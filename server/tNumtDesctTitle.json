@@ -1,0 +1,28 @@
+{
+  "elements": [
+    {
+      "name": "Description",
+      "elements": [
+        {
+          "text": "Needing to enable file share/external sharing in Microsoft Teams. Request is to improve knowledge transfer/sharing capabilities with Level 1 support (Logicalis)\n\nThank you,\nCarlos Rodriguez\n\nManager- IT Service Operations\n6101 Blue Lagoon Dr Suite 200\nMiami, FL 33126\nEmail: crodriguez@convivasolutions.com<mailto:crodriguez@convivasolutions.com>\nO: 305.500.2000 x. 1358218\nC: 786.501.1968\nwww.convivasolutions.com<http://www.convivasolutions.com/>\n\n[https://s3.amazonaws.com/artisanfiles/Conviva_CS_Horiz_Gradient_positive_TM_RGB.png]<http://www.convivasolutions.com/>\n\n\n\n________________________________\n\nIMPORTANT: This transmission contains confidential information, some or all of which may be protected health information as defined by the federal Health Insurance Portability & Accountability Act (HIPAA) Privacy and Security Rule under 45 CFR Part 160 and 45 CFR Part 164 . This transmission is intended for the exclusive use of the individual or entity to whom it is addressed and may contain information that is proprietary, privileged, confidential and/or exempt from disclosure under applicable law. If you are not the intended recipient, or an employee or agent responsible for delivering this facsimile transmission to the intended recipient, you are notified that any disclosure, dissemination, distribution or copying of this information is strictly prohibited and may be subject to legal restriction or sanction. Please notify the sender by telephone at (305) 662-5200 immediately and destroy all copies of the materials sent."
+        }
+      ]
+    },
+    {
+      "name": "TicketNumber",
+      "elements": [
+        {
+          "text": "T20190924.0157"
+        }
+      ]
+    },
+    {
+      "name": "Title",
+      "elements": [
+        {
+          "text": "enabling file share/external sharing in Microsoft Teams"
+        }
+      ]
+    }
+  ]
+}

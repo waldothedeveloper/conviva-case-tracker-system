@@ -2,29 +2,13 @@ const { gql } = require("apollo-server");
 
 const typeDefs = gql`
   type Query {
-    getSingleTicket: Entity!
-    getTicketSample(id: String!): TicketSample
+    getAutoTaskSingleTicket(id: String!): Ticket!
   }
 
-  type TicketSample {
-    ticketNumber: String
-    title: String
-    description: String
-  }
-
-  type TicketTitle {
-    _text: String!
-  }
-  type TicketDescription {
-    _text: String!
-  }
-  type TicketNumber {
-    _text: String!
-  }
-  type Entity {
-    Title: TicketTitle!
-    Description: TicketDescription!
-    TicketNumber: TicketNumber!
+  type Ticket {
+    Description: String
+    TicketNumber: String
+    Title: String
   }
 `;
 

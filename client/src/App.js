@@ -4,10 +4,10 @@ import { gql } from "apollo-boost";
 
 const GET_SINGLE_TICKET = gql`
   query GET_SINGLE_TICKET($id: String!) {
-    getTicketSample(id: $id) {
-      ticketNumber
-      title
-      description
+    getAutoTaskSingleTicket(id: $id) {
+      Title
+      TicketNumber
+      Description
     }
   }
 `;
@@ -51,19 +51,25 @@ function App() {
         <div style={{ margin: "4rem" }}>Please enter a ticket number</div>
       )}
 
-      {data !== undefined && data.getTicketSample !== null && (
-        <div>
-          <h3>Title: {data.getTicketSample.title}</h3>
-          <h4>Description: {data.getTicketSample.description}</h4>
-          <h5>Ticket Number: {data.getTicketSample.ticketNumber}</h5>
-        </div>
-      )}
+      {data !== undefined &&
+        data.getAutoTaskSingleTicket.Title !== null &&
+        data.getAutoTaskSingleTicket.TicketNumber !== null &&
+        data.getAutoTaskSingleTicket.Description !== null && (
+          <div>
+            <h3>Title: {data.getAutoTaskSingleTicket.Title}</h3>
+            <h4>Description: {data.getAutoTaskSingleTicket.Description}</h4>
+            <h5>Ticket Number: {data.getAutoTaskSingleTicket.TicketNumber}</h5>
+          </div>
+        )}
 
-      {data !== undefined && data.getTicketSample === null && (
-        <div style={{ margin: "4rem" }}>
-          <h3> Ticket not found...please try again</h3>
-        </div>
-      )}
+      {data !== undefined &&
+        data.getAutoTaskSingleTicket.Title === null &&
+        data.getAutoTaskSingleTicket.TicketNumber === null &&
+        data.getAutoTaskSingleTicket.Description === null && (
+          <div style={{ margin: "4rem" }}>
+            <h3> Ticket not found...please try again</h3>
+          </div>
+        )}
     </div>
   );
 }
