@@ -4,6 +4,8 @@ import { gql } from "apollo-boost";
 import { ticketStatus } from "./utils/helpers";
 import { ticketPriority } from "./utils/helpers";
 import { resources } from "./utils/helpers";
+import { queues } from "./utils/helpers";
+import { getTicketAge } from "./utils/helpers";
 
 const GET_SINGLE_TICKET = gql`
   query GET_SINGLE_TICKET($id: String!) {
@@ -14,9 +16,22 @@ const GET_SINGLE_TICKET = gql`
       Status
       Priority
       AssignedResourceID
+      CreateDate
+      LastActivityDate
+      LastActivityResourceID
+      QueueID
     }
   }
 `;
+
+let options = {
+  weekday: "long",
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  minute: "2-digit",
+  hour: "numeric"
+};
 
 function App() {
   let input;
@@ -33,12 +48,13 @@ function App() {
   if (error) {
     return <div>...Something when wrong</div>;
   }
-  const findResource =
-    data !== undefined
-      ? resources.find(
-          e => e.id === data.getAutoTaskSingleTicket.AssignedResourceID
-        )
+
+  // this is to find the full name of technicians etc
+  const findResource = (resourceID, typeOfResource) => {
+    return data !== undefined
+      ? typeOfResource.find(e => e.id === resourceID)
       : "";
+  };
 
   return (
     <div>
@@ -56,12 +72,9 @@ function App() {
             input = node;
           }}
         />
+        <br />
         <button type='submit'>Submit</button>
       </form>
-
-      {data === undefined && (
-        <div style={{ margin: "4rem" }}>Please enter a ticket number</div>
-      )}
 
       {data !== undefined &&
         data.getAutoTaskSingleTicket.Title !== null &&
@@ -69,7 +82,22 @@ function App() {
         data.getAutoTaskSingleTicket.Description !== null && (
           <div>
             <h3>Title: {data.getAutoTaskSingleTicket.Title}</h3>
-            <h4>Description: {data.getAutoTaskSingleTicket.Description}</h4>
+            <h4>
+              Description:
+              <br />
+            </h4>
+            <p>
+              {data.getAutoTaskSingleTicket.Description.split("\n").map(
+                (item, key) => {
+                  return (
+                    <React.Fragment key={key}>
+                      {item}
+                      <br />
+                    </React.Fragment>
+                  );
+                }
+              )}
+            </p>
             <h5>Ticket Number: {data.getAutoTaskSingleTicket.TicketNumber}</h5>
             <h5>
               Ticket Status: {ticketStatus[data.getAutoTaskSingleTicket.Status]}
@@ -80,17 +108,54 @@ function App() {
             </h5>
             <h5>
               Service Desk Contact:{" "}
-              {findResource.resource_name !== undefined
-                ? findResource.resource_name
-                : ""}
+              {data.getAutoTaskSingleTicket.AssignedResourceID === null
+                ? "Not Assigned"
+                : findResource(
+                    data.getAutoTaskSingleTicket.AssignedResourceID,
+                    resources
+                  ).resource_name}
             </h5>
+            <h5>
+              Date created:{" "}
+              {new Date(
+                data.getAutoTaskSingleTicket.CreateDate
+              ).toLocaleDateString("en-US", options)}
+            </h5>
+            <h5>
+              Last Activity Time:{" "}
+              {new Date(
+                data.getAutoTaskSingleTicket.LastActivityDate
+              ).toLocaleDateString("en-US", options)}
+            </h5>
+            <h5>
+              Last Activity By:{" "}
+              {data.getAutoTaskSingleTicket.LastActivityResourceID === null
+                ? "Not Activity Assigned"
+                : findResource(
+                    data.getAutoTaskSingleTicket.LastActivityResourceID,
+                    resources
+                  ).resource_name}
+            </h5>
+            <h5>
+              Queue:{" "}
+              {data.getAutoTaskSingleTicket.QueueID === null
+                ? "Queue not found"
+                : findResource(data.getAutoTaskSingleTicket.QueueID, queues)
+                    .resource_name}
+            </h5>
+
+            <h5>Ticket Age:</h5>
+            <p>
+              {data.createDate === null
+                ? ""
+                : getTicketAge(data.getAutoTaskSingleTicket.CreateDate)}{" "}
+              days
+            </p>
           </div>
         )}
 
       {data !== undefined &&
-        data.getAutoTaskSingleTicket.Title === null &&
-        data.getAutoTaskSingleTicket.TicketNumber === null &&
-        data.getAutoTaskSingleTicket.Description === null && (
+        data.getAutoTaskSingleTicket.TicketNumber === null && (
           <div style={{ margin: "4rem" }}>
             <h3> Ticket not found...please try again</h3>
           </div>
