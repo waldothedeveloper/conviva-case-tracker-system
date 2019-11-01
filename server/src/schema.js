@@ -9,6 +9,9 @@ const typeDefs = gql`
     Description: String
     TicketNumber: String
     Title: String
+    Status: Int
+    Priority: Int
+    AssignedResourceID: Int
   }
 `;
 
