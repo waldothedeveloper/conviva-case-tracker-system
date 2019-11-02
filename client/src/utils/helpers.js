@@ -23,6 +23,7 @@ export const ticketPriority = {
 
 // everybody at Conviva
 export const resources = [
+  { id: 4, resource_name: "AutoTask Administrator" },
   { id: 29682915, resource_name: "Nelson Arguelles" },
   { id: 29682999, resource_name: "Supra Banerjee" },
   { id: 29682969, resource_name: "Michael Barnes" },
