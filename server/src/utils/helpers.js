@@ -20,7 +20,11 @@ module.exports = function CleanDataAndReturnTicketObject(obj) {
     "TicketNumber",
     "Status",
     "Priority",
-    "AssignedResourceID"
+    "AssignedResourceID",
+    "CreateDate",
+    "LastActivityDate",
+    "LastActivityResourceID",
+    "QueueID"
   ];
 
   // find ticket details and make a new object out of it

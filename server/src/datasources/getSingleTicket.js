@@ -2,10 +2,10 @@ var username = "apireports2@convivasolutions.com";
 var password = "Qtp@8555";
 
 const SOAPTicketHelper = ticketNumber => {
+  console.log("ticketNumber: ", ticketNumber);
   const options = {
     method: "POST",
     headers: {
-      // "Content-Length": Buffer.byteLength(body),
       Host: "webservices14.autotask.net",
       Authorization:
         "Basic " + Buffer.from(username + ":" + password).toString("base64"),
