@@ -1,26 +1,3 @@
-export const ticketStatus = {
-  1: "New",
-  2: "Waiting Approval",
-  3: "Dispatched",
-  4: "Change Order",
-  5: "Complete",
-  6: "In Progress",
-  7: "Escalate",
-  8: "Waiting Materials",
-  9: "Waiting Customer",
-  10: "Waiting Vendor",
-  11: "On Hold",
-  12: "Inactive",
-  13: "Complete"
-};
-
-export const ticketPriority = {
-  1: "P1",
-  2: "P2",
-  3: "P3",
-  4: "P4"
-};
-
 // everybody at Conviva
 export const resources = [
   { id: 4, resource_name: "AutoTask Administrator" },
@@ -103,44 +80,3 @@ export const resources = [
   { id: 29683004, resource_name: "Carlos Villegas" },
   { id: 29682982, resource_name: "Bryce Vrana" }
 ];
-
-export const queues = [
-  { id: 4, resource_name: "AutoTask Administrator" },
-  { id: 29683378, resource_name: "Administration" },
-  { id: 29683508, resource_name: "CGX Issues" },
-  { id: 5, resource_name: "Client Portal" },
-  { id: 29683490, resource_name: "Conviva Clinical Apps" },
-  { id: 29683494, resource_name: "Conviva Daytona Level 2 Support" },
-  { id: 29683488, resource_name: "Conviva JAX L2 Support" },
-  { id: 29683493, resource_name: "Conviva Orlando L2 Support" },
-  { id: 29683492, resource_name: "Conviva Tampa L2 Support" },
-  { id: 29683486, resource_name: "Conviva Texas L2 Support" },
-  { id: 29683491, resource_name: "Desk Phone Support" },
-  { id: 29683479, resource_name: "ECW Support" },
-  { id: 29683502, resource_name: "Equipment and Access" },
-  { id: 29683484, resource_name: "Hardware Purchase Support" },
-  { id: 29683483, resource_name: "HR Help Desk" },
-  { id: 29683507, resource_name: "Info Security" },
-  { id: 29683480, resource_name: "Infrastructure-Level 3" },
-  { id: 29683510, resource_name: "IT Procurement" },
-  { id: 29683481, resource_name: "Logicalis LANWAN Support" },
-  { id: 29682833, resource_name: "Logicalis Level I Support" },
-  { id: 8, resource_name: "Monitoring Alert" },
-  { id: 29683504, resource_name: "Onboarding" },
-  { id: 6, resource_name: "Post Sale" },
-  { id: 29683498, resource_name: "Practice Technology BA" },
-  { id: 29683497, resource_name: "Practice Technology Ops RPT" },
-  { id: 29683354, resource_name: "Recurring Tickets" },
-  { id: 29682969, resource_name: "Service Delivery-Level 2" },
-  { id: 29683500, resource_name: "Skype Audio conference" },
-  { id: 29683495, resource_name: "Software Purchase Support" },
-  { id: 29683496, resource_name: "SQL database support" },
-  { id: 29683511, resource_name: "Telecom" },
-  { id: 29683501, resource_name: "Vendor Issues" },
-  { id: 29683482, resource_name: "Workday Help Desk" },
-  { id: 29683509, resource_name: "Workday-Level 3" }
-];
-
-export function getTicketAge(oldDate) {
-  return Math.round((new Date() - new Date(oldDate)) / (1000 * 60 * 60 * 24));
-}

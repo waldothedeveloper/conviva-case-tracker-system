@@ -1,11 +1,10 @@
 import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
+import TicketSearchCard from "./views/singleTicket/TicketSearchCard";
+import TicketResults from "./views/singleTicket/TicketResults";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import { ticketStatus } from "./utils/helpers";
-import { ticketPriority } from "./utils/helpers";
-import { resources } from "./utils/helpers";
-import { queues } from "./utils/helpers";
-import { getTicketAge } from "./utils/helpers";
 
 const GET_SINGLE_TICKET = gql`
   query GET_SINGLE_TICKET($id: String!) {
@@ -24,148 +23,39 @@ const GET_SINGLE_TICKET = gql`
   }
 `;
 
-let options = {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-  minute: "2-digit",
-  hour: "numeric"
-};
+const useStyles = makeStyles(theme => ({
+  root: {
+    padding: 0,
+    margin: "0 auto",
+    justifyContent: "center",
+    alignContent: "center"
+  }
+}));
 
-function App() {
+const App = () => {
+  const classes = useStyles();
   let input;
+
   const [loadSingleTicket, { called, loading, data, error }] = useLazyQuery(
     GET_SINGLE_TICKET,
     { variables: { id: input } }
   );
-  console.log("data: ", data);
-
-  if (called && loading) {
-    return <div>...loading</div>;
-  }
-
-  if (error) {
-    return <div>...Something when wrong</div>;
-  }
-
-  // this is to find the full name of technicians etc
-  const findResource = (resourceID, typeOfResource) => {
-    return data !== undefined
-      ? typeOfResource.find(e => e.id === resourceID)
-      : "";
-  };
 
   return (
-    <div>
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          loadSingleTicket({ variables: { id: input.value } });
-          input.value = "";
-        }}
-      >
-        <p>Please enter a ticket number</p>
-        <input
-          placeholder='enter ticket number'
-          ref={node => {
-            input = node;
-          }}
+    <Grid container className={classes.root}>
+      <Grid item xs={12} sm={12} md={4} lg={4} xl={4}>
+        <TicketSearchCard input={input} loadSingleTicket={loadSingleTicket} />
+      </Grid>
+      <Grid item xs={12} sm={12} md={8} lg={8} xl={8}>
+        <TicketResults
+          called={called}
+          loading={loading}
+          data={data}
+          error={error}
         />
-        <br />
-        <button type='submit'>Submit</button>
-      </form>
-
-      {data !== undefined && data.getAutoTaskSingleTicket && (
-        <div>
-          <h3>
-            Title:{" "}
-            {data.getAutoTaskSingleTicket.Title !== null
-              ? data.getAutoTaskSingleTicket.Title
-              : "No Title found"}
-          </h3>
-          <h4>
-            Description:
-            <br />
-          </h4>
-          <p>
-            {data.getAutoTaskSingleTicket.Description !== null
-              ? data.getAutoTaskSingleTicket.Description.split("\n").map(
-                  (item, key) => {
-                    return (
-                      <React.Fragment key={key}>
-                        {item}
-                        <br />
-                      </React.Fragment>
-                    );
-                  }
-                )
-              : "No description found"}
-          </p>
-          <h5>Ticket Number: {data.getAutoTaskSingleTicket.TicketNumber}</h5>
-          <h5>
-            Ticket Status: {ticketStatus[data.getAutoTaskSingleTicket.Status]}
-          </h5>
-          <h5>
-            Ticket Priority:{" "}
-            {ticketPriority[data.getAutoTaskSingleTicket.Priority]}
-          </h5>
-          <h5>
-            Service Desk Contact:{" "}
-            {data.getAutoTaskSingleTicket.AssignedResourceID === null
-              ? "Not Assigned yet"
-              : findResource(
-                  data.getAutoTaskSingleTicket.AssignedResourceID,
-                  resources
-                ).resource_name}
-          </h5>
-          <h5>
-            Date created:{" "}
-            {new Date(
-              data.getAutoTaskSingleTicket.CreateDate
-            ).toLocaleDateString("en-US", options)}
-          </h5>
-          <h5>
-            Last Activity Time:{" "}
-            {new Date(
-              data.getAutoTaskSingleTicket.LastActivityDate
-            ).toLocaleDateString("en-US", options)}
-          </h5>
-          <h5>
-            Last Activity By:{" "}
-            {data.getAutoTaskSingleTicket.LastActivityResourceID === null
-              ? "Not Activity Assigned"
-              : findResource(
-                  data.getAutoTaskSingleTicket.LastActivityResourceID,
-                  resources
-                ).resource_name}
-          </h5>
-          <h5>
-            Queue:{" "}
-            {data.getAutoTaskSingleTicket.QueueID === null
-              ? "Queue not found"
-              : findResource(data.getAutoTaskSingleTicket.QueueID, queues)
-                  .resource_name}
-          </h5>
-
-          <h5>Ticket Age:</h5>
-          <p>
-            {data.createDate === null
-              ? ""
-              : getTicketAge(data.getAutoTaskSingleTicket.CreateDate)}{" "}
-            days
-          </p>
-        </div>
-      )}
-
-      {data !== undefined &&
-        data.getAutoTaskSingleTicket.TicketNumber === null && (
-          <div style={{ margin: "4rem" }}>
-            <h3> Ticket not found...please try again</h3>
-          </div>
-        )}
-    </div>
+      </Grid>
+    </Grid>
   );
-}
+};
 
 export default App;

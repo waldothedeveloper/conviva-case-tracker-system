@@ -9,6 +9,7 @@ const resolvers = {
   Query: {
     // get a Single ticket
     getAutoTaskSingleTicket: async (_, args) => {
+      // console.log(args.id);
       try {
         const response = await fetch(url, SOAPTicketHelper(args.id));
         const thisIsJustAnXMLString = await response.text();
