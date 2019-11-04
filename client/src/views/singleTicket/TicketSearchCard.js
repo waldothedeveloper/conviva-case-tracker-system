@@ -5,17 +5,18 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+import useForm from "../../containers/useForm";
+import validate from "../../utils/SingleTicketFormValidationRules";
 
 const useStyles = makeStyles(theme => ({
   card: {
-    minWidth: 275,
-    padding: "0 13% 0 13%"
+    minWidth: 275
   },
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1)
   },
-  formStyle: {
+  formStyles: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center"
@@ -23,17 +24,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default function TicketSearchCard({ input, loadSingleTicket }) {
-  const [ticketInput, setTicketInput] = React.useState("");
   const classes = useStyles();
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    loadSingleTicket({ variables: { id: ticketInput } });
+  //this will be the callback function
+  const sentCleanDataToServer = () => {
+    console.log("Did i run");
+    loadSingleTicket({ variables: { id: validTicket.ticketNumber } });
   };
 
-  const handleChange = e => {
-    setTicketInput(e.target.value);
-  };
+  const { validTicket, errors, handleChange, handleSubmit } = useForm(
+    sentCleanDataToServer,
+    validate
+  );
 
   return (
     <Card className={classes.card}>
@@ -41,24 +43,22 @@ export default function TicketSearchCard({ input, loadSingleTicket }) {
         <Typography align='left' variant='h5' gutterBottom>
           Search ticket
         </Typography>
-        <Typography align='left' variant='body2' component='p'>
-          A ticket has the following convention: <br />
-          T-year-month-day.xxxx (four unique numbers)
-        </Typography>
-        <form onSubmit={handleSubmit} className={classes.formStyle}>
+
+        <form onSubmit={handleSubmit} className={classes.formStyles}>
           <TextField
             maxLength='14'
             onChange={handleChange}
             inputRef={node => {
               input = node;
             }}
-            value={ticketInput}
+            value={validTicket.ticketNumber || ""}
             className={classes.textField}
-            error={false}
+            error={errors.bool && true}
             placeholder='Search...'
-            helperText='helper text useful for errors'
+            helperText={errors.bool ? errors.ticketNumber : ""}
             margin='normal'
             variant='outlined'
+            name='ticketNumber'
           />
           <Button
             size='large'

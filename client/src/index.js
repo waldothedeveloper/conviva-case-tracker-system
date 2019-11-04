@@ -7,6 +7,11 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./containers/theme";
 import * as serviceWorker from "./serviceWorker";
+// import "./index.css";
+// import "./fonts/CeraPRO-Regular.otf";
+// import "./fonts/CeraPRO-Medium.otf";
+// import "./fonts/CeraPRO-Light.otf";
+// import "./fonts/CeraPRO-Thin.otf";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000"

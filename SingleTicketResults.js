@@ -1,11 +1,11 @@
 import React from "react";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import { ticketStatus } from "../../utils/getTicketAge";
-import { ticketPriority } from "../../utils/getTicketAge";
-import { resources } from "../../utils/getTicketAge";
-import { queues } from "../../utils/getTicketAge";
-import { getTicketAge } from "../../utils/getTicketAge";
+import { ticketStatus } from "./client/src/utils/getTicketAge";
+import { ticketPriority } from "./client/src/utils/getTicketAge";
+import { resources } from "./client/src/utils/getTicketAge";
+import { queues } from "./client/src/utils/getTicketAge";
+import { getTicketAge } from "./client/src/utils/getTicketAge";
 
 const GET_SINGLE_TICKET = gql`
   query GET_SINGLE_TICKET($id: String!) {
