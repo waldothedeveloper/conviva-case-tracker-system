@@ -7,10 +7,12 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import useForm from "../../containers/useForm";
 import validate from "../../utils/SingleTicketFormValidationRules";
+import TicketHelper from "./TicketHelper";
 
 const useStyles = makeStyles(theme => ({
   card: {
-    minWidth: 275
+    minWidth: 275,
+    boxShadow: "none"
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -26,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 export default function TicketSearchCard({ input, loadSingleTicket }) {
   const classes = useStyles();
 
-  //this will be the callback function
+  //submit correct ticket if no errors
   const sentCleanDataToServer = () => {
     console.log("Did i run");
     loadSingleTicket({ variables: { id: validTicket.ticketNumber } });
@@ -40,10 +42,6 @@ export default function TicketSearchCard({ input, loadSingleTicket }) {
   return (
     <Card className={classes.card}>
       <CardContent>
-        <Typography align='left' variant='h5' gutterBottom>
-          Search ticket
-        </Typography>
-
         <form onSubmit={handleSubmit} className={classes.formStyles}>
           <TextField
             maxLength='14'
@@ -60,6 +58,11 @@ export default function TicketSearchCard({ input, loadSingleTicket }) {
             variant='outlined'
             name='ticketNumber'
           />
+          <Typography variant='body2' gutterBottom>
+            A ticket number has the following structure: <br />
+            T-year-month-day-period-four-Numbers
+          </Typography>
+          <TicketHelper errors={errors} />
           <Button
             size='large'
             type='submit'

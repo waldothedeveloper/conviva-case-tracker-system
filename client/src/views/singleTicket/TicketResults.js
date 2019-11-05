@@ -214,12 +214,9 @@ export default function TicketResults({ data, error, loading, called }) {
             >
               TICKET NOT FOUND
             </Typography>
-            <Typography variant='h6' align='center' gutterBottom>
-              Please follow the tips below to find a ticket:
-            </Typography>
-            <Typography align='center' variant='body1' component='p'>
-              A ticket has the following convention: <br />
-              T-year-month-day.xxxx (four unique numbers)
+            <Typography variant='body1' align='center' gutterBottom>
+              The ticket might have one or more incorrect numbers. Please double
+              check your ticket number
             </Typography>
           </CardContent>
         </Card>

@@ -1,12 +1,13 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import TicketSearchCard from "./views/singleTicket/TicketSearchCard";
+// import TicketSearchCard from "./views/singleTicket/TicketSearchCard";
 import TicketResults from "./views/singleTicket/TicketResults";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { CheckInternetConnection } from "./utils/checkInternet";
 import Typography from "@material-ui/core/Typography";
+import TicketExpansionPanel from "./views/singleTicket/TicketExpansionPanel";
 
 const GET_SINGLE_TICKET = gql`
   query GET_SINGLE_TICKET($id: String!) {
@@ -27,7 +28,7 @@ const GET_SINGLE_TICKET = gql`
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: "2% 5% 2% 5%",
+    padding: "2% 0",
     margin: "0 auto",
     justifyContent: "center"
   },
@@ -45,7 +46,6 @@ const useStyles = makeStyles(theme => ({
 
 const App = () => {
   const isOnline = CheckInternetConnection();
-  console.log("isOnline: ", isOnline);
   const classes = useStyles();
   let input;
 
@@ -67,7 +67,7 @@ const App = () => {
             lg={4}
             xl={4}
           >
-            <TicketSearchCard
+            <TicketExpansionPanel
               input={input}
               loadSingleTicket={loadSingleTicket}
             />
