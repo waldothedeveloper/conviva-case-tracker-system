@@ -8,11 +8,6 @@ let fourLastDigits = /^\d{4}$/;
 
 export default function Validate(values) {
   let errors = {};
-  // let capitalizedValues;
-
-  // if (values.ticketNumber) {
-  //   capitalizedValues = values.ticketNumber.toUpperCase();
-  // }
 
   // Check if it is empty
   if (!values.ticketNumber) {
@@ -65,13 +60,6 @@ export default function Validate(values) {
     errors.bool = true;
   }
 
-  //If it does not match the regex dont allow submit
-  // if (!ticketRegex.test(values.ticketNumber.toUpperCase())) {
-  //   errors.ticketNumber = "Incorrect ticket format...please follow guides";
-  //   errors.bool = true;
-  //   console.log("Incorrect ticket format...please follow guides");
-  // }
-
   //If the length is greater than 14 chars don't allow submit
   if (values.ticketNumber && values.ticketNumber.length > 14) {
     errors.ticketNumber =
@@ -79,6 +67,13 @@ export default function Validate(values) {
     errors.bool = true;
     console.log("A ticket number cannot contain more than 14 characters!");
   }
+
+  //If it does not match the regex dont allow submit
+  // if (!ticketRegex.test(values.ticketNumber.toUpperCase())) {
+  //   errors.ticketNumber = "Incorrect ticket format...please follow guides";
+  //   errors.bool = true;
+  //   console.log("Incorrect ticket format...please follow guides");
+  // }
 
   return errors;
 }

@@ -23,13 +23,16 @@ const useStyles = makeStyles({
     alignItems: "center"
   },
   container1: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center"
+    display: "flex"
+  },
+  container1FirstDiv: {
+    width: "50%"
   },
   container1LastDiv: {
-    width: "16%"
+    alignItems: "flex-end",
+    width: "50%",
+    display: "flex",
+    flexDirection: "column"
   }
 });
 
@@ -71,7 +74,7 @@ export default function TicketResults({ data, error, loading, called }) {
         <Card className={classes.card}>
           {/* ticket number */}
           <CardContent className={classes.container1}>
-            <div>
+            <div className={classes.container1FirstDiv}>
               <Typography color='textSecondary' variant='subtitle1'>
                 Ticket Number
               </Typography>
@@ -90,7 +93,7 @@ export default function TicketResults({ data, error, loading, called }) {
           </CardContent>
           {/* technician */}
           <CardContent className={classes.container1}>
-            <div>
+            <div className={classes.container1FirstDiv}>
               <Typography color='textSecondary' variant='subtitle1'>
                 Service Desk Contact
               </Typography>
@@ -128,7 +131,7 @@ export default function TicketResults({ data, error, loading, called }) {
           </CardContent>
           {/* status, resources, create-date, age, last activity time, last activity time */}
           <CardContent className={classes.container1}>
-            <div>
+            <div className={classes.container1FirstDiv}>
               <Typography color='textSecondary' variant='subtitle1'>
                 Ticket Status
               </Typography>
@@ -153,12 +156,6 @@ export default function TicketResults({ data, error, loading, called }) {
               </Typography>
             </div>
             <div className={classes.container1LastDiv}>
-              <Typography color='textSecondary' variant='subtitle1'>
-                Resources
-              </Typography>
-              <Typography variant='body1' gutterBottom>
-                Other technicians...
-              </Typography>
               <Typography color='textSecondary' variant='subtitle1'>
                 Ticket Age
               </Typography>

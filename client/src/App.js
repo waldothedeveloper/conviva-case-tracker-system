@@ -33,7 +33,7 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center"
   },
   gridItems: {
-    padding: "1%"
+    padding: "0.4%"
   },
   offline: {
     padding: "2% 5% 2% 5%",
