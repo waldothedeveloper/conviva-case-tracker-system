@@ -61,7 +61,7 @@ export default function TicketSearchCard({ input, loadSingleTicket }) {
         </Typography>
         <form onSubmit={handleSubmit} className={classes.formStyles}>
           <TextField
-            inputProps={{ maxLength: 14 }}
+            inputProps={{ maxLength: 15 }}
             maxLength='14'
             onChange={handleChange}
             inputRef={node => {

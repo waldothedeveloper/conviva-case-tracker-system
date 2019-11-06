@@ -36,7 +36,7 @@ const options = {
   keys: ["name"]
 };
 
-export default function FindCenter({ data }) {
+export default function FindCenter({ data, loading, error, called }) {
   const classes = useStyles();
   const [center, setCenter] = React.useState("");
   const [searchedCenter, setSearchedCenter] = React.useState([]);

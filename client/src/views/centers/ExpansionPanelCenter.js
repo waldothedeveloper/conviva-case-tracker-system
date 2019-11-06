@@ -61,7 +61,12 @@ export default function ExpansionPanelCenter() {
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.expDetails}>
-          <FindCenter data={data} />
+          <FindCenter
+            called={called}
+            loading={loading}
+            error={error}
+            data={data}
+          />
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </div>
