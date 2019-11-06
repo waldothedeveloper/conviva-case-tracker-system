@@ -45,7 +45,7 @@ const useStyles = makeStyles({
 
 export default function TicketResults({ data, error, loading, called }) {
   const classes = useStyles();
-  console.log("Data:", data);
+  // console.log("Data:", data);
 
   // this is to find the full name of technicians etc
   const findResource = (resourceID, typeOfResource) => {
@@ -272,12 +272,15 @@ export default function TicketResults({ data, error, loading, called }) {
         <Card className={classes.cardEmpty}>
           <CardContent>
             <Typography variant='h2' align='center' gutterBottom>
-              Welcome to the Conviva <br />
-              Ticket Tracker System
+              {/* Welcome to the Service Desk Request */}
+              Welcome to <br />
+              Conviva Service Desk Request Tool
             </Typography>
             <Typography align='center' variant='h6' component='p'>
-              Choose the panels on the left side to find an action. <br />
-              You can search by ticket number or find open tickets by center
+              This tool will allow you to check the status update of a submitted
+              ticket.
+              {/* Choose the panels on the left side to find an action. <br />
+              You can search by ticket number or find open tickets by center */}
             </Typography>
           </CardContent>
         </Card>

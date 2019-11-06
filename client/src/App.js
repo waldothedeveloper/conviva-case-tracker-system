@@ -1,7 +1,6 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-// import TicketSearchCard from "./views/singleTicket/TicketSearchCard";
 import TicketResults from "./views/singleTicket/TicketResults";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";

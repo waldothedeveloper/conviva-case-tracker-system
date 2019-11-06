@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
+import { InMemoryCache } from "apollo-cache-inmemory";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { ThemeProvider } from "@material-ui/core/styles";
 import theme from "./containers/theme";
@@ -14,7 +15,8 @@ import "./index.css";
 // import "./fonts/CeraPRO-Thin.otf";
 
 const client = new ApolloClient({
-  uri: "http://localhost:4000"
+  uri: "http://localhost:4000",
+  cache: new InMemoryCache()
 });
 
 ReactDOM.render(

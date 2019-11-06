@@ -2,9 +2,9 @@ import React from "react";
 
 export default function useForm(callback, validate) {
   const [validTicket, setValidTicket] = React.useState("");
-  console.log("form data: ", validTicket);
+  // console.log("form data: ", validTicket);
   const [errors, setErrors] = React.useState({});
-  console.log("errors: ", errors);
+  // console.log("errors: ", errors);
   const [isSubmitting, setIsSubmitting] = React.useState(false);
 
   // If there's no errors and the form has submitted

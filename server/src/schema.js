@@ -21,6 +21,7 @@ const typeDefs = gql`
   }
 
   type Company {
+    id: String
     name: String
     city: String
   }

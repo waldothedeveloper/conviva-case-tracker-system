@@ -1,5 +1,5 @@
 const CleanDataAndReturnTicketObject = require("./utils/helpers");
-const CleanDataAndReturnCompanyData = require("./utils/companyInfo")
+const CleanDataAndReturnCompanyData = require("./utils/companyInfo");
 const SOAPTicketHelper = require("./datasources/getSingleTicket");
 const SOAPTicketsByCompanyHelper = require("./datasources/getTicketsByCompany");
 const SOAPGetCompaniesHelper = require("./datasources/getCompanies");
@@ -57,8 +57,6 @@ const resolvers = {
         // console.log("JSONobj: ", JSON.stringify(JSONobj));
         // this will return the new object constructed over there
         return CleanDataAndReturnCompanyData(JSONobj);
-
-        return "Testing";
       } catch (error) {
         console.log("error in the server", error);
       }

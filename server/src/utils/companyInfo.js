@@ -15,8 +15,9 @@ module.exports = function CleanDataAndReturnCompanyData(obj) {
 
   let names = [];
   let cities = [];
+  let ids = [];
   let companies = [];
-  let words = ["AccountName", "City"];
+  let words = ["AccountName", "City", "id"];
 
   // find ticket details and make a new object out of it
   const DestructureData = (JSarray, word) => {
@@ -37,6 +38,10 @@ module.exports = function CleanDataAndReturnCompanyData(obj) {
           if (each.name === "City") {
             cities = [...cities, { city: each.elements[0].text }];
           }
+
+          if (each.name === "id") {
+            ids = [...ids, { id: each.elements[0].text }];
+          }
         }
         DestructureData(each.elements, word);
       }
@@ -50,7 +55,11 @@ module.exports = function CleanDataAndReturnCompanyData(obj) {
 
   // creating one single array with company name and city all together
   names.forEach((e, index) => {
-    companies.push({ name: e.name, city: cities[index].city });
+    companies.push({
+      id: ids[index].id,
+      name: e.name,
+      city: cities[index].city
+    });
   });
 
   // console.log("Companies: ", JSON.stringify(companies));
