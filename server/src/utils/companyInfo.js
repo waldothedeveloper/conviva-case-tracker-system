@@ -13,6 +13,8 @@ module.exports = function CleanDataAndReturnCompanyData(obj) {
   // flattening the Array of arrays to whatever depth was able to find
   const flattened = toArray.flat(depth);
 
+  let names = [];
+  let cities = [];
   let companies = [];
   let words = ["AccountName", "City"];
 
@@ -20,16 +22,21 @@ module.exports = function CleanDataAndReturnCompanyData(obj) {
   const DestructureData = (JSarray, word) => {
     let found = e => e.name && e.name === word;
 
-    JSarray.map(each => {
+    JSarray.map((each, index) => {
+      // console.log(`index : ${index}`);
       if (
         typeof each === "object" &&
         each.elements &&
         Array.isArray(each.elements)
       ) {
         if (found(each)) {
-          companies = [...companies, { [each.name]: each.elements[0].text }];
+          if (each.name === "AccountName") {
+            names = [...names, { name: each.elements[0].text }];
+          }
 
-          // companies[word] = each.elements[0].text;
+          if (each.name === "City") {
+            cities = [...cities, { city: each.elements[0].text }];
+          }
         }
         DestructureData(each.elements, word);
       }
@@ -41,7 +48,12 @@ module.exports = function CleanDataAndReturnCompanyData(obj) {
     DestructureData(flattened, word);
   });
 
-  console.log("List of companies:", JSON.stringify(companies));
+  // creating one single array with company name and city all together
+  names.forEach((e, index) => {
+    companies.push({ name: e.name, city: cities[index].city });
+  });
+
+  // console.log("Companies: ", JSON.stringify(companies));
 
   return companies;
 };

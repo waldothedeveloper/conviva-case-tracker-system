@@ -20,7 +20,8 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
+    height: "90vh"
   },
   container1: {
     display: "flex"
