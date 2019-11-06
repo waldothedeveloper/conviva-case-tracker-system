@@ -9,11 +9,8 @@ import TicketSearchCard from "./TicketSearchCard";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    width: "100%"
-  },
-  heading: {
-    fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular
+    width: "100%",
+    margin: "0 0 5% 0"
   }
 }));
 

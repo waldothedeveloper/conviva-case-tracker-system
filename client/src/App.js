@@ -8,6 +8,7 @@ import { gql } from "apollo-boost";
 import { CheckInternetConnection } from "./utils/checkInternet";
 import Typography from "@material-ui/core/Typography";
 import TicketExpansionPanel from "./views/singleTicket/TicketExpansionPanel";
+import ExpansionPanelCenter from "./views/centers/ExpansionPanelCenter";
 
 const GET_SINGLE_TICKET = gql`
   query GET_SINGLE_TICKET($id: String!) {
@@ -33,7 +34,8 @@ const useStyles = makeStyles(theme => ({
     justifyContent: "center"
   },
   gridItems: {
-    padding: "0.4%"
+    padding: "0.4%",
+    margin: "-0.2% !important"
   },
   offline: {
     padding: "2% 5% 2% 5%",
@@ -71,6 +73,7 @@ const App = () => {
               input={input}
               loadSingleTicket={loadSingleTicket}
             />
+            <ExpansionPanelCenter />
           </Grid>
           <Grid
             className={classes.gridItems}

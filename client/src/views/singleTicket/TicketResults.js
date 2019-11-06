@@ -33,6 +33,12 @@ const useStyles = makeStyles({
     width: "50%",
     display: "flex",
     flexDirection: "column"
+  },
+  text: {
+    fontWeight: "bold"
+  },
+  subtext: {
+    color: "#567D96"
   }
 });
 
@@ -75,18 +81,26 @@ export default function TicketResults({ data, error, loading, called }) {
           {/* ticket number */}
           <CardContent className={classes.container1}>
             <div className={classes.container1FirstDiv}>
-              <Typography color='textSecondary' variant='subtitle1'>
+              <Typography
+                className={classes.subtext}
+                color='textSecondary'
+                variant='subtitle1'
+              >
                 Ticket Number
               </Typography>
-              <Typography variant='body1' gutterBottom>
+              <Typography className={classes.text} variant='body1' gutterBottom>
                 {data.getAutoTaskSingleTicket.TicketNumber}
               </Typography>
             </div>
             <div className={classes.container1LastDiv}>
-              <Typography color='textSecondary' variant='subtitle1'>
+              <Typography
+                className={classes.subtext}
+                color='textSecondary'
+                variant='subtitle1'
+              >
                 Priority
               </Typography>
-              <Typography variant='body1' gutterBottom>
+              <Typography className={classes.text} variant='body1' gutterBottom>
                 {ticketPriority[data.getAutoTaskSingleTicket.Priority]}
               </Typography>
             </div>
@@ -94,10 +108,14 @@ export default function TicketResults({ data, error, loading, called }) {
           {/* technician */}
           <CardContent className={classes.container1}>
             <div className={classes.container1FirstDiv}>
-              <Typography color='textSecondary' variant='subtitle1'>
+              <Typography
+                className={classes.subtext}
+                color='textSecondary'
+                variant='subtitle1'
+              >
                 Service Desk Contact
               </Typography>
-              <Typography variant='body1' gutterBottom>
+              <Typography className={classes.text} variant='body1' gutterBottom>
                 {data.getAutoTaskSingleTicket.AssignedResourceID === null
                   ? "Not Assigned yet"
                   : findResource(
@@ -107,10 +125,14 @@ export default function TicketResults({ data, error, loading, called }) {
               </Typography>
             </div>
             <div className={classes.container1LastDiv}>
-              <Typography color='textSecondary' variant='subtitle1'>
+              <Typography
+                className={classes.subtext}
+                color='textSecondary'
+                variant='subtitle1'
+              >
                 Queue
               </Typography>
-              <Typography variant='body1' gutterBottom>
+              <Typography className={classes.text} variant='body1' gutterBottom>
                 {data.getAutoTaskSingleTicket.QueueID === null
                   ? "Queue not found"
                   : findResource(data.getAutoTaskSingleTicket.QueueID, queues)
@@ -120,7 +142,11 @@ export default function TicketResults({ data, error, loading, called }) {
           </CardContent>
           {/* title  */}
           <CardContent>
-            <Typography color='textSecondary' variant='subtitle1'>
+            <Typography
+              className={classes.subtext}
+              color='textSecondary'
+              variant='subtitle1'
+            >
               Title
             </Typography>
             <Typography variant='h4' className={classes.title} gutterBottom>
@@ -132,43 +158,63 @@ export default function TicketResults({ data, error, loading, called }) {
           {/* status, resources, create-date, age, last activity time, last activity time */}
           <CardContent className={classes.container1}>
             <div className={classes.container1FirstDiv}>
-              <Typography color='textSecondary' variant='subtitle1'>
+              <Typography
+                className={classes.subtext}
+                color='textSecondary'
+                variant='subtitle1'
+              >
                 Ticket Status
               </Typography>
-              <Typography variant='body1' gutterBottom>
+              <Typography className={classes.text} variant='body1' gutterBottom>
                 {ticketStatus[data.getAutoTaskSingleTicket.Status]}
               </Typography>
-              <Typography color='textSecondary' variant='subtitle1'>
+              <Typography
+                className={classes.subtext}
+                color='textSecondary'
+                variant='subtitle1'
+              >
                 Date Created
               </Typography>
-              <Typography variant='body1' gutterBottom>
+              <Typography className={classes.text} variant='body1' gutterBottom>
                 {new Date(
                   data.getAutoTaskSingleTicket.CreateDate
                 ).toLocaleDateString("en-US", options)}
               </Typography>
-              <Typography color='textSecondary' variant='subtitle1'>
+              <Typography
+                className={classes.subtext}
+                color='textSecondary'
+                variant='subtitle1'
+              >
                 Last Activity Time
               </Typography>
-              <Typography variant='body1' gutterBottom>
+              <Typography className={classes.text} variant='body1' gutterBottom>
                 {new Date(
                   data.getAutoTaskSingleTicket.LastActivityDate
                 ).toLocaleDateString("en-US", options)}
               </Typography>
             </div>
             <div className={classes.container1LastDiv}>
-              <Typography color='textSecondary' variant='subtitle1'>
+              <Typography
+                className={classes.subtext}
+                color='textSecondary'
+                variant='subtitle1'
+              >
                 Ticket Age
               </Typography>
-              <Typography variant='body1' gutterBottom>
+              <Typography className={classes.text} variant='body1' gutterBottom>
                 {data.createDate === null
                   ? ""
                   : getTicketAge(data.getAutoTaskSingleTicket.CreateDate)}{" "}
                 days
               </Typography>
-              <Typography color='textSecondary' variant='subtitle1'>
+              <Typography
+                className={classes.subtext}
+                color='textSecondary'
+                variant='subtitle1'
+              >
                 Last Activity By
               </Typography>
-              <Typography variant='body1' gutterBottom>
+              <Typography className={classes.text} variant='body1' gutterBottom>
                 {data.getAutoTaskSingleTicket.LastActivityResourceID === null
                   ? "Not Activity Assigned"
                   : findResource(
@@ -180,10 +226,14 @@ export default function TicketResults({ data, error, loading, called }) {
           </CardContent>
           {/* Description */}
           <CardContent>
-            <Typography color='textSecondary' variant='subtitle1'>
+            <Typography
+              className={classes.subtext}
+              color='textSecondary'
+              variant='subtitle1'
+            >
               Description
             </Typography>
-            <Typography variant='body1' gutterBottom>
+            <Typography className={classes.text} variant='body1' gutterBottom>
               {data.getAutoTaskSingleTicket.Description !== null
                 ? data.getAutoTaskSingleTicket.Description.split("\n").map(
                     (item, key) => {
@@ -220,17 +270,13 @@ export default function TicketResults({ data, error, loading, called }) {
       ) : (
         <Card className={classes.cardEmpty}>
           <CardContent>
-            <Typography
-              variant='h2'
-              align='center'
-              color='textSecondary'
-              gutterBottom
-            >
-              Tips for searching
+            <Typography variant='h2' align='center' gutterBottom>
+              Welcome to the Conviva <br />
+              Ticket Tracker System
             </Typography>
             <Typography align='center' variant='h6' component='p'>
-              A ticket has the following convention: <br />
-              T-year-month-day.xxxx
+              Choose the panels on the left side to find an action. <br />
+              You can search by ticket number or find open tickets by center
             </Typography>
           </CardContent>
         </Card>

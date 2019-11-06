@@ -1,4 +1,3 @@
-import { red } from "@material-ui/core/colors";
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
 import ceraPRO from "../fonts/CeraPRO-Medium.ttf";
 
@@ -33,21 +32,21 @@ let theme = createMuiTheme({
   palette: {
     type: "light",
     primary: {
-      main: "#00465E"
+      main: "#9DC8C9"
     },
     secondary: {
-      light: "#EBF4F4",
-      main: "#CEE3E4",
-      dark: "#BAD8D9"
+      // light: "#EBF4F4",
+      main: "#CEE3E4"
+      // dark: "#BAD8D9"
     },
     error: {
-      main: red.A400
+      main: "#FB7B56"
     },
     background: {
-      main: "#3A3A3A"
+      main: "#9DC8C9"
     },
     text: {
-      primary: "#000",
+      primary: "#333",
       // secondary: "#333",
       disabled: "#DFDCD4"
     }

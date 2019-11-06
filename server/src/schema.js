@@ -4,6 +4,7 @@ const typeDefs = gql`
   type Query {
     getAutoTaskSingleTicket(id: String!): Ticket!
     getTicketsByCompany(id: String!): Ticket!
+    getListOfCompanies: [Company]!
   }
 
   type Ticket {
@@ -17,6 +18,10 @@ const typeDefs = gql`
     LastActivityDate: String
     LastActivityResourceID: Int
     QueueID: Int
+  }
+
+  type Company {
+    name: String
   }
 `;
 

@@ -1,9 +1,12 @@
 const CleanDataAndReturnTicketObject = require("./utils/helpers");
-const url = "https://webservices14.autotask.net/atservices/1.6/atws.asmx";
+const CleanDataAndReturnCompanyData = require("./utils/companyInfo")
 const SOAPTicketHelper = require("./datasources/getSingleTicket");
 const SOAPTicketsByCompanyHelper = require("./datasources/getTicketsByCompany");
+const SOAPGetCompaniesHelper = require("./datasources/getCompanies");
 const convert = require("xml-js");
 const fetch = require("node-fetch");
+
+const url = "https://webservices14.autotask.net/atservices/1.6/atws.asmx";
 
 const resolvers = {
   Query: {
@@ -37,6 +40,23 @@ const resolvers = {
         // console.log("JSONobj: ", JSON.stringify(JSONobj));
         // this will return the new object constructed over there
         return CleanDataAndReturnTicketObject(JSONobj);
+      } catch (error) {
+        console.log("error in the server", error);
+      }
+    },
+    // get companies
+    getListOfCompanies: async () => {
+      try {
+        const response = await fetch(url, SOAPGetCompaniesHelper());
+        const thisIsJustAnXMLString = await response.text();
+        // console.log("thisIsJustAnXMLString: ", thisIsJustAnXMLString);
+        const toJSONString = convert.xml2json(thisIsJustAnXMLString);
+        // console.log("toJSONString: ", JSON.stringify(toJSONString));
+
+        const JSONobj = JSON.parse(toJSONString);
+        // console.log("JSONobj: ", JSON.stringify(JSONobj));
+        // this will return the new object constructed over there
+        return CleanDataAndReturnCompanyData(JSONobj);
 
         return "Testing";
       } catch (error) {

@@ -17,11 +17,20 @@ const useStyles = makeStyles(theme => ({
   textField: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1)
+    // background: "#F3F1ED"
   },
   formStyles: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center"
+  },
+  button: {
+    transition: "background .300s ease-in-out",
+    background: "#BAD8D9",
+    "&:hover": {
+      background: "#567D96 !important",
+      color: "#fff"
+    }
   }
 }));
 
@@ -38,6 +47,11 @@ export default function TicketSearchCard({ input, loadSingleTicket }) {
     sentCleanDataToServer,
     validate
   );
+
+  React.useEffect(() => {
+    const input = document.getElementsByClassName("MuiInputBase-input");
+    input[0].style.background = "#F3F1ED";
+  }, []);
 
   return (
     <Card className={classes.card}>
