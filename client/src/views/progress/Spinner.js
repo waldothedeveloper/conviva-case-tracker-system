@@ -9,7 +9,7 @@ const useStyles = makeStyles(theme => ({
       marginLeft: theme.spacing(2)
     },
     justifyContent: "center",
-    margin: " 0 auto"
+    margin: " 2.5rem auto"
   }
 }));
 

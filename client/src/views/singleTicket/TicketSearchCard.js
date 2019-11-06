@@ -15,9 +15,7 @@ const useStyles = makeStyles(theme => ({
     boxShadow: "none"
   },
   textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1)
-    // background: "#F3F1ED"
+    margin: 0
   },
   formStyles: {
     display: "flex",
@@ -48,6 +46,7 @@ export default function TicketSearchCard({ input, loadSingleTicket }) {
     validate
   );
 
+  // To change the color of the input search
   React.useEffect(() => {
     const input = document.getElementsByClassName("MuiInputBase-input");
     input[0].style.background = "#F3F1ED";
@@ -56,8 +55,13 @@ export default function TicketSearchCard({ input, loadSingleTicket }) {
   return (
     <Card className={classes.card}>
       <CardContent>
+        <Typography variant='body2' gutterBottom>
+          A ticket number has the following structure: <br />
+          T-year-month-day-period-four-Numbers
+        </Typography>
         <form onSubmit={handleSubmit} className={classes.formStyles}>
           <TextField
+            inputProps={{ maxLength: 14 }}
             maxLength='14'
             onChange={handleChange}
             inputRef={node => {
@@ -72,10 +76,7 @@ export default function TicketSearchCard({ input, loadSingleTicket }) {
             variant='outlined'
             name='ticketNumber'
           />
-          <Typography variant='body2' gutterBottom>
-            A ticket number has the following structure: <br />
-            T-year-month-day-period-four-Numbers
-          </Typography>
+
           <TicketHelper errors={errors} />
           <Button
             size='large'

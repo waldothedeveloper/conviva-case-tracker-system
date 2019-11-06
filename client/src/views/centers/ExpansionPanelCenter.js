@@ -5,9 +5,9 @@ import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import CentersList from "./CentersList";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
+import FindCenter from "./FindCenter";
 
 const GET_COMPANIES = gql`
   query {
@@ -23,6 +23,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     width: "100%",
     margin: "0 0 5% 0"
+  },
+  expDetails: {
+    flexDirection: "column"
   }
 }));
 
@@ -42,7 +45,7 @@ export default function ExpansionPanelCenter() {
     if (loaded) {
       loadCompanies();
     }
-  }, [loaded]);
+  }, [loaded, loadCompanies]);
 
   return (
     <div className={classes.root}>
@@ -57,13 +60,8 @@ export default function ExpansionPanelCenter() {
             Search tickets by center
           </Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
-          <CentersList
-            data={data}
-            loading={loading}
-            error={error}
-            called={called}
-          />
+        <ExpansionPanelDetails className={classes.expDetails}>
+          <FindCenter data={data} />
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </div>
