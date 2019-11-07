@@ -29,8 +29,18 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function FolderList({ searchedCenter }) {
+export default function FolderList({
+  searchedCenter,
+  center,
+  setSearchTicketsPerCompany,
+  setSearchSingleTicket
+}) {
   const classes = useStyles();
+
+  function handleClick() {
+    setSearchTicketsPerCompany(true);
+    setSearchSingleTicket(false);
+  }
 
   if (searchedCenter.length > 0) {
     return (
@@ -38,7 +48,7 @@ export default function FolderList({ searchedCenter }) {
         <List className={classes.root}>
           {searchedCenter.map(company => {
             return (
-              <ListItem button key={company.id}>
+              <ListItem onClick={handleClick} button key={company.id}>
                 <ListItemText primary={company.name} secondary={company.city} />
               </ListItem>
             );
@@ -46,11 +56,11 @@ export default function FolderList({ searchedCenter }) {
         </List>
       </div>
     );
-  } else if (searchedCenter === 0) {
+  } else if (searchedCenter.length === 0 && center.length !== 0) {
     return (
       <List className={classes.root}>
         <ListItem>
-          <ListItemText primary='No results...try using a different spelling' />
+          <ListItemText primary='Your search did not match any documents. Make sure all words are spelled correctly.' />
         </ListItem>
       </List>
     );

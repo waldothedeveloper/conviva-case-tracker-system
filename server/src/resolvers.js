@@ -1,5 +1,6 @@
-const CleanDataAndReturnTicketObject = require("./utils/helpers");
+const CleanDataAndReturnTicketObject = require("./utils/singleTicket");
 const CleanDataAndReturnCompanyData = require("./utils/companyInfo");
+const cleanDataAndReturnArrayOfOpenTicketsPerCompany = require("./utils/ticketPerCompanyHelper");
 const SOAPTicketHelper = require("./datasources/getSingleTicket");
 const SOAPTicketsByCompanyHelper = require("./datasources/getTicketsByCompany");
 const SOAPGetCompaniesHelper = require("./datasources/getCompanies");
@@ -39,7 +40,7 @@ const resolvers = {
         const JSONobj = JSON.parse(toJSONString);
         // console.log("JSONobj: ", JSON.stringify(JSONobj));
         // this will return the new object constructed over there
-        return CleanDataAndReturnTicketObject(JSONobj);
+        return cleanDataAndReturnArrayOfOpenTicketsPerCompany(JSONobj);
       } catch (error) {
         console.log("error in the server", error);
       }

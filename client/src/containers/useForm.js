@@ -1,23 +1,20 @@
 import React from "react";
 
-export default function useForm(callback, validate) {
+export default function useForm(
+  callback,
+  validate,
+  setSearchSingleTicket,
+  setSearchTicketsPerCompany
+) {
   const [validTicket, setValidTicket] = React.useState("");
+  console.log("validTicket: ", validTicket);
   // console.log("form data: ", validTicket);
   const [errors, setErrors] = React.useState({});
   // console.log("errors: ", errors);
-  const [isSubmitting, setIsSubmitting] = React.useState(false);
-
-  // If there's no errors and the form has submitted
-  React.useEffect(() => {
-    if (!errors.bool && isSubmitting) {
-      callback();
-    }
-    //eslint-disable-next-line
-  }, [errors]);
 
   //whenever the user types please validate input
   React.useEffect(() => {
-    if (validTicket.ticketNumber) {
+    if (validTicket) {
       setErrors(validate(validTicket));
     }
   }, [validTicket, validate]);
@@ -26,7 +23,12 @@ export default function useForm(callback, validate) {
     if (event) event.preventDefault();
 
     setErrors(validate(validTicket));
-    setIsSubmitting(true);
+
+    if (!errors.bool) {
+      setSearchTicketsPerCompany(false);
+      setSearchSingleTicket(true);
+      callback();
+    }
   };
 
   const handleChange = event => {

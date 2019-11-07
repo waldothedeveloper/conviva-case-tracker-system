@@ -29,7 +29,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function ExpansionPanelCenter() {
+export default function CompanyExpansionPanel({
+  setSearchTicketsPerCompany,
+  setSearchSingleTicket
+}) {
   const classes = useStyles();
   const [loaded, setLoadedCompanies] = React.useState(false);
 
@@ -62,6 +65,8 @@ export default function ExpansionPanelCenter() {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.expDetails}>
           <FindCenter
+            setSearchSingleTicket={setSearchSingleTicket}
+            setSearchTicketsPerCompany={setSearchTicketsPerCompany}
             called={called}
             loading={loading}
             error={error}

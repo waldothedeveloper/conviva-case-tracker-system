@@ -28,7 +28,7 @@ module.exports = function CleanDataAndReturnTicketObject(obj) {
   ];
 
   // find ticket details and make a new object out of it
-  const findDescription = (JSarray, word) => {
+  const DestructureData = (JSarray, word) => {
     let found = e => e.name && e.name === word;
 
     JSarray.map(each => {
@@ -40,14 +40,14 @@ module.exports = function CleanDataAndReturnTicketObject(obj) {
         if (found(each)) {
           ticket[word] = each.elements[0].text;
         }
-        findDescription(each.elements, word);
+        DestructureData(each.elements, word);
       }
     });
   };
 
   // make a new object for each ticket detail
   words.forEach(word => {
-    findDescription(flattened, word);
+    DestructureData(flattened, word);
   });
 
   return ticket;

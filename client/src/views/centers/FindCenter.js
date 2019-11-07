@@ -2,9 +2,10 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+// import Button from "@material-ui/core/Button";
 import Fuse from "fuse.js";
 import CentersList from "./CentersList";
+import Spinner from "../progress/Spinner";
 
 const useStyles = makeStyles(theme => ({
   formStyles: {
@@ -36,11 +37,18 @@ const options = {
   keys: ["name"]
 };
 
-export default function FindCenter({ data, loading, error, called }) {
+export default function FindCenter({
+  data,
+  loading,
+  error,
+  called,
+  setSearchTicketsPerCompany,
+  setSearchSingleTicket
+}) {
   const classes = useStyles();
   const [center, setCenter] = React.useState("");
   const [searchedCenter, setSearchedCenter] = React.useState([]);
-  // console.log("searchedCenter: ", searchedCenter);
+  console.log("searchedCenter: ", searchedCenter);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -83,8 +91,26 @@ export default function FindCenter({ data, loading, error, called }) {
           variant='outlined'
           name='company'
         />
-        <CentersList data={data} searchedCenter={searchedCenter} />
-        <Button
+        {loading && called ? (
+          <Spinner />
+        ) : error ? (
+          <div>
+            <Typography variant='body1' gutterBottom>
+              We could not retrieve the center information.Please check back
+              later
+            </Typography>
+          </div>
+        ) : (
+          <CentersList
+            setSearchSingleTicket={setSearchSingleTicket}
+            setSearchTicketsPerCompany={setSearchTicketsPerCompany}
+            data={data}
+            center={center}
+            searchedCenter={searchedCenter}
+          />
+        )}
+
+        {/* <Button
           size='large'
           type='submit'
           variant='contained'
@@ -92,7 +118,7 @@ export default function FindCenter({ data, loading, error, called }) {
           className={classes.button}
         >
           Submit
-        </Button>
+        </Button> */}
       </form>
     </React.Fragment>
   );

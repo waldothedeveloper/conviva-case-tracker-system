@@ -2,7 +2,6 @@ var username = "apireports2@convivasolutions.com";
 var password = "Qtp@8555";
 
 const SOAPTicketHelper = ticketNumber => {
-  console.log("ticketNumber: ", ticketNumber);
   const options = {
     method: "POST",
     headers: {

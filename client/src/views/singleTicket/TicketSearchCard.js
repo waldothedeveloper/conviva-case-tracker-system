@@ -32,18 +32,24 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function TicketSearchCard({ input, loadSingleTicket }) {
+export default function TicketSearchCard({
+  input,
+  loadSingleTicket,
+  setSearchSingleTicket,
+  setSearchTicketsPerCompany
+}) {
   const classes = useStyles();
 
   //submit correct ticket if no errors
   const sentCleanDataToServer = () => {
-    console.log("Did i run");
     loadSingleTicket({ variables: { id: validTicket.ticketNumber } });
   };
 
   const { validTicket, errors, handleChange, handleSubmit } = useForm(
     sentCleanDataToServer,
-    validate
+    validate,
+    setSearchSingleTicket,
+    setSearchTicketsPerCompany
   );
 
   // To change the color of the input search

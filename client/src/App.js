@@ -1,13 +1,15 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
-import TicketResults from "./views/singleTicket/TicketResults";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { CheckInternetConnection } from "./utils/checkInternet";
-import Typography from "@material-ui/core/Typography";
 import TicketExpansionPanel from "./views/singleTicket/TicketExpansionPanel";
-import ExpansionPanelCenter from "./views/centers/ExpansionPanelCenter";
+import CompanyExpansionPanel from "./views/centers/ExpansionPanelCenter";
+import SingleTicketResults from "./views/singleTicket/SingleTicketResults";
+import Welcome from "./views/placeholders/Welcome";
+import TicketsPerCompanyTable from "./views/ticketsPerCompany/TicketsPerCompanyTable";
 
 const GET_SINGLE_TICKET = gql`
   query GET_SINGLE_TICKET($id: String!) {
@@ -48,6 +50,13 @@ const useStyles = makeStyles(theme => ({
 const App = () => {
   const isOnline = CheckInternetConnection();
   const classes = useStyles();
+  const [searchSingleTicket, setSearchSingleTicket] = React.useState(false);
+  // console.log("searchSingleTicket: ", searchSingleTicket);
+  const [searchTicketsPerCompany, setSearchTicketsPerCompany] = React.useState(
+    false
+  );
+  // console.log("searchTicketsPerCompany: ", searchTicketsPerCompany);
+
   let input;
 
   const [loadSingleTicket, { called, loading, data, error }] = useLazyQuery(
@@ -69,10 +78,15 @@ const App = () => {
             xl={4}
           >
             <TicketExpansionPanel
+              setSearchTicketsPerCompany={setSearchTicketsPerCompany}
+              setSearchSingleTicket={setSearchSingleTicket}
               input={input}
               loadSingleTicket={loadSingleTicket}
             />
-            <ExpansionPanelCenter />
+            <CompanyExpansionPanel
+              setSearchSingleTicket={setSearchSingleTicket}
+              setSearchTicketsPerCompany={setSearchTicketsPerCompany}
+            />
           </Grid>
           <Grid
             className={classes.gridItems}
@@ -83,12 +97,18 @@ const App = () => {
             lg={8}
             xl={8}
           >
-            <TicketResults
-              called={called}
-              loading={loading}
-              data={data}
-              error={error}
-            />
+            {searchSingleTicket ? (
+              <SingleTicketResults
+                called={called}
+                loading={loading}
+                data={data}
+                error={error}
+              />
+            ) : searchTicketsPerCompany ? (
+              <TicketsPerCompanyTable />
+            ) : (
+              <Welcome />
+            )}
           </Grid>
         </Grid>
       ) : (

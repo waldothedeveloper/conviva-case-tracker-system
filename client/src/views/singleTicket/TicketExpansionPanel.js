@@ -14,7 +14,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function TicketExpansionPanel({ input, loadSingleTicket }) {
+export default function TicketExpansionPanel({
+  input,
+  loadSingleTicket,
+  setSearchSingleTicket,
+  setSearchTicketsPerCompany
+}) {
   const classes = useStyles();
 
   return (
@@ -30,7 +35,12 @@ export default function TicketExpansionPanel({ input, loadSingleTicket }) {
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <TicketSearchCard input={input} loadSingleTicket={loadSingleTicket} />
+          <TicketSearchCard
+            input={input}
+            loadSingleTicket={loadSingleTicket}
+            setSearchSingleTicket={setSearchSingleTicket}
+            setSearchTicketsPerCompany={setSearchTicketsPerCompany}
+          />
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </div>
