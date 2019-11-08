@@ -7,7 +7,7 @@ export default function useForm(
   setSearchTicketsPerCompany
 ) {
   const [validTicket, setValidTicket] = React.useState("");
-  console.log("validTicket: ", validTicket);
+  // console.log("validTicket: ", validTicket);
   // console.log("form data: ", validTicket);
   const [errors, setErrors] = React.useState({});
   // console.log("errors: ", errors);

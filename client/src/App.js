@@ -10,6 +10,7 @@ import CompanyExpansionPanel from "./views/centers/ExpansionPanelCenter";
 import SingleTicketResults from "./views/singleTicket/SingleTicketResults";
 import Welcome from "./views/placeholders/Welcome";
 import TicketsPerCompanyTable from "./views/ticketsPerCompany/TicketsPerCompanyTable";
+import ShowTicketsPerCompanyPlacehoder from "./views/ticketsPerCompany/ShowTicketsPerCompanyPlaceholder";
 
 const GET_SINGLE_TICKET = gql`
   query GET_SINGLE_TICKET($id: String!) {
@@ -51,13 +52,14 @@ const App = () => {
   const isOnline = CheckInternetConnection();
   const classes = useStyles();
   const [searchSingleTicket, setSearchSingleTicket] = React.useState(false);
-  // console.log("searchSingleTicket: ", searchSingleTicket);
   const [searchTicketsPerCompany, setSearchTicketsPerCompany] = React.useState(
     false
   );
-  // console.log("searchTicketsPerCompany: ", searchTicketsPerCompany);
-
+  const [ticketsByCompany, setTicketsByCompany] = React.useState([]);
   let input;
+
+  const [ticketPanelOpen, setTicketPanelOpen] = React.useState(false);
+  const [companyPanelOpen, setCompanyPanelOpen] = React.useState(true);
 
   const [loadSingleTicket, { called, loading, data, error }] = useLazyQuery(
     GET_SINGLE_TICKET,
@@ -77,15 +79,24 @@ const App = () => {
             lg={4}
             xl={4}
           >
+            <CompanyExpansionPanel
+              companyPanelOpen={companyPanelOpen}
+              setCompanyPanelOpen={setCompanyPanelOpen}
+              setTicketPanelOpen={setTicketPanelOpen}
+              ticketPanelOpen={ticketPanelOpen}
+              setTicketsByCompany={setTicketsByCompany}
+              setSearchSingleTicket={setSearchSingleTicket}
+              setSearchTicketsPerCompany={setSearchTicketsPerCompany}
+            />
             <TicketExpansionPanel
+              companyPanelOpen={companyPanelOpen}
+              setCompanyPanelOpen={setCompanyPanelOpen}
+              setTicketPanelOpen={setTicketPanelOpen}
+              ticketPanelOpen={ticketPanelOpen}
               setSearchTicketsPerCompany={setSearchTicketsPerCompany}
               setSearchSingleTicket={setSearchSingleTicket}
               input={input}
               loadSingleTicket={loadSingleTicket}
-            />
-            <CompanyExpansionPanel
-              setSearchSingleTicket={setSearchSingleTicket}
-              setSearchTicketsPerCompany={setSearchTicketsPerCompany}
             />
           </Grid>
           <Grid
@@ -105,7 +116,11 @@ const App = () => {
                 error={error}
               />
             ) : searchTicketsPerCompany ? (
-              <TicketsPerCompanyTable />
+              <ShowTicketsPerCompanyPlacehoder
+                table={
+                  <TicketsPerCompanyTable ticketsByCompany={ticketsByCompany} />
+                }
+              />
             ) : (
               <Welcome />
             )}

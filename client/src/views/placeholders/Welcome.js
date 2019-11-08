@@ -24,14 +24,13 @@ export default function Welcome() {
   return (
     <Card className={classes.cardEmpty}>
       <CardContent>
-        <Typography variant='h2' align='center' gutterBottom>
+        <Typography variant='h3' align='center' gutterBottom>
           {/* Welcome to the Service Desk Request */}
-          Welcome to <br />
-          Conviva Service Desk Request Tool
+          Welcome to the <br />
+          Conviva Case Status Tracker
         </Typography>
         <Typography align='center' variant='h6' component='p'>
-          This tool will allow you to check the status update of a submitted
-          ticket.
+          A beautiful slogan placed here
         </Typography>
       </CardContent>
     </Card>

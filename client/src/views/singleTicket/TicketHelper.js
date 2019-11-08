@@ -58,7 +58,6 @@ export default function TicketHelper({ errors }) {
       <Fab size='small' variant='extended' disabled className={classes.button}>
         {errors.period ? <DoneIcon className={classes.doneIconStyles} /> : null}
         <span style={{ textTransform: "upperCase" }}>A &nbsp;</span>period after
-        the date
       </Fab>
       {/* 4 last unique digits after period */}
       <Fab size='small' variant='extended' disabled className={classes.button}>

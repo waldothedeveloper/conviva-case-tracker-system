@@ -50,6 +50,38 @@ module.exports = function cleanDataAndReturnArrayOfOpenTicketsPerCompany(obj) {
     return element;
   });
 
-  // console.log("getOnlyTicketInfo: ", JSON.stringify(getOnlyTicketInfo));
-  return getOnlyTicketInfo;
+  let numberOfTickets = getOnlyTicketInfo.length;
+  let cleanArrayOfTickets = [];
+  cleanArrayOfTickets.length = numberOfTickets;
+
+  getOnlyTicketInfo.map((elements, idx) => {
+    elements.elements.map(obj => {
+      if (obj.name === "TicketNumber") {
+        cleanArrayOfTickets[idx] === undefined
+          ? (cleanArrayOfTickets[idx] = { ticketNumber: obj.elements[0].text })
+          : (cleanArrayOfTickets[idx].ticketNumber = obj.elements[0].text);
+      }
+
+      if (obj.name === "Title") {
+        cleanArrayOfTickets[idx] === undefined
+          ? (cleanArrayOfTickets[idx] = { title: obj.elements[0].text })
+          : (cleanArrayOfTickets[idx].title = obj.elements[0].text);
+      }
+
+      if (obj.name === "Status") {
+        cleanArrayOfTickets[idx] === undefined
+          ? (cleanArrayOfTickets[idx] = { status: obj.elements[0].text })
+          : (cleanArrayOfTickets[idx].status = obj.elements[0].text);
+      }
+
+      if (obj.name === "Priority") {
+        cleanArrayOfTickets[idx] === undefined
+          ? (cleanArrayOfTickets[idx] = { priority: obj.elements[0].text })
+          : (cleanArrayOfTickets[idx].priority = obj.elements[0].text);
+      }
+    });
+  });
+
+  // console.log("cleanArrayOfTickets", cleanArrayOfTickets);
+  return cleanArrayOfTickets;
 };

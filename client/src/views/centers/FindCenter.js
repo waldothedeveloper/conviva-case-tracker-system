@@ -2,7 +2,6 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-// import Button from "@material-ui/core/Button";
 import Fuse from "fuse.js";
 import CentersList from "./CentersList";
 import Spinner from "../progress/Spinner";
@@ -43,12 +42,14 @@ export default function FindCenter({
   error,
   called,
   setSearchTicketsPerCompany,
-  setSearchSingleTicket
+  setSearchSingleTicket,
+  setTicketsByCompany,
+  loadCompanies
 }) {
   const classes = useStyles();
   const [center, setCenter] = React.useState("");
   const [searchedCenter, setSearchedCenter] = React.useState([]);
-  console.log("searchedCenter: ", searchedCenter);
+  // console.log("searchedCenter: ", searchedCenter);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -65,6 +66,8 @@ export default function FindCenter({
   React.useEffect(() => {
     if (center.length !== 0 && data !== undefined) {
       setSearchedCenter(fuse.search(center));
+    } else if (center.length === 0) {
+      setSearchedCenter([]);
     }
   }, [center, data]);
 
@@ -81,6 +84,7 @@ export default function FindCenter({
       </Typography>
       <form onSubmit={handleSubmit} className={classes.formStyles}>
         <TextField
+          onClick={() => loadCompanies()}
           onChange={handleChange}
           value={center}
           className={classes.textField}
@@ -92,7 +96,12 @@ export default function FindCenter({
           name='company'
         />
         {loading && called ? (
-          <Spinner />
+          <React.Fragment>
+            <Typography align='center' variant='body1' gutterBottom>
+              Loading centers...please wait
+            </Typography>
+            <Spinner />
+          </React.Fragment>
         ) : error ? (
           <div>
             <Typography variant='body1' gutterBottom>
@@ -102,6 +111,7 @@ export default function FindCenter({
           </div>
         ) : (
           <CentersList
+            setTicketsByCompany={setTicketsByCompany}
             setSearchSingleTicket={setSearchSingleTicket}
             setSearchTicketsPerCompany={setSearchTicketsPerCompany}
             data={data}
@@ -109,16 +119,6 @@ export default function FindCenter({
             searchedCenter={searchedCenter}
           />
         )}
-
-        {/* <Button
-          size='large'
-          type='submit'
-          variant='contained'
-          color='primary'
-          className={classes.button}
-        >
-          Submit
-        </Button> */}
       </form>
     </React.Fragment>
   );

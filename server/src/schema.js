@@ -8,16 +8,10 @@ const typeDefs = gql`
   }
 
   type ArrayOfTickets {
-    elements: [SingleTicketPerCompany]
-  }
-
-  type SingleTicketPerCompany {
-    name: String
-    elements: [SingleTicketsPerCompanyDetail]
-  }
-
-  type SingleTicketsPerCompanyDetail {
-    text: String
+    title: String
+    status: String
+    ticketNumber: String
+    priority: String
   }
 
   type Ticket {

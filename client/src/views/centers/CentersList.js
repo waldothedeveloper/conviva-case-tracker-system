@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import GetTicketsPerCompany from "../ticketsPerCompany/getTicketsPerCompany";
 import "../../css/centerList.css";
 
 const useStyles = makeStyles(theme => ({
@@ -29,26 +30,30 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function FolderList({
+export default function CenterList({
   searchedCenter,
   center,
   setSearchTicketsPerCompany,
-  setSearchSingleTicket
+  setSearchSingleTicket,
+  setTicketsByCompany
 }) {
   const classes = useStyles();
 
-  function handleClick() {
+  const setSelectedCompany = GetTicketsPerCompany(setTicketsByCompany);
+
+  function handleClick(id) {
     setSearchTicketsPerCompany(true);
     setSearchSingleTicket(false);
+    setSelectedCompany(searchedCenter[id]);
   }
 
   if (searchedCenter.length > 0) {
     return (
       <div className={classes.cover}>
         <List className={classes.root}>
-          {searchedCenter.map(company => {
+          {searchedCenter.map((company, id) => {
             return (
-              <ListItem onClick={handleClick} button key={company.id}>
+              <ListItem onClick={() => handleClick(id)} button key={company.id}>
                 <ListItemText primary={company.name} secondary={company.city} />
               </ListItem>
             );
@@ -68,3 +73,11 @@ export default function FolderList({
     return null;
   }
 }
+
+// {
+//   return (
+//     <Typography align='center' variant='body1' gutterBottom>
+//       Done! Search a center
+//     </Typography>
+//   );
+// }

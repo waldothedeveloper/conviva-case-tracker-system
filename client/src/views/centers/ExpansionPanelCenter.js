@@ -31,28 +31,28 @@ const useStyles = makeStyles(theme => ({
 
 export default function CompanyExpansionPanel({
   setSearchTicketsPerCompany,
-  setSearchSingleTicket
+  setSearchSingleTicket,
+  setTicketsByCompany,
+  ticketPanelOpen,
+  companyPanelOpen,
+  setTicketPanelOpen,
+  setCompanyPanelOpen
 }) {
   const classes = useStyles();
-  const [loaded, setLoadedCompanies] = React.useState(false);
+  // const [loaded, setLoadedCompanies] = React.useState(false);
 
   const [loadCompanies, { called, loading, data, error }] = useLazyQuery(
     GET_COMPANIES
   );
 
   const handleClick = () => {
-    setLoadedCompanies(!loaded);
+    setCompanyPanelOpen(!companyPanelOpen);
+    setTicketPanelOpen(!ticketPanelOpen);
   };
-
-  React.useEffect(() => {
-    if (loaded) {
-      loadCompanies();
-    }
-  }, [loaded, loadCompanies]);
 
   return (
     <div className={classes.root}>
-      <ExpansionPanel>
+      <ExpansionPanel expanded={companyPanelOpen}>
         <ExpansionPanelSummary
           onClick={handleClick}
           expandIcon={<ExpandMoreIcon />}
@@ -60,11 +60,13 @@ export default function CompanyExpansionPanel({
           id='panel1a-header'
         >
           <Typography align='left' variant='h6' gutterBottom>
-            Search tickets by center
+            Case status by center
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails className={classes.expDetails}>
           <FindCenter
+            loadCompanies={loadCompanies}
+            setTicketsByCompany={setTicketsByCompany}
             setSearchSingleTicket={setSearchSingleTicket}
             setSearchTicketsPerCompany={setSearchTicketsPerCompany}
             called={called}

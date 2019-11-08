@@ -3,11 +3,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
+import IconButton from "@material-ui/core/IconButton";
 import useForm from "../../containers/useForm";
 import validate from "../../utils/SingleTicketFormValidationRules";
 import TicketHelper from "./TicketHelper";
+import SearchIcon from "@material-ui/icons/Search";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import FormControl from "@material-ui/core/FormControl";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -66,33 +70,39 @@ export default function TicketSearchCard({
           T-year-month-day-period-four-Numbers
         </Typography>
         <form onSubmit={handleSubmit} className={classes.formStyles}>
-          <TextField
-            inputProps={{ maxLength: 15 }}
-            maxLength='14'
-            onChange={handleChange}
-            inputRef={node => {
-              input = node;
-            }}
-            value={validTicket.ticketNumber || ""}
-            className={classes.textField}
-            error={errors.bool && true}
-            placeholder='Search...'
-            helperText={errors.bool ? errors.ticketNumber : ""}
-            margin='normal'
-            variant='outlined'
-            name='ticketNumber'
-          />
+          <FormControl className={classes.textField} variant='outlined'>
+            <OutlinedInput
+              required={true}
+              autoFocus={true}
+              id='search-case'
+              name='ticketNumber'
+              type='text'
+              error={errors.bool && true}
+              inputProps={{ maxLength: 15 }}
+              value={validTicket.ticketNumber || ""}
+              onChange={handleChange}
+              inputRef={node => {
+                input = node;
+              }}
+              endAdornment={
+                <InputAdornment position='end'>
+                  <IconButton
+                    aria-label='start-search-case'
+                    type='submit'
+                    // onMouseDown={handleSubmit}
+                  >
+                    <SearchIcon />
+                  </IconButton>
+                </InputAdornment>
+              }
+              labelWidth={70}
+            />
+            <FormHelperText id='standard-weight-helper-text'>
+              {errors.bool ? errors.ticketNumber : ""}
+            </FormHelperText>
+          </FormControl>
 
           <TicketHelper errors={errors} />
-          <Button
-            size='large'
-            type='submit'
-            variant='contained'
-            color='primary'
-            className={classes.button}
-          >
-            Submit
-          </Button>
         </form>
       </CardContent>
     </Card>

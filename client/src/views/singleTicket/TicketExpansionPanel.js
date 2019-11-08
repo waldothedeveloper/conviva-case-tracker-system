@@ -18,20 +18,30 @@ export default function TicketExpansionPanel({
   input,
   loadSingleTicket,
   setSearchSingleTicket,
-  setSearchTicketsPerCompany
+  setSearchTicketsPerCompany,
+  ticketPanelOpen,
+  companyPanelOpen,
+  setTicketPanelOpen,
+  setCompanyPanelOpen
 }) {
   const classes = useStyles();
 
+  const handleClick = () => {
+    setTicketPanelOpen(!ticketPanelOpen);
+    setCompanyPanelOpen(!companyPanelOpen);
+  };
+
   return (
     <div className={classes.root}>
-      <ExpansionPanel>
+      <ExpansionPanel expanded={ticketPanelOpen}>
         <ExpansionPanelSummary
+          onClick={handleClick}
           expandIcon={<ExpandMoreIcon />}
           aria-controls='panel1a-content'
           id='panel1a-header'
         >
           <Typography align='left' variant='h6' gutterBottom>
-            Search ticket number
+            Case status by number
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
