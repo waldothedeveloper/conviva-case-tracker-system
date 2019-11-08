@@ -46,7 +46,7 @@ const useStyles = makeStyles({
 export default function SingleTicketResults({ data, error, loading, called }) {
   const classes = useStyles();
 
-  // console.log("data rom SingleTiketResults:", data);
+  // console.log("data from SingleTiketResults:", data);
   // this is to find the full name of technicians etc
   const findResource = (resourceID, typeOfResource) => {
     return data !== undefined
@@ -240,8 +240,7 @@ export default function SingleTicketResults({ data, error, loading, called }) {
             <Typography className={classes.text} variant='body1' gutterBottom>
               {data.createDate === null
                 ? ""
-                : getTicketAge(data.getAutoTaskSingleTicket.CreateDate)}{" "}
-              days
+                : getTicketAge(data.getAutoTaskSingleTicket.CreateDate)}
             </Typography>
             <Typography
               className={classes.subtext}

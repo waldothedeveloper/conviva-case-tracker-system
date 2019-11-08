@@ -45,6 +45,7 @@ export const resources = [
   { id: 29682916, resource_name: "Juan Molina" },
   { id: 29682981, resource_name: "Sherine Nedumchira" },
   { id: 29682960, resource_name: "Alejandro Nieto" },
+  { id: 29682976, resource_name: "Alejandro Nieves" },
   { id: 29682907, resource_name: "Janet Noriega" },
   { id: 29682967, resource_name: "Saikrishna Nyalakonda" },
   { id: 29682901, resource_name: "Mike Oneill" },
