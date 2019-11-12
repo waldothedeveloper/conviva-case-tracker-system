@@ -69,6 +69,7 @@ export default function FindCenter({
     } else if (center.length === 0) {
       setSearchedCenter([]);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [center, data]);
 
   // To change the color of the input search

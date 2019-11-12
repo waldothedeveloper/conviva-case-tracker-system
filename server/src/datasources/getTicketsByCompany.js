@@ -1,5 +1,5 @@
-var username = "apireports2@convivasolutions.com";
-var password = "Qtp@8555";
+var username = process.env.API_USERNAME;
+var password = process.env.API_PASSWORD;
 
 const SOAPTicketsByCompanyHelper = companyID => {
   const options = {
