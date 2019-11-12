@@ -56,28 +56,72 @@ module.exports = function cleanDataAndReturnArrayOfOpenTicketsPerCompany(obj) {
 
   getOnlyTicketInfo.map((elements, idx) => {
     elements.elements.map(obj => {
-      if (obj.name === "TicketNumber") {
+      if (obj.name === "Description") {
         cleanArrayOfTickets[idx] === undefined
-          ? (cleanArrayOfTickets[idx] = { ticketNumber: obj.elements[0].text })
-          : (cleanArrayOfTickets[idx].ticketNumber = obj.elements[0].text);
+          ? (cleanArrayOfTickets[idx] = { Description: obj.elements[0].text })
+          : (cleanArrayOfTickets[idx].Description = obj.elements[0].text);
       }
 
       if (obj.name === "Title") {
         cleanArrayOfTickets[idx] === undefined
-          ? (cleanArrayOfTickets[idx] = { title: obj.elements[0].text })
-          : (cleanArrayOfTickets[idx].title = obj.elements[0].text);
+          ? (cleanArrayOfTickets[idx] = { Title: obj.elements[0].text })
+          : (cleanArrayOfTickets[idx].Title = obj.elements[0].text);
+      }
+
+      if (obj.name === "TicketNumber") {
+        cleanArrayOfTickets[idx] === undefined
+          ? (cleanArrayOfTickets[idx] = { TicketNumber: obj.elements[0].text })
+          : (cleanArrayOfTickets[idx].TicketNumber = obj.elements[0].text);
       }
 
       if (obj.name === "Status") {
         cleanArrayOfTickets[idx] === undefined
-          ? (cleanArrayOfTickets[idx] = { status: obj.elements[0].text })
-          : (cleanArrayOfTickets[idx].status = obj.elements[0].text);
+          ? (cleanArrayOfTickets[idx] = { Status: obj.elements[0].text })
+          : (cleanArrayOfTickets[idx].Status = obj.elements[0].text);
       }
 
       if (obj.name === "Priority") {
         cleanArrayOfTickets[idx] === undefined
-          ? (cleanArrayOfTickets[idx] = { priority: obj.elements[0].text })
-          : (cleanArrayOfTickets[idx].priority = obj.elements[0].text);
+          ? (cleanArrayOfTickets[idx] = { Priority: obj.elements[0].text })
+          : (cleanArrayOfTickets[idx].Priority = obj.elements[0].text);
+      }
+
+      if (obj.name === "AssignedResourceID") {
+        cleanArrayOfTickets[idx] === undefined
+          ? (cleanArrayOfTickets[idx] = {
+              AssignedResourceID: obj.elements[0].text
+            })
+          : (cleanArrayOfTickets[idx].AssignedResourceID =
+              obj.elements[0].text);
+      }
+
+      if (obj.name === "CreateDate") {
+        cleanArrayOfTickets[idx] === undefined
+          ? (cleanArrayOfTickets[idx] = { CreateDate: obj.elements[0].text })
+          : (cleanArrayOfTickets[idx].CreateDate = obj.elements[0].text);
+      }
+
+      if (obj.name === "LastActivityDate") {
+        cleanArrayOfTickets[idx] === undefined
+          ? (cleanArrayOfTickets[idx] = {
+              LastActivityDate: obj.elements[0].text
+            })
+          : (cleanArrayOfTickets[idx].LastActivityDate = obj.elements[0].text);
+      }
+
+      if (obj.name === "LastActivityResourceID") {
+        cleanArrayOfTickets[idx] === undefined
+          ? (cleanArrayOfTickets[idx] = {
+              LastActivityResourceID: obj.elements[0].text
+            })
+          : (cleanArrayOfTickets[idx].LastActivityResourceID =
+              obj.elements[0].text);
+      }
+
+      if (obj.name === "QueueID") {
+        cleanArrayOfTickets[idx] === undefined
+          ? (cleanArrayOfTickets[idx] = { QueueID: obj.elements[0].text })
+          : (cleanArrayOfTickets[idx].QueueID = obj.elements[0].text);
       }
     });
   });

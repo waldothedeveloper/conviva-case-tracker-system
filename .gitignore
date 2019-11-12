@@ -9,6 +9,7 @@
 /server/package-lock.json
 
 .DS_Store
+variables.env
 .env
 .env.local
 .env.development.local

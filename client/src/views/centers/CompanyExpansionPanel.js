@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 export default function CompanyExpansionPanel({
   setSearchTicketsPerCompany,
   setSearchSingleTicket,
-  setTicketsByCompany,
+  setselectedCompanyID,
   ticketPanelOpen,
   companyPanelOpen,
   setTicketPanelOpen,
@@ -66,7 +66,7 @@ export default function CompanyExpansionPanel({
         <ExpansionPanelDetails className={classes.expDetails}>
           <FindCenter
             loadCompanies={loadCompanies}
-            setTicketsByCompany={setTicketsByCompany}
+            setselectedCompanyID={setselectedCompanyID}
             setSearchSingleTicket={setSearchSingleTicket}
             setSearchTicketsPerCompany={setSearchTicketsPerCompany}
             called={called}

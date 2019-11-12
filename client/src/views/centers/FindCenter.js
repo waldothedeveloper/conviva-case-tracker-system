@@ -1,10 +1,13 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Fuse from "fuse.js";
 import CentersList from "./CentersList";
 import Spinner from "../progress/Spinner";
+import OutlinedInput from "@material-ui/core/OutlinedInput";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import CloseIcon from "@material-ui/icons/Close";
+import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles(theme => ({
   formStyles: {
@@ -12,16 +15,8 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     justifyContent: "center"
   },
-  textField: {
-    margin: " 0 0 16px 0"
-  },
-  button: {
-    transition: "background .300s ease-in-out",
-    background: "#BAD8D9",
-    "&:hover": {
-      background: "#567D96 !important",
-      color: "#fff"
-    }
+  searchRoot: {
+    background: "#F3F1ED"
   }
 }));
 
@@ -43,7 +38,7 @@ export default function FindCenter({
   called,
   setSearchTicketsPerCompany,
   setSearchSingleTicket,
-  setTicketsByCompany,
+  setselectedCompanyID,
   loadCompanies
 }) {
   const classes = useStyles();
@@ -59,6 +54,10 @@ export default function FindCenter({
     setCenter(event.target.value);
   };
 
+  const handleClick = () => {
+    setCenter("");
+  };
+
   //defined the fuse search!
   const fuse = data !== undefined && new Fuse(data.getListOfCompanies, options);
 
@@ -66,17 +65,9 @@ export default function FindCenter({
   React.useEffect(() => {
     if (center.length !== 0 && data !== undefined) {
       setSearchedCenter(fuse.search(center));
-    } else if (center.length === 0) {
-      setSearchedCenter([]);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [center, data]);
-
-  // To change the color of the input search
-  React.useEffect(() => {
-    const input = document.getElementsByClassName("MuiInputBase-input");
-    input[0].style.background = "#F3F1ED";
-  }, []);
 
   return (
     <React.Fragment>
@@ -84,17 +75,23 @@ export default function FindCenter({
         Type the name of any of the Conviva Centers
       </Typography>
       <form onSubmit={handleSubmit} className={classes.formStyles}>
-        <TextField
+        <OutlinedInput
           onClick={() => loadCompanies()}
           onChange={handleChange}
           value={center}
-          className={classes.textField}
-          error={false}
-          placeholder='Search...'
-          helperText={""}
-          margin='normal'
-          variant='outlined'
+          className={classes.searchRoot}
+          required={true}
+          autoFocus={true}
           name='company'
+          type='text'
+          error={false}
+          endAdornment={
+            <InputAdornment position='end'>
+              <IconButton aria-label='start-search-case' onClick={handleClick}>
+                <CloseIcon />
+              </IconButton>
+            </InputAdornment>
+          }
         />
         {loading && called ? (
           <React.Fragment>
@@ -112,7 +109,7 @@ export default function FindCenter({
           </div>
         ) : (
           <CentersList
-            setTicketsByCompany={setTicketsByCompany}
+            setselectedCompanyID={setselectedCompanyID}
             setSearchSingleTicket={setSearchSingleTicket}
             setSearchTicketsPerCompany={setSearchTicketsPerCompany}
             data={data}

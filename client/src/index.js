@@ -16,7 +16,9 @@ import "./index.css";
 
 const client = new ApolloClient({
   uri: "http://localhost:4000",
-  cache: new InMemoryCache()
+  cache: new InMemoryCache({
+    dataIdFromObject: object => object.id || null
+  })
 });
 
 ReactDOM.render(

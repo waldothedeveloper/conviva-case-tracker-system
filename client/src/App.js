@@ -6,7 +6,7 @@ import { useLazyQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
 import { CheckInternetConnection } from "./utils/checkInternet";
 import TicketExpansionPanel from "./views/singleTicket/TicketExpansionPanel";
-import CompanyExpansionPanel from "./views/centers/ExpansionPanelCenter";
+import CompanyExpansionPanel from "./views/centers/CompanyExpansionPanel";
 import SingleTicketResults from "./views/singleTicket/SingleTicketResults";
 import Welcome from "./views/placeholders/Welcome";
 import TicketsPerCompanyTable from "./views/ticketsPerCompany/TicketsPerCompanyTable";
@@ -56,7 +56,9 @@ const App = () => {
   const [searchTicketsPerCompany, setSearchTicketsPerCompany] = React.useState(
     false
   );
-  const [ticketsByCompany, setTicketsByCompany] = React.useState([]);
+  const [selectedCompanyID, setselectedCompanyID] = React.useState(null);
+  // console.log('selectedCompanyID: ', selectedCompanyID);
+  
   let input;
 
   const [ticketPanelOpen, setTicketPanelOpen] = React.useState(false);
@@ -85,7 +87,7 @@ const App = () => {
               setCompanyPanelOpen={setCompanyPanelOpen}
               setTicketPanelOpen={setTicketPanelOpen}
               ticketPanelOpen={ticketPanelOpen}
-              setTicketsByCompany={setTicketsByCompany}
+              setselectedCompanyID={setselectedCompanyID}
               setSearchSingleTicket={setSearchSingleTicket}
               setSearchTicketsPerCompany={setSearchTicketsPerCompany}
             />
@@ -119,7 +121,7 @@ const App = () => {
             ) : searchTicketsPerCompany ? (
               <ShowTicketsPerCompanyPlacehoder
                 table={
-                  <TicketsPerCompanyTable ticketsByCompany={ticketsByCompany} />
+                  <TicketsPerCompanyTable  selectedCompanyID={selectedCompanyID}/>
                 }
               />
             ) : (

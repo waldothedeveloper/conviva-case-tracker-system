@@ -81,16 +81,11 @@ export default function TicketSearchCard({
               }}
               endAdornment={
                 <InputAdornment position='end'>
-                  <IconButton
-                    aria-label='start-search-case'
-                    type='submit'
-                    // onMouseDown={handleSubmit}
-                  >
+                  <IconButton aria-label='start-search-case' type='submit'>
                     <SearchIcon />
                   </IconButton>
                 </InputAdornment>
               }
-              labelWidth={70}
             />
             <FormHelperText id='standard-weight-helper-text'>
               {errors.bool ? errors.ticketNumber : ""}

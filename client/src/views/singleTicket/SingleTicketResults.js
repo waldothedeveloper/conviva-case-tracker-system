@@ -10,7 +10,7 @@ import { resources } from "../../utils/resources";
 import { queues } from "../../utils/queues";
 import { getTicketAge } from "../../utils/getTicketAge";
 import { options } from "../../utils/options";
-// import SingleTicketNotes from "./SingleTicketNotes";
+
 
 const useStyles = makeStyles({
   card: {
@@ -199,7 +199,7 @@ export default function SingleTicketResults({ data, error, loading, called }) {
             </Typography>
             <Typography className={classes.text} variant='body1' gutterBottom>
               {data.getAutoTaskSingleTicket.LastActivityResourceID === null
-                ? "Not Activity Assigned"
+                ? "No Activity Assigned"
                 : findResource(
                     data.getAutoTaskSingleTicket.LastActivityResourceID,
                     resources

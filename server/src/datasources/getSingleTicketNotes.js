@@ -1,5 +1,5 @@
-var username = process.env.API_USERNAME;
-var password = process.env.API_PASSWORD;
+var username = "xxx";
+var password = "xxx";
 
 const SOAPTicketNotesHelper = ticketID => {
   const options = {

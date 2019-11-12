@@ -3,7 +3,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import GetTicketsPerCompany from "../ticketsPerCompany/getTicketsPerCompany";
 import "../../css/centerList.css";
 
 const useStyles = makeStyles(theme => ({
@@ -35,16 +34,16 @@ export default function CenterList({
   center,
   setSearchTicketsPerCompany,
   setSearchSingleTicket,
-  setTicketsByCompany
+  setselectedCompanyID
 }) {
   const classes = useStyles();
 
-  const setSelectedCompany = GetTicketsPerCompany(setTicketsByCompany);
+  
 
   function handleClick(id) {
     setSearchTicketsPerCompany(true);
     setSearchSingleTicket(false);
-    setSelectedCompany(searchedCenter[id]);
+    setselectedCompanyID(searchedCenter[id]);
   }
 
   if (searchedCenter.length > 0) {

@@ -1,3 +1,6 @@
+require("dotenv").config({
+  path: "variables.env"
+});
 var username = process.env.API_USERNAME;
 var password = process.env.API_PASSWORD;
 

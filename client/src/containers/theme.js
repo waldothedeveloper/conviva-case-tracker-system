@@ -27,6 +27,16 @@ let theme = createMuiTheme({
       "@global": {
         "@font-face": [ceraPROfont]
       }
+    },
+    MuiCardContent: {
+      root: {
+        padding: "2px 16px"
+      }
+    },
+    MuiInputBase: {
+      input: {
+        background: "#F3F1ED"
+      }
     }
   },
   palette: {
