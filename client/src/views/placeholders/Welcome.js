@@ -3,18 +3,18 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import infinite_heartbeat from "../../assets/infinite_heartbeat.png";
 
 const useStyles = makeStyles({
-  card: {
-    minWidth: 275,
-    padding: "1.6%"
-  },
   cardEmpty: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    height: "90vh"
+    height: "90vh",
+    backgroundImage: `url(${infinite_heartbeat})`,
+    backgroundRepeat: "no-repeat",
+    backgroundSize: "cover"
   }
 });
 

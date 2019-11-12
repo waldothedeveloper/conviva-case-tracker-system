@@ -65,7 +65,16 @@ export default function TicketsPerCompanyTable({ ticketsByCompany }) {
           {ticketsByCompany.length > 0 &&
             ticketsByCompany[0].data.getTicketsByCompany.map((obj, idx) => {
               return (
-                <TableRow hover selected={true} key={idx}>
+                <TableRow
+                  hover
+                  key={
+                    ticketsByCompany[0].data.getTicketsByCompany[idx]
+                      .ticketNumber
+                  }
+                  onClick={() =>
+                    console.log("Clicking each element in the table")
+                  }
+                >
                   <TableCell component='th' scope='row'>
                     {obj.ticketNumber}
                   </TableCell>

@@ -36,7 +36,7 @@ export default function TicketHelper({ errors }) {
         {errors.letterT ? (
           <DoneIcon className={classes.doneIconStyles} />
         ) : null}
-        First letter should be:
+        Case starts with letter:
         <span style={{ textTransform: "upperCase" }}> &nbsp; T</span>
       </Fab>
       {/* year */}

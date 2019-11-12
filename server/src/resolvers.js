@@ -1,7 +1,9 @@
 const CleanDataAndReturnTicketObject = require("./utils/singleTicket");
+const cleanDataAndReturnArraySingleTicketNotes = require("./utils/singleTicketNotes");
 const CleanDataAndReturnCompanyData = require("./utils/companyInfo");
 const cleanDataAndReturnArrayOfOpenTicketsPerCompany = require("./utils/ticketPerCompanyHelper");
 const SOAPTicketHelper = require("./datasources/getSingleTicket");
+const SOAPTicketNotesHelper = require("./datasources/getSingleTicketNotes");
 const SOAPTicketsByCompanyHelper = require("./datasources/getTicketsByCompany");
 const SOAPGetCompaniesHelper = require("./datasources/getCompanies");
 const convert = require("xml-js");
@@ -25,7 +27,23 @@ const resolvers = {
         // this will return the new object constructed over there
         return CleanDataAndReturnTicketObject(JSONobj);
       } catch (error) {
-        console.log("error in the server", error);
+        console.log("error in the server trying to get Single Ticket", error);
+      }
+    },
+    getSingleTicketNotes: async (_, args) => {
+      // console.log(args.id);
+      try {
+        const response = await fetch(url, SOAPTicketNotesHelper(args.id));
+        const thisIsJustAnXMLString = await response.text();
+        const toJSONString = convert.xml2json(thisIsJustAnXMLString);
+        // console.log("toJSONString: ", JSON.stringify(toJSONString));
+
+        const JSONobj = JSON.parse(toJSONString);
+        // console.log("JSONobj: ", JSON.stringify(JSONobj));
+        // this will return the new object constructed over there
+        return cleanDataAndReturnArraySingleTicketNotes(JSONobj);
+      } catch (error) {
+        console.log("error in the server trying to get Ticket Notes", error);
       }
     },
     // get all tickets by company
@@ -42,7 +60,10 @@ const resolvers = {
         // this will return the new object constructed over there
         return cleanDataAndReturnArrayOfOpenTicketsPerCompany(JSONobj);
       } catch (error) {
-        console.log("error in the server", error);
+        console.log(
+          "error in the server trying to get Tickets Per Company",
+          error
+        );
       }
     },
     // get companies
@@ -59,7 +80,10 @@ const resolvers = {
         // this will return the new object constructed over there
         return CleanDataAndReturnCompanyData(JSONobj);
       } catch (error) {
-        console.log("error in the server", error);
+        console.log(
+          "error in the server trying to get List of Companies",
+          error
+        );
       }
     }
   }

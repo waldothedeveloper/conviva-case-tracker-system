@@ -1,7 +1,7 @@
 export let options = {
-  weekday: "long",
+  weekday: "short",
   year: "numeric",
-  month: "long",
+  month: "short",
   day: "numeric",
   minute: "2-digit",
   hour: "numeric"

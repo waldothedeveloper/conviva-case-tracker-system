@@ -25,6 +25,7 @@ const GET_SINGLE_TICKET = gql`
       LastActivityDate
       LastActivityResourceID
       QueueID
+      id
     }
   }
 `;

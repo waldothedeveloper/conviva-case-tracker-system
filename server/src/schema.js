@@ -5,6 +5,14 @@ const typeDefs = gql`
     getAutoTaskSingleTicket(id: String!): Ticket!
     getTicketsByCompany(id: String!): [ArrayOfTickets]!
     getListOfCompanies: [Company]!
+    getSingleTicketNotes(id: Int!): [TicketNotes]!
+  }
+
+  type TicketNotes {
+    title: String
+    lastActivityDate: String
+    assignedTo: String
+    description: String
   }
 
   type ArrayOfTickets {
@@ -25,6 +33,7 @@ const typeDefs = gql`
     LastActivityDate: String
     LastActivityResourceID: Int
     QueueID: Int
+    id: Int
   }
 
   type Company {

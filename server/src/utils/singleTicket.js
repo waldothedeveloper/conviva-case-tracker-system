@@ -14,6 +14,7 @@ module.exports = function CleanDataAndReturnTicketObject(obj) {
   const flattened = toArray.flat(depth);
 
   let ticket = {};
+
   let words = [
     "Description",
     "Title",
@@ -24,7 +25,8 @@ module.exports = function CleanDataAndReturnTicketObject(obj) {
     "CreateDate",
     "LastActivityDate",
     "LastActivityResourceID",
-    "QueueID"
+    "QueueID",
+    "id"
   ];
 
   // find ticket details and make a new object out of it
@@ -50,5 +52,6 @@ module.exports = function CleanDataAndReturnTicketObject(obj) {
     DestructureData(flattened, word);
   });
 
+  // console.log("ticket: ", ticket);
   return ticket;
 };

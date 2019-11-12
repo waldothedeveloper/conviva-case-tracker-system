@@ -73,11 +73,3 @@ export default function CenterList({
     return null;
   }
 }
-
-// {
-//   return (
-//     <Typography align='center' variant='body1' gutterBottom>
-//       Done! Search a center
-//     </Typography>
-//   );
-// }

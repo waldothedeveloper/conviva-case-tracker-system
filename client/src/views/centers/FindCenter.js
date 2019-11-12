@@ -74,7 +74,7 @@ export default function FindCenter({
   // To change the color of the input search
   React.useEffect(() => {
     const input = document.getElementsByClassName("MuiInputBase-input");
-    input[1].style.background = "#F3F1ED";
+    input[0].style.background = "#F3F1ED";
   }, []);
 
   return (

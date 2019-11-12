@@ -26,13 +26,8 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     justifyContent: "center"
   },
-  button: {
-    transition: "background .300s ease-in-out",
-    background: "#BAD8D9",
-    "&:hover": {
-      background: "#567D96 !important",
-      color: "#fff"
-    }
+  searchRoot: {
+    background: "#F3F1ED"
   }
 }));
 
@@ -56,22 +51,22 @@ export default function TicketSearchCard({
     setSearchTicketsPerCompany
   );
 
-  // To change the color of the input search
-  React.useEffect(() => {
-    const input = document.getElementsByClassName("MuiInputBase-input");
-    input[0].style.background = "#F3F1ED";
-  }, []);
-
   return (
     <Card className={classes.card}>
       <CardContent>
         <Typography variant='body2' gutterBottom>
-          A ticket number has the following structure: <br />
-          T-year-month-day-period-four-Numbers
+          A case number has the following structure: <br />
+          -letter T <br />
+          -year <br />
+          -month <br />
+          -day <br />
+          -a period <br />
+          -four-Numbers
         </Typography>
         <form onSubmit={handleSubmit} className={classes.formStyles}>
           <FormControl className={classes.textField} variant='outlined'>
             <OutlinedInput
+              className={classes.searchRoot}
               required={true}
               autoFocus={true}
               id='search-case'
