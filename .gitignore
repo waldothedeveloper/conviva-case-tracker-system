@@ -1,6 +1,6 @@
 
 /client/node_modules
-/client/package_lock.json
+/client/package-lock.json
 
 /server/node_modules
 /coverage
