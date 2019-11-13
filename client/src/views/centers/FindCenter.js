@@ -56,6 +56,7 @@ export default function FindCenter({
 
   const handleClick = () => {
     setCenter("");
+    setSearchedCenter([]);
   };
 
   //defined the fuse search!
@@ -71,7 +72,7 @@ export default function FindCenter({
 
   return (
     <React.Fragment>
-      <Typography variant='body2' gutterBottom>
+      <Typography variant="body2" gutterBottom>
         Type the name of any of the Conviva Centers
       </Typography>
       <form onSubmit={handleSubmit} className={classes.formStyles}>
@@ -81,13 +82,12 @@ export default function FindCenter({
           value={center}
           className={classes.searchRoot}
           required={true}
-          autoFocus={true}
-          name='company'
-          type='text'
+          name="company"
+          type="text"
           error={false}
           endAdornment={
-            <InputAdornment position='end'>
-              <IconButton aria-label='start-search-case' onClick={handleClick}>
+            <InputAdornment position="end">
+              <IconButton aria-label="start-search-case" onClick={handleClick}>
                 <CloseIcon />
               </IconButton>
             </InputAdornment>
@@ -95,14 +95,14 @@ export default function FindCenter({
         />
         {loading && called ? (
           <React.Fragment>
-            <Typography align='center' variant='body1' gutterBottom>
+            <Typography align="center" variant="body1" gutterBottom>
               Loading centers...please wait
             </Typography>
             <Spinner />
           </React.Fragment>
         ) : error ? (
           <div>
-            <Typography variant='body1' gutterBottom>
+            <Typography variant="body1" gutterBottom>
               We could not retrieve the center information.Please check back
               later
             </Typography>

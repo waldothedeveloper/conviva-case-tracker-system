@@ -29,6 +29,10 @@ const useStyles = makeStyles({
   },
   table: {
     minWidth: 650
+  },
+  mainRow: {
+    fontSize: "1.2rem",
+    color: "#FB7B56"
   }
 });
 
@@ -65,16 +69,22 @@ export default function TicketsPerCompanyTable({ selectedCompanyID }) {
   }
 
   if (error) {
-    return <div>Something when wrong...please try again</div>;
+    return (
+      <Paper className={classes.empty}>
+        <Typography variant="h3" align="center" gutterBottom>
+          Something went terribly wrong. Please come back later.
+        </Typography>
+      </Paper>
+    );
   }
 
   if (data !== undefined && data.getTicketsByCompany.length === 0) {
     return (
       <Paper className={classes.empty}>
-        <Typography variant='h2' align='center' gutterBottom>
+        <Typography variant="h2" align="center" gutterBottom>
           :(
         </Typography>
-        <Typography variant='h5' align='center' gutterBottom>
+        <Typography variant="h5" align="center" gutterBottom>
           No open cases found for this center
         </Typography>
       </Paper>
@@ -84,14 +94,22 @@ export default function TicketsPerCompanyTable({ selectedCompanyID }) {
   return (
     <React.Fragment>
       <Paper className={classes.root}>
-        <Table className={classes.table} aria-label='simple table'>
+        <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Ticket Number</TableCell>
-              <TableCell align='right'>Title</TableCell>
-              <TableCell align='right'>Company/Center</TableCell>
-              <TableCell align='right'>Status</TableCell>
-              <TableCell align='right'>Priority</TableCell>
+              <TableCell className={classes.mainRow}>Case</TableCell>
+              <TableCell className={classes.mainRow} align="right">
+                Title
+              </TableCell>
+              <TableCell className={classes.mainRow} align="right">
+                Company/Center
+              </TableCell>
+              <TableCell className={classes.mainRow} align="right">
+                Status
+              </TableCell>
+              <TableCell className={classes.mainRow} align="right">
+                Priority
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -103,19 +121,19 @@ export default function TicketsPerCompanyTable({ selectedCompanyID }) {
                     key={data.getTicketsByCompany[idx].TicketNumber}
                     onClick={() => handleClickOpen(obj.TicketNumber)}
                   >
-                    <TableCell component='th' scope='row'>
+                    <TableCell component="th" scope="row">
                       {obj.TicketNumber}
                     </TableCell>
-                    <TableCell align='right'>{obj.Title}</TableCell>
-                    <TableCell align='right'>
+                    <TableCell align="right">{obj.Title}</TableCell>
+                    <TableCell align="right">
                       {selectedCompanyID.name !== undefined
                         ? selectedCompanyID.name
                         : ""}
                     </TableCell>
-                    <TableCell align='right'>
+                    <TableCell align="right">
                       {ticketStatus[obj.Status]}
                     </TableCell>
-                    <TableCell align='right'>
+                    <TableCell align="right">
                       {ticketPriority[obj.Priority]}
                     </TableCell>
                   </TableRow>

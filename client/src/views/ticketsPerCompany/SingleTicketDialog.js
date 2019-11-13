@@ -14,7 +14,6 @@ import { resources } from "../../utils/resources";
 import { queues } from "../../utils/queues";
 import { getTicketAge } from "../../utils/getTicketAge";
 import { options } from "../../utils/options";
-import Spinner from "../progress/Spinner"
 
 const useStyles = makeStyles({
   card: {
@@ -37,19 +36,21 @@ const useStyles = makeStyles({
     fontWeight: "bold"
   },
   subtext: {
-    color: "#567D96"
+    color: "#9DC8C9"
   },
   button: {
     transition: "background .300s ease-in-out",
-    background: "#BAD8D9",
+    background: "#F7AD5A",
+    color: "#FFF",
     "&:hover": {
-      background: "#567D96 !important",
-      color: "#fff"
+      background: "#FB7B56 !important",
+      color: "#FFF"
     }
+  },
+  dialogAct: {
+    padding: 16
   }
 });
-
-
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -62,13 +63,12 @@ export default function SingleTicketDialog({
 }) {
   const classes = useStyles();
 
-    // this is to find the full name of technicians etc
-    const findResource = (resourceID, typeOfResource) => {
-      return typeOfResource.find(e => e.id === resourceID) || "";
-    };
+  // this is to find the full name of technicians etc
+  const findResource = (resourceID, typeOfResource) => {
+    return typeOfResource.find(e => e.id === resourceID) || "";
+  };
 
-
-  if(selectedTicket.length > 0) {
+  if (selectedTicket.length > 0) {
     return (
       <div>
         <Dialog
@@ -81,183 +81,228 @@ export default function SingleTicketDialog({
           aria-labelledby="alert-dialog-slide-title"
           aria-describedby="alert-dialog-slide-description"
         >
-         
-          <DialogContent >
-          <Card className={classes.card}>
-          {/* case number */}
-          <CardContent className={classes.container1}>
-            <div className={classes.container1FirstDiv}>
-              <Typography
-                className={classes.subtext}
-                color='textSecondary'
-                variant='subtitle1'
-              >
-                Case Number
-              </Typography>
-              <Typography className={classes.text} variant='body1' gutterBottom>
-                {selectedTicket[0].TicketNumber}
-              </Typography>
-            </div>
-            <div className={classes.container1LastDiv}>
-              <Typography
-                className={classes.subtext}
-                color='textSecondary'
-                variant='subtitle1'
-              >
-                Priority
-              </Typography>
-              <Typography className={classes.text} variant='body1' gutterBottom>
-                {ticketPriority[selectedTicket[0].Priority]}
-              </Typography>
-            </div>
-          </CardContent>
-          {/* title  */}
-          <CardContent>
-            <Typography
-              className={classes.subtext}
-              color='textSecondary'
-              variant='subtitle1'
+          <DialogContent>
+            <Card className={classes.card}>
+              {/* case number */}
+              <CardContent className={classes.container1}>
+                <div className={classes.container1FirstDiv}>
+                  <Typography
+                    className={classes.subtext}
+                    color="textSecondary"
+                    variant="subtitle1"
+                  >
+                    Case
+                  </Typography>
+                  <Typography
+                    className={classes.text}
+                    variant="body1"
+                    gutterBottom
+                  >
+                    {selectedTicket[0].TicketNumber}
+                  </Typography>
+                </div>
+                <div className={classes.container1LastDiv}>
+                  <Typography
+                    className={classes.subtext}
+                    color="textSecondary"
+                    variant="subtitle1"
+                  >
+                    Priority
+                  </Typography>
+                  <Typography
+                    className={classes.text}
+                    variant="body1"
+                    gutterBottom
+                  >
+                    {ticketPriority[selectedTicket[0].Priority]}
+                  </Typography>
+                </div>
+              </CardContent>
+              {/* title  */}
+              <CardContent>
+                <Typography
+                  className={classes.subtext}
+                  color="textSecondary"
+                  variant="subtitle1"
+                >
+                  Title
+                </Typography>
+                <Typography variant="h5" className={classes.title} gutterBottom>
+                  {selectedTicket[0].Title}
+                </Typography>
+              </CardContent>
+              {/* status, resources, create-date, age, last activity time, last activity time */}
+              <CardContent className={classes.container1}>
+                <div className={classes.container1FirstDiv}>
+                  <Typography
+                    className={classes.subtext}
+                    color="textSecondary"
+                    variant="subtitle1"
+                  >
+                    Last Activity On
+                  </Typography>
+                  <Typography
+                    className={classes.text}
+                    variant="body1"
+                    gutterBottom
+                  >
+                    {new Date(
+                      selectedTicket[0].LastActivityDate
+                    ).toLocaleDateString("en-US", options)}
+                  </Typography>
+
+                  <Typography
+                    className={classes.subtext}
+                    color="textSecondary"
+                    variant="subtitle1"
+                  >
+                    Status
+                  </Typography>
+                  <Typography
+                    className={classes.text}
+                    variant="body1"
+                    gutterBottom
+                  >
+                    {ticketStatus[selectedTicket[0].Status]}
+                  </Typography>
+                  <Typography
+                    className={classes.subtext}
+                    color="textSecondary"
+                    variant="subtitle1"
+                  >
+                    Date Created
+                  </Typography>
+                  <Typography
+                    className={classes.text}
+                    variant="body1"
+                    gutterBottom
+                  >
+                    {new Date(selectedTicket[0].CreateDate).toLocaleDateString(
+                      "en-US",
+                      options
+                    )}
+                  </Typography>
+                </div>
+                <div className={classes.container1LastDiv}>
+                  <Typography
+                    className={classes.subtext}
+                    color="textSecondary"
+                    variant="subtitle1"
+                  >
+                    By
+                  </Typography>
+                  <Typography
+                    className={classes.text}
+                    variant="body1"
+                    gutterBottom
+                  >
+                    {selectedTicket[0].LastActivityResourceID === null
+                      ? "-"
+                      : findResource(
+                          selectedTicket[0].LastActivityResourceID,
+                          resources
+                        ).resource_name}
+                  </Typography>
+                  <Typography
+                    className={classes.subtext}
+                    color="textSecondary"
+                    variant="subtitle1"
+                  >
+                    Age
+                  </Typography>
+                  <Typography
+                    className={classes.text}
+                    variant="body1"
+                    gutterBottom
+                  >
+                    {selectedTicket[0].CreateDate === null
+                      ? ""
+                      : getTicketAge(selectedTicket[0].CreateDate)}
+                  </Typography>
+                </div>
+              </CardContent>
+
+              {/* technician */}
+              <CardContent className={classes.container1}>
+                <div className={classes.container1FirstDiv}>
+                  <Typography
+                    className={classes.subtext}
+                    color="textSecondary"
+                    variant="subtitle1"
+                  >
+                    Service Desk Contact
+                  </Typography>
+                  <Typography
+                    className={classes.text}
+                    variant="body1"
+                    gutterBottom
+                  >
+                    {selectedTicket[0].AssignedResourceID === null
+                      ? "Not Assigned yet"
+                      : findResource(
+                          selectedTicket[0].AssignedResourceID,
+                          resources
+                        ).resource_name}
+                  </Typography>
+                </div>
+                <div className={classes.container1LastDiv}>
+                  <Typography
+                    className={classes.subtext}
+                    color="textSecondary"
+                    variant="subtitle1"
+                  >
+                    Queue
+                  </Typography>
+                  <Typography
+                    className={classes.text}
+                    variant="body1"
+                    gutterBottom
+                  >
+                    {selectedTicket[0].QueueID === null
+                      ? "Queue not found"
+                      : findResource(selectedTicket[0].QueueID, queues)
+                          .resource_name}
+                  </Typography>
+                </div>
+              </CardContent>
+
+              {/* Description */}
+              <CardContent>
+                <Typography
+                  className={classes.subtext}
+                  color="textSecondary"
+                  variant="subtitle1"
+                >
+                  Description
+                </Typography>
+                <Typography
+                  className={classes.text}
+                  variant="body1"
+                  gutterBottom
+                >
+                  {selectedTicket[0].Description !== undefined &&
+                  selectedTicket[0].Description !== null
+                    ? selectedTicket[0].Description.split("\n").map(
+                        (item, key) => {
+                          return (
+                            <React.Fragment key={key}>
+                              {item}
+                              <br />
+                            </React.Fragment>
+                          );
+                        }
+                      )
+                    : "No description found"}
+                </Typography>
+              </CardContent>
+            </Card>
+          </DialogContent>
+          <DialogActions className={classes.dialogAct}>
+            <Button
+              size="large"
+              onClick={handleClose}
+              className={classes.button}
             >
-              Title
-            </Typography>
-            <Typography variant='h5' className={classes.title} gutterBottom>
-              {selectedTicket[0].Title}
-            </Typography>
-          </CardContent>
-          {/* status, resources, create-date, age, last activity time, last activity time */}
-          <CardContent className={classes.container1}>
-            <div className={classes.container1FirstDiv}>
-              <Typography
-                className={classes.subtext}
-                color='textSecondary'
-                variant='subtitle1'
-              >
-                Last Activity On
-              </Typography>
-              <Typography className={classes.text} variant='body1' gutterBottom>
-                {new Date(
-                  selectedTicket[0].LastActivityDate
-                ).toLocaleDateString("en-US", options)}
-              </Typography>
-  
-              <Typography
-                className={classes.subtext}
-                color='textSecondary'
-                variant='subtitle1'
-              >
-                Status
-              </Typography>
-              <Typography className={classes.text} variant='body1' gutterBottom>
-                {ticketStatus[selectedTicket[0].Status]}
-              </Typography>
-              <Typography
-                className={classes.subtext}
-                color='textSecondary'
-                variant='subtitle1'
-              >
-                Date Created
-              </Typography>
-              <Typography className={classes.text} variant='body1' gutterBottom>
-                {new Date(
-                  selectedTicket[0].CreateDate
-                ).toLocaleDateString("en-US", options)}
-              </Typography>
-            </div>
-            <div className={classes.container1LastDiv}>
-              <Typography
-                className={classes.subtext}
-                color='textSecondary'
-                variant='subtitle1'
-              >
-                By
-              </Typography>
-              <Typography className={classes.text} variant='body1' gutterBottom>
-                {selectedTicket[0].LastActivityResourceID === null
-                  ? "-"
-                  : findResource(
-                    selectedTicket[0].LastActivityResourceID,
-                      resources
-                    ).resource_name}
-              </Typography>
-              <Typography
-                className={classes.subtext}
-                color='textSecondary'
-                variant='subtitle1'
-              >
-                Age
-              </Typography>
-              <Typography className={classes.text} variant='body1' gutterBottom>
-                {selectedTicket[0].CreateDate === null
-                  ? ""
-                  : getTicketAge(selectedTicket[0].CreateDate)}
-              </Typography>
-            </div>
-          </CardContent>
-  
-          {/* technician */}
-          <CardContent className={classes.container1}>
-            <div className={classes.container1FirstDiv}>
-              <Typography
-                className={classes.subtext}
-                color='textSecondary'
-                variant='subtitle1'
-              >
-                Service Desk Contact
-              </Typography>
-              <Typography className={classes.text} variant='body1' gutterBottom>
-                {selectedTicket[0].AssignedResourceID === null
-                  ? "Not Assigned yet"
-                  : findResource(
-                    selectedTicket[0].AssignedResourceID,
-                      resources
-                    ).resource_name}
-              </Typography>
-            </div>
-            <div className={classes.container1LastDiv}>
-              <Typography
-                className={classes.subtext}
-                color='textSecondary'
-                variant='subtitle1'
-              >
-                Queue
-              </Typography>
-              <Typography className={classes.text} variant='body1' gutterBottom>
-                {selectedTicket[0].QueueID === null
-                  ? "Queue not found"
-                  : findResource(selectedTicket[0].QueueID, queues)
-                      .resource_name}
-              </Typography>
-            </div>
-          </CardContent>
-  
-          {/* Description */}
-          <CardContent>
-            <Typography
-              className={classes.subtext}
-              color='textSecondary'
-              variant='subtitle1'
-            >
-              Description
-            </Typography>
-            <Typography className={classes.text} variant='body1' gutterBottom>
-              {selectedTicket[0].Description !== undefined && selectedTicket[0].Description !== null
-                ? selectedTicket[0].Description.split("\n").map(
-                    (item, key) => {
-                      return (
-                        <React.Fragment key={key}>
-                          {item}
-                          <br />
-                        </React.Fragment>
-                      );
-                    }
-                  )
-                : "No description found"}
-            </Typography>
-          </CardContent>
-        </Card>
-        </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} className={classes.button}>
               Close
             </Button>
           </DialogActions>
@@ -265,6 +310,6 @@ export default function SingleTicketDialog({
       </div>
     );
   } else {
-    return <Spinner />
+    return null;
   }
 }

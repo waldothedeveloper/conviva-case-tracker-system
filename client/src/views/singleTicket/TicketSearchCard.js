@@ -28,6 +28,9 @@ const useStyles = makeStyles(theme => ({
   },
   searchRoot: {
     background: "#F3F1ED"
+  },
+  helperText: {
+    color: "#FB7B56"
   }
 }));
 
@@ -54,24 +57,15 @@ export default function TicketSearchCard({
   return (
     <Card className={classes.card}>
       <CardContent>
-        <Typography variant='body2' gutterBottom>
-          A case number has the following structure: <br />
-          -letter T <br />
-          -year <br />
-          -month <br />
-          -day <br />
-          -a period <br />
-          -four-Numbers
-        </Typography>
         <form onSubmit={handleSubmit} className={classes.formStyles}>
-          <FormControl className={classes.textField} variant='outlined'>
+          <FormControl className={classes.textField} variant="outlined">
             <OutlinedInput
               className={classes.searchRoot}
               required={true}
-              autoFocus={true}
-              id='search-case'
-              name='ticketNumber'
-              type='text'
+              // autoFocus={true}
+              id="search-case"
+              name="ticketNumber"
+              type="text"
               error={errors.bool && true}
               inputProps={{ maxLength: 15 }}
               value={validTicket.ticketNumber || ""}
@@ -80,20 +74,25 @@ export default function TicketSearchCard({
                 input = node;
               }}
               endAdornment={
-                <InputAdornment position='end'>
-                  <IconButton aria-label='start-search-case' type='submit'>
+                <InputAdornment position="end">
+                  <IconButton aria-label="start-search-case" type="submit">
                     <SearchIcon />
                   </IconButton>
                 </InputAdornment>
               }
             />
-            <FormHelperText id='standard-weight-helper-text'>
+            <FormHelperText
+              className={classes.helperText}
+              id="standard-weight-helper-text"
+            >
               {errors.bool ? errors.ticketNumber : ""}
             </FormHelperText>
           </FormControl>
-
-          <TicketHelper errors={errors} />
         </form>
+        <Typography variant="body2" gutterBottom>
+          Case Number example: T20191231.0001
+        </Typography>
+        <TicketHelper errors={errors} />
       </CardContent>
     </Card>
   );

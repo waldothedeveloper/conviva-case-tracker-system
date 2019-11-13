@@ -1,5 +1,8 @@
-var username = "xxx";
-var password = "xxx";
+// var username = "xxx";
+// var password = "xxx";
+
+var username = "apireports2@convivasolutions.com";
+var password = "Qtp@8555";
 
 const SOAPTicketNotesHelper = ticketID => {
   const options = {

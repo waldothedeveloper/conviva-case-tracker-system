@@ -26,6 +26,11 @@ const useStyles = makeStyles(theme => ({
     borderWidth: 1,
     paddingBottom: 4,
     overflow: "hidden"
+  },
+  list: {
+    "&hover": {
+      fontWeight: "bolder"
+    }
   }
 }));
 
@@ -37,8 +42,6 @@ export default function CenterList({
   setselectedCompanyID
 }) {
   const classes = useStyles();
-
-  
 
   function handleClick(id) {
     setSearchTicketsPerCompany(true);
@@ -52,7 +55,12 @@ export default function CenterList({
         <List className={classes.root}>
           {searchedCenter.map((company, id) => {
             return (
-              <ListItem onClick={() => handleClick(id)} button key={company.id}>
+              <ListItem
+                button
+                onClick={() => handleClick(id)}
+                key={company.id}
+                className={classes.list}
+              >
                 <ListItemText primary={company.name} secondary={company.city} />
               </ListItem>
             );
@@ -64,7 +72,7 @@ export default function CenterList({
     return (
       <List className={classes.root}>
         <ListItem>
-          <ListItemText primary='Your search did not match any documents. Make sure all words are spelled correctly.' />
+          <ListItemText primary="Your search did not match any documents. Make sure all words are spelled correctly." />
         </ListItem>
       </List>
     );

@@ -1,8 +1,12 @@
-require("dotenv").config({
-  path: "variables.env"
-});
-var username = process.env.API_USERNAME;
-var password = process.env.API_PASSWORD;
+// require("dotenv").config({
+//   path: "variables.env"
+// });
+// var username = process.env.API_USERNAME;
+// var password = process.env.API_PASSWORD;
+
+var username = "apireports2@convivasolutions.com";
+var password = "Qtp@8555";
+
 
 const SOAPGetCompaniesHelper = () => {
   const options = {
