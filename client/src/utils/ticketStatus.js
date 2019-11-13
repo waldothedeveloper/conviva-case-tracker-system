@@ -1,5 +1,3 @@
-import { createSecretKey } from "crypto";
-
 export const ticketStatus = status => {
   let result = "";
   switch (status) {

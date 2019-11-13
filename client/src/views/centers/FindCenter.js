@@ -62,6 +62,10 @@ export default function FindCenter({
   //defined the fuse search!
   const fuse = data !== undefined && new Fuse(data.getListOfCompanies, options);
 
+  React.useEffect(() => {
+    loadCompanies();
+  }, []);
+
   // Search only if there's stored data available
   React.useEffect(() => {
     if (center.length !== 0 && data !== undefined) {
@@ -77,7 +81,7 @@ export default function FindCenter({
       </Typography>
       <form onSubmit={handleSubmit} className={classes.formStyles}>
         <OutlinedInput
-          onClick={() => loadCompanies()}
+          // onClick={}
           onChange={handleChange}
           value={center}
           className={classes.searchRoot}

@@ -62,7 +62,6 @@ export default function TicketSearchCard({
             <OutlinedInput
               className={classes.searchRoot}
               required={true}
-              // autoFocus={true}
               id="search-case"
               name="ticketNumber"
               type="text"

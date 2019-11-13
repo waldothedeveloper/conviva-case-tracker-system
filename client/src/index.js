@@ -16,6 +16,16 @@ const cache = new InMemoryCache({
   dataIdFromObject: object => object.id || null
 });
 
+const defaultOptions = {
+  watchQuery: {
+    fetchPolicy: "cache-and-network"
+  },
+  query: {
+    fetchPolicy: "network-only",
+    errorPolicy: "all"
+  }
+};
+
 const client = new ApolloClient({
   link: ApolloLink.from([
     onError(({ graphQLErrors, networkError }) => {
@@ -32,7 +42,8 @@ const client = new ApolloClient({
       // credentials: 'same-origin'
     })
   ]),
-  cache: cache
+  cache: cache,
+  defaultOptions: defaultOptions
 });
 
 ReactDOM.render(
