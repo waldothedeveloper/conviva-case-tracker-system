@@ -1,0 +1,10 @@
+Hi Waldo,
+ 
+Here is the server IP/CNAME Link to Netbios Name . If you need anything else let me know.
+Netbios-DC00001-111-01.mccigroup.com
+IP- 192.168.151.118
+CNAME- CONAPPWP306
+
+
+
+I created an A record casetracker.mccigroup.com pointing to 192.168.151.118.

@@ -131,10 +131,10 @@ export default function TicketsPerCompanyTable({ selectedCompanyID }) {
                         : ""}
                     </TableCell>
                     <TableCell align="right">
-                      {ticketStatus[obj.Status]}
+                      {ticketStatus(obj.Status)}
                     </TableCell>
                     <TableCell align="right">
-                      {ticketPriority[obj.Priority]}
+                      {ticketPriority(obj.Priority)}
                     </TableCell>
                   </TableRow>
                 );

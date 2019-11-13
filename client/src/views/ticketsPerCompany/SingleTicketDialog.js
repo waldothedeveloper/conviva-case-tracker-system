@@ -14,6 +14,7 @@ import { resources } from "../../utils/resources";
 import { queues } from "../../utils/queues";
 import { getTicketAge } from "../../utils/getTicketAge";
 import { options } from "../../utils/options";
+import ContactAvatars from "../Avatars/ContactAvatars";
 
 const useStyles = makeStyles({
   card: {
@@ -40,7 +41,7 @@ const useStyles = makeStyles({
   },
   button: {
     transition: "background .300s ease-in-out",
-    background: "#F7AD5A",
+    background: "#567D96",
     color: "#FFF",
     "&:hover": {
       background: "#FB7B56 !important",
@@ -114,7 +115,7 @@ export default function SingleTicketDialog({
                     variant="body1"
                     gutterBottom
                   >
-                    {ticketPriority[selectedTicket[0].Priority]}
+                    {ticketPriority(selectedTicket[0].Priority)}
                   </Typography>
                 </div>
               </CardContent>
@@ -163,7 +164,7 @@ export default function SingleTicketDialog({
                     variant="body1"
                     gutterBottom
                   >
-                    {ticketStatus[selectedTicket[0].Status]}
+                    {ticketStatus(selectedTicket[0].Status)}
                   </Typography>
                   <Typography
                     className={classes.subtext}
@@ -265,7 +266,17 @@ export default function SingleTicketDialog({
                   </Typography>
                 </div>
               </CardContent>
-
+              {/* Contac CARLOS or WALDO */}
+              <CardContent>
+                <Typography
+                  className={classes.subtext}
+                  color="textSecondary"
+                  variant="body1"
+                >
+                  For questions about a case please contact:
+                </Typography>
+                <ContactAvatars />
+              </CardContent>
               {/* Description */}
               <CardContent>
                 <Typography

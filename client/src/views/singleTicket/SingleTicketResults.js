@@ -10,6 +10,7 @@ import { resources } from "../../utils/resources";
 import { queues } from "../../utils/queues";
 import { getTicketAge } from "../../utils/getTicketAge";
 import { options } from "../../utils/options";
+import ContactAvatars from "../Avatars/ContactAvatars";
 
 const useStyles = makeStyles({
   card: {
@@ -59,7 +60,8 @@ export default function SingleTicketResults({ data, error, loading, called }) {
       <Card className={classes.cardEmpty}>
         <CardContent>
           <Typography align="center" variant="h4" component="p">
-            Something went terribly wrong. Please come back later.
+            Something went terribly wrong. <br />
+            Please come back later.
           </Typography>
         </CardContent>
       </Card>
@@ -120,7 +122,7 @@ export default function SingleTicketResults({ data, error, loading, called }) {
               Priority
             </Typography>
             <Typography className={classes.text} variant="body1" gutterBottom>
-              {ticketPriority[data.getAutoTaskSingleTicket.Priority]}
+              {ticketPriority(data.getAutoTaskSingleTicket.Priority)}
             </Typography>
           </div>
         </CardContent>
@@ -163,7 +165,7 @@ export default function SingleTicketResults({ data, error, loading, called }) {
               Status
             </Typography>
             <Typography className={classes.text} variant="body1" gutterBottom>
-              {ticketStatus[data.getAutoTaskSingleTicket.Status]}
+              {ticketStatus(data.getAutoTaskSingleTicket.Status)}
             </Typography>
             <Typography
               className={classes.subtext}
@@ -249,7 +251,17 @@ export default function SingleTicketResults({ data, error, loading, called }) {
             </Typography>
           </div>
         </CardContent>
-
+        {/* Contac CARLOS or WALDO */}
+        <CardContent>
+          <Typography
+            className={classes.subtext}
+            color="textSecondary"
+            variant="body1"
+          >
+            For questions about a case please contact:
+          </Typography>
+          <ContactAvatars />
+        </CardContent>
         {/* Description */}
         <CardContent>
           <Typography
