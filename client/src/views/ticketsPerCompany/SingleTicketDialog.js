@@ -266,17 +266,6 @@ export default function SingleTicketDialog({
                   </Typography>
                 </div>
               </CardContent>
-              {/* Contac CARLOS or WALDO */}
-              <CardContent>
-                <Typography
-                  className={classes.subtext}
-                  color="textSecondary"
-                  variant="body1"
-                >
-                  For questions about a case please contact:
-                </Typography>
-                <ContactAvatars />
-              </CardContent>
               {/* Description */}
               <CardContent>
                 <Typography
@@ -305,6 +294,17 @@ export default function SingleTicketDialog({
                       )
                     : "No description found"}
                 </Typography>
+              </CardContent>
+              {/* Contact CARLOS or WALDO */}
+              <CardContent>
+                <Typography
+                  className={classes.subtext}
+                  color="textSecondary"
+                  variant="body1"
+                >
+                  For questions about a case please contact:
+                </Typography>
+                <ContactAvatars />
               </CardContent>
             </Card>
           </DialogContent>

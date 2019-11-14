@@ -1,6 +1,5 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
@@ -11,6 +10,8 @@ import SingleTicketResults from "./views/singleTicket/SingleTicketResults";
 import Welcome from "./views/placeholders/Welcome";
 import TicketsPerCompanyTable from "./views/ticketsPerCompany/TicketsPerCompanyTable";
 import ShowTicketsPerCompanyPlacehoder from "./views/ticketsPerCompany/ShowTicketsPerCompanyPlaceholder";
+import AppBar from "./views/offline/AppBar";
+import OfflineMessage from "./views/offline/OfflineMessage";
 
 const GET_SINGLE_TICKET = gql`
   query GET_SINGLE_TICKET($id: String!) {
@@ -58,16 +59,16 @@ const App = () => {
   );
   const [selectedCompanyID, setselectedCompanyID] = React.useState(null);
   // console.log('selectedCompanyID: ', selectedCompanyID);
-  
+
   let input;
 
   const [ticketPanelOpen, setTicketPanelOpen] = React.useState(false);
   const [companyPanelOpen, setCompanyPanelOpen] = React.useState(true);
 
-  const [loadSingleTicket, { called, loading, data, error }] = useLazyQuery(
-    GET_SINGLE_TICKET,
-    { variables: { id: input } }
-  );
+  const [
+    loadSingleTicket,
+    { called, loading, data, error }
+  ] = useLazyQuery(GET_SINGLE_TICKET, { variables: { id: input } });
 
   return (
     <React.Fragment>
@@ -121,7 +122,9 @@ const App = () => {
             ) : searchTicketsPerCompany ? (
               <ShowTicketsPerCompanyPlacehoder
                 table={
-                  <TicketsPerCompanyTable  selectedCompanyID={selectedCompanyID}/>
+                  <TicketsPerCompanyTable
+                    selectedCompanyID={selectedCompanyID}
+                  />
                 }
               />
             ) : (
@@ -130,18 +133,10 @@ const App = () => {
           </Grid>
         </Grid>
       ) : (
-        <Grid container className={classes.offline}>
-          <Grid xs={12} sm={12} md={12} lg={12} xl={12} item>
-            <Typography align='center' variant='h1' gutterBottom>
-              :( <br />
-              <br />
-              It seems like you're offline
-            </Typography>
-            <Typography align='center' variant='h4'>
-              Please check your internet connection
-            </Typography>
-          </Grid>
-        </Grid>
+        <React.Fragment>
+          <AppBar />
+          <OfflineMessage />
+        </React.Fragment>
       )}
     </React.Fragment>
   );

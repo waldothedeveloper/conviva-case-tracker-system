@@ -64,7 +64,7 @@ export default function FindCenter({
 
   React.useEffect(() => {
     loadCompanies();
-  }, []);
+  }, [loadCompanies]);
 
   // Search only if there's stored data available
   React.useEffect(() => {

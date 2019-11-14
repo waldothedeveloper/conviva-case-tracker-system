@@ -251,17 +251,6 @@ export default function SingleTicketResults({ data, error, loading, called }) {
             </Typography>
           </div>
         </CardContent>
-        {/* Contac CARLOS or WALDO */}
-        <CardContent>
-          <Typography
-            className={classes.subtext}
-            color="textSecondary"
-            variant="body1"
-          >
-            For questions about a case please contact:
-          </Typography>
-          <ContactAvatars />
-        </CardContent>
         {/* Description */}
         <CardContent>
           <Typography
@@ -285,6 +274,17 @@ export default function SingleTicketResults({ data, error, loading, called }) {
                 )
               : "No description found"}
           </Typography>
+        </CardContent>
+        {/* Contac CARLOS or WALDO */}
+        <CardContent>
+          <Typography
+            className={classes.subtext}
+            color="textSecondary"
+            variant="body1"
+          >
+            For questions about a case please contact:
+          </Typography>
+          <ContactAvatars />
         </CardContent>
       </Card>
     );

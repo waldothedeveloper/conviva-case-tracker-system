@@ -12,6 +12,7 @@ import SingleTicketDialog from "./SingleTicketDialog";
 import GetTicketsPerCompany from "./getTicketsPerCompany";
 import { ticketStatus } from "../../utils/ticketStatus";
 import { ticketPriority } from "../../utils/ticketPriority";
+import convivaLOGO from "../../assets/Conviva.png";
 
 const useStyles = makeStyles({
   root: {
@@ -33,6 +34,14 @@ const useStyles = makeStyles({
   mainRow: {
     fontSize: "1.2rem",
     color: "#FB7B56"
+  },
+  im: {
+    width: "100%",
+    height: "auto"
+  },
+  fig: {
+    width: "20rem",
+    margin: "0 0 0 -3.6rem !important"
   }
 });
 
@@ -71,7 +80,7 @@ export default function TicketsPerCompanyTable({ selectedCompanyID }) {
   if (error) {
     return (
       <Paper className={classes.empty}>
-        <Typography variant="h3" align="center" gutterBottom>
+        <Typography variant="h3" align="center" color="error" gutterBottom>
           Something went terribly wrong. Please come back later.
         </Typography>
       </Paper>
@@ -81,10 +90,10 @@ export default function TicketsPerCompanyTable({ selectedCompanyID }) {
   if (data !== undefined && data.getTicketsByCompany.length === 0) {
     return (
       <Paper className={classes.empty}>
-        <Typography variant="h2" align="center" gutterBottom>
-          :(
-        </Typography>
-        <Typography variant="h5" align="center" gutterBottom>
+        <figure className={classes.fig}>
+          <img src={convivaLOGO} alt="" className={classes.im} />
+        </figure>
+        <Typography variant="h5" align="center" color="error" gutterBottom>
           No open cases found for this center
         </Typography>
       </Paper>
