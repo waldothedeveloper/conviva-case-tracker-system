@@ -7,11 +7,14 @@ import convivaLOGO from "../../assets/Conviva.png";
 
 const useStyles = makeStyles({
   cardEmpty: {
+    height: "90vh"
+  },
+  root: {
+    marginTop: "4rem",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems: "center",
-    height: "90vh"
+    alignItems: "center"
   },
   im: {
     width: "100%",
@@ -19,7 +22,8 @@ const useStyles = makeStyles({
   },
   fig: {
     width: "30rem",
-    margin: "0 0 0 -3.6rem !important"
+    height: "auto",
+    margin: "0 0 0 6rem"
   }
 });
 
@@ -28,7 +32,7 @@ export default function Welcome() {
 
   return (
     <Card className={classes.cardEmpty}>
-      <CardContent>
+      <CardContent className={classes.root}>
         <figure className={classes.fig}>
           <img src={convivaLOGO} alt="" className={classes.im} />
         </figure>
@@ -37,8 +41,7 @@ export default function Welcome() {
         </Typography>
         <Typography align="center" variant="body1" component="p">
           ...a <span style={{ fontWeight: "bold" }}>Live Link </span>to your
-          case <br />
-          helps you staying connected to your Case
+          case...
         </Typography>
       </CardContent>
     </Card>

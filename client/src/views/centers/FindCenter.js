@@ -11,6 +11,7 @@ import IconButton from "@material-ui/core/IconButton";
 
 const useStyles = makeStyles(theme => ({
   formStyles: {
+    marginTop: "0.2rem",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center"
@@ -77,11 +78,11 @@ export default function FindCenter({
   return (
     <React.Fragment>
       <Typography variant="body2" gutterBottom>
-        Type the name of any of the Conviva Centers
+        Type the center name
       </Typography>
       <form onSubmit={handleSubmit} className={classes.formStyles}>
         <OutlinedInput
-          // onClick={}
+          // placeholder="Seach a Conviva Center"
           onChange={handleChange}
           value={center}
           className={classes.searchRoot}
@@ -99,7 +100,12 @@ export default function FindCenter({
         />
         {loading && called ? (
           <React.Fragment>
-            <Typography align="center" variant="body1" gutterBottom>
+            <Typography
+              align="center"
+              variant="body1"
+              gutterBottom
+              style={{ marginTop: "2rem" }}
+            >
               Loading centers...please wait
             </Typography>
             <Spinner />
@@ -107,8 +113,8 @@ export default function FindCenter({
         ) : error ? (
           <div>
             <Typography variant="body1" gutterBottom>
-              We could not retrieve the center information.Please check back
-              later
+              We could not retrieve the centers information. <br />
+              Please check back later
             </Typography>
           </div>
         ) : (
