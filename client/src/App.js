@@ -1,11 +1,17 @@
 import React from "react";
+import Grid from "@material-ui/core/Grid";
+import { makeStyles } from "@material-ui/core/styles";
 import { useLazyQuery } from "@apollo/react-hooks";
 import { gql } from "apollo-boost";
-import { ticketStatus } from "./utils/helpers";
-import { ticketPriority } from "./utils/helpers";
-import { resources } from "./utils/helpers";
-import { queues } from "./utils/helpers";
-import { getTicketAge } from "./utils/helpers";
+import { CheckInternetConnection } from "./utils/checkInternet";
+import TicketExpansionPanel from "./views/singleTicket/TicketExpansionPanel";
+import CompanyExpansionPanel from "./views/centers/CompanyExpansionPanel";
+import SingleTicketResults from "./views/singleTicket/SingleTicketResults";
+import Welcome from "./views/placeholders/Welcome";
+import TicketsPerCompanyTable from "./views/ticketsPerCompany/TicketsPerCompanyTable";
+import ShowTicketsPerCompanyPlacehoder from "./views/ticketsPerCompany/ShowTicketsPerCompanyPlaceholder";
+import AppBar from "./views/offline/AppBar";
+import OfflineMessage from "./views/offline/OfflineMessage";
 
 const GET_SINGLE_TICKET = gql`
   query GET_SINGLE_TICKET($id: String!) {
@@ -20,152 +26,120 @@ const GET_SINGLE_TICKET = gql`
       LastActivityDate
       LastActivityResourceID
       QueueID
+      id
     }
   }
 `;
 
-let options = {
-  weekday: "long",
-  year: "numeric",
-  month: "long",
-  day: "numeric",
-  minute: "2-digit",
-  hour: "numeric"
-};
+const useStyles = makeStyles(theme => ({
+  root: {
+    padding: "2% 0",
+    margin: "0 auto",
+    justifyContent: "center"
+  },
+  gridItems: {
+    padding: "0.4%",
+    margin: "-0.2% !important"
+  },
+  offline: {
+    padding: "2% 5% 2% 5%",
+    margin: "0 auto",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100vh"
+  }
+}));
 
-function App() {
-  let input;
-  const [loadSingleTicket, { called, loading, data, error }] = useLazyQuery(
-    GET_SINGLE_TICKET,
-    { variables: { id: input } }
+const App = () => {
+  const isOnline = CheckInternetConnection();
+  const classes = useStyles();
+  const [searchSingleTicket, setSearchSingleTicket] = React.useState(false);
+  const [searchTicketsPerCompany, setSearchTicketsPerCompany] = React.useState(
+    false
   );
-  console.log("data: ", data);
+  const [selectedCompanyID, setselectedCompanyID] = React.useState(null);
+  // console.log('selectedCompanyID: ', selectedCompanyID);
 
-  if (called && loading) {
-    return <div>...loading</div>;
-  }
+  let input;
 
-  if (error) {
-    return <div>...Something when wrong</div>;
-  }
+  const [ticketPanelOpen, setTicketPanelOpen] = React.useState(false);
+  const [companyPanelOpen, setCompanyPanelOpen] = React.useState(true);
 
-  // this is to find the full name of technicians etc
-  const findResource = (resourceID, typeOfResource) => {
-    return data !== undefined
-      ? typeOfResource.find(e => e.id === resourceID)
-      : "";
-  };
+  const [
+    loadSingleTicket,
+    { called, loading, data, error }
+  ] = useLazyQuery(GET_SINGLE_TICKET, { variables: { id: input } });
 
   return (
-    <div>
-      <form
-        onSubmit={e => {
-          e.preventDefault();
-          loadSingleTicket({ variables: { id: input.value } });
-          input.value = "";
-        }}
-      >
-        <p>Please enter a ticket number</p>
-        <input
-          placeholder='enter ticket number'
-          ref={node => {
-            input = node;
-          }}
-        />
-        <br />
-        <button type='submit'>Submit</button>
-      </form>
-
-      {data !== undefined && data.getAutoTaskSingleTicket && (
-        <div>
-          <h3>
-            Title:{" "}
-            {data.getAutoTaskSingleTicket.Title !== null
-              ? data.getAutoTaskSingleTicket.Title
-              : "No Title found"}
-          </h3>
-          <h4>
-            Description:
-            <br />
-          </h4>
-          <p>
-            {data.getAutoTaskSingleTicket.Description !== null
-              ? data.getAutoTaskSingleTicket.Description.split("\n").map(
-                  (item, key) => {
-                    return (
-                      <React.Fragment key={key}>
-                        {item}
-                        <br />
-                      </React.Fragment>
-                    );
-                  }
-                )
-              : "No description found"}
-          </p>
-          <h5>Ticket Number: {data.getAutoTaskSingleTicket.TicketNumber}</h5>
-          <h5>
-            Ticket Status: {ticketStatus[data.getAutoTaskSingleTicket.Status]}
-          </h5>
-          <h5>
-            Ticket Priority:{" "}
-            {ticketPriority[data.getAutoTaskSingleTicket.Priority]}
-          </h5>
-          <h5>
-            Service Desk Contact:{" "}
-            {data.getAutoTaskSingleTicket.AssignedResourceID === null
-              ? "Not Assigned yet"
-              : findResource(
-                  data.getAutoTaskSingleTicket.AssignedResourceID,
-                  resources
-                ).resource_name}
-          </h5>
-          <h5>
-            Date created:{" "}
-            {new Date(
-              data.getAutoTaskSingleTicket.CreateDate
-            ).toLocaleDateString("en-US", options)}
-          </h5>
-          <h5>
-            Last Activity Time:{" "}
-            {new Date(
-              data.getAutoTaskSingleTicket.LastActivityDate
-            ).toLocaleDateString("en-US", options)}
-          </h5>
-          <h5>
-            Last Activity By:{" "}
-            {data.getAutoTaskSingleTicket.LastActivityResourceID === null
-              ? "Not Activity Assigned"
-              : findResource(
-                  data.getAutoTaskSingleTicket.LastActivityResourceID,
-                  resources
-                ).resource_name}
-          </h5>
-          <h5>
-            Queue:{" "}
-            {data.getAutoTaskSingleTicket.QueueID === null
-              ? "Queue not found"
-              : findResource(data.getAutoTaskSingleTicket.QueueID, queues)
-                  .resource_name}
-          </h5>
-
-          <h5>Ticket Age:</h5>
-          <p>
-            {data.createDate === null
-              ? ""
-              : getTicketAge(data.getAutoTaskSingleTicket.CreateDate)}{" "}
-            days
-          </p>
-        </div>
+    <React.Fragment>
+      {isOnline ? (
+        <Grid container className={classes.root}>
+          <Grid
+            className={classes.gridItems}
+            item
+            xs={12}
+            sm={12}
+            md={4}
+            lg={4}
+            xl={4}
+          >
+            <CompanyExpansionPanel
+              companyPanelOpen={companyPanelOpen}
+              setCompanyPanelOpen={setCompanyPanelOpen}
+              setTicketPanelOpen={setTicketPanelOpen}
+              ticketPanelOpen={ticketPanelOpen}
+              setselectedCompanyID={setselectedCompanyID}
+              setSearchSingleTicket={setSearchSingleTicket}
+              setSearchTicketsPerCompany={setSearchTicketsPerCompany}
+            />
+            <TicketExpansionPanel
+              companyPanelOpen={companyPanelOpen}
+              setCompanyPanelOpen={setCompanyPanelOpen}
+              setTicketPanelOpen={setTicketPanelOpen}
+              ticketPanelOpen={ticketPanelOpen}
+              setSearchTicketsPerCompany={setSearchTicketsPerCompany}
+              setSearchSingleTicket={setSearchSingleTicket}
+              input={input}
+              loadSingleTicket={loadSingleTicket}
+            />
+          </Grid>
+          <Grid
+            className={classes.gridItems}
+            item
+            xs={12}
+            sm={12}
+            md={8}
+            lg={8}
+            xl={8}
+          >
+            {searchSingleTicket ? (
+              <SingleTicketResults
+                called={called}
+                loading={loading}
+                data={data}
+                error={error}
+              />
+            ) : searchTicketsPerCompany ? (
+              <ShowTicketsPerCompanyPlacehoder
+                table={
+                  <TicketsPerCompanyTable
+                    selectedCompanyID={selectedCompanyID}
+                  />
+                }
+              />
+            ) : (
+              <Welcome />
+            )}
+          </Grid>
+        </Grid>
+      ) : (
+        <React.Fragment>
+          <AppBar />
+          <OfflineMessage />
+        </React.Fragment>
       )}
-
-      {data !== undefined &&
-        data.getAutoTaskSingleTicket.TicketNumber === null && (
-          <div style={{ margin: "4rem" }}>
-            <h3> Ticket not found...please try again</h3>
-          </div>
-        )}
-    </div>
+    </React.Fragment>
   );
-}
+};
 
 export default App;

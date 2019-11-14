@@ -3,7 +3,16 @@ const { gql } = require("apollo-server");
 const typeDefs = gql`
   type Query {
     getAutoTaskSingleTicket(id: String!): Ticket!
-    getTicketsByCompany(id: String!): Ticket!
+    getTicketsByCompany(id: String!): [Ticket]!
+    getListOfCompanies: [Company]!
+    getSingleTicketNotes(id: Int!): [TicketNotes]!
+  }
+
+  type TicketNotes {
+    title: String
+    lastActivityDate: String
+    assignedTo: String
+    description: String
   }
 
   type Ticket {
@@ -17,6 +26,13 @@ const typeDefs = gql`
     LastActivityDate: String
     LastActivityResourceID: Int
     QueueID: Int
+    id: Int
+  }
+
+  type Company {
+    id: String
+    name: String
+    city: String
   }
 `;
 

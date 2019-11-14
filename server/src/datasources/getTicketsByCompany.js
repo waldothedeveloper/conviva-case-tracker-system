@@ -1,3 +1,6 @@
+// var username = "xxx";
+// var password = "xxx";
+
 var username = "apireports2@convivasolutions.com";
 var password = "Qtp@8555";
 
