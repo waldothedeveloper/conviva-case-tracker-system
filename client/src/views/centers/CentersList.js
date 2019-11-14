@@ -14,13 +14,11 @@ const useStyles = makeStyles(theme => ({
   },
   cover: {
     marginBottom: "2rem",
-    background: "#fff",
     display: "flex",
     flexDirection: "column",
     padding: 0,
     border: 0,
     borderRadius: "0 0 24px 24px",
-    // boxShadow: "0 2px 2px 0 rgba(32,33,36,0.28)",
     borderColor: "#9dc8c9",
     borderStyle: "solid",
     borderWidth: 1,

@@ -1,0 +1,20 @@
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+  55% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.done {
+  opacity: 0;
+  animation: fadeInOut 4.8s;
+  -webkit-animation: fadeInOut 4.8s;
+}

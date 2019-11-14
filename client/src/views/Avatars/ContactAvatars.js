@@ -4,13 +4,16 @@ import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import Grid from "@material-ui/core/Grid";
 import Link from "@material-ui/core/Link";
+import waldo from "../../assets/waldo.jpg";
 
 const useStyles = makeStyles({
   bigAvatar: {
-    margin: 10
+    margin: 10,
+    width: 60,
+    height: 60
   },
   link: {
-    margin: 0,
+    marginBottom: "1rem",
     color: "#FFF"
   },
   text: {
@@ -53,7 +56,7 @@ export default function ContactAvatars() {
       </div>
       <div className={classes.container1LastDiv}>
         <Grid item className={classes.contact}>
-          <Avatar className={classes.bigAvatar}>W</Avatar>
+          <Avatar className={classes.bigAvatar} src={waldo} />
           <Typography>Waldo Lavaut</Typography>
         </Grid>
         <Link

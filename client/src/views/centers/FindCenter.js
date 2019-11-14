@@ -3,11 +3,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Fuse from "fuse.js";
 import CentersList from "./CentersList";
-import Spinner from "../progress/Spinner";
 import OutlinedInput from "@material-ui/core/OutlinedInput";
 import InputAdornment from "@material-ui/core/InputAdornment";
 import CloseIcon from "@material-ui/icons/Close";
 import IconButton from "@material-ui/core/IconButton";
+import "../../css/findCenter.css";
 
 const useStyles = makeStyles(theme => ({
   formStyles: {
@@ -46,6 +46,8 @@ export default function FindCenter({
   const [center, setCenter] = React.useState("");
   const [searchedCenter, setSearchedCenter] = React.useState([]);
   // console.log("searchedCenter: ", searchedCenter);
+
+  // console.log("data", data);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -108,7 +110,6 @@ export default function FindCenter({
             >
               Loading centers...please wait
             </Typography>
-            <Spinner />
           </React.Fragment>
         ) : error ? (
           <div>
@@ -118,14 +119,29 @@ export default function FindCenter({
             </Typography>
           </div>
         ) : (
-          <CentersList
-            setselectedCompanyID={setselectedCompanyID}
-            setSearchSingleTicket={setSearchSingleTicket}
-            setSearchTicketsPerCompany={setSearchTicketsPerCompany}
-            data={data}
-            center={center}
-            searchedCenter={searchedCenter}
-          />
+          <React.Fragment>
+            <CentersList
+              setselectedCompanyID={setselectedCompanyID}
+              setSearchSingleTicket={setSearchSingleTicket}
+              setSearchTicketsPerCompany={setSearchTicketsPerCompany}
+              data={data}
+              center={center}
+              searchedCenter={searchedCenter}
+            />
+            {data !== undefined ? (
+              <Typography
+                className="done"
+                align="center"
+                variant="body1"
+                gutterBottom
+                style={{ marginTop: "2rem" }}
+              >
+                Done!
+              </Typography>
+            ) : (
+              ""
+            )}
+          </React.Fragment>
         )}
       </form>
     </React.Fragment>

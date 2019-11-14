@@ -16,6 +16,7 @@ import convivaLOGO from "../../assets/Conviva.png";
 
 const useStyles = makeStyles({
   root: {
+    maxHeight: "100vh",
     width: "100%",
     overflowX: "auto"
   },
@@ -27,6 +28,12 @@ const useStyles = makeStyles({
     flexDirection: "column",
     alignItems: "center",
     justifyContent: "center"
+  },
+  table1: {
+    minWidth: 650,
+    position: "sticky",
+    top: 0,
+    backgroundColor: "#F3F1ED"
   },
   table: {
     minWidth: 650
@@ -103,7 +110,7 @@ export default function TicketsPerCompanyTable({ selectedCompanyID }) {
   return (
     <React.Fragment>
       <Paper className={classes.root}>
-        <Table className={classes.table} aria-label="simple table">
+        <Table className={classes.table1} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell className={classes.mainRow}>Case</TableCell>
@@ -121,6 +128,8 @@ export default function TicketsPerCompanyTable({ selectedCompanyID }) {
               </TableCell>
             </TableRow>
           </TableHead>
+        </Table>
+        <Table className={classes.table}>
           <TableBody>
             {data !== undefined &&
               data.getTicketsByCompany.map((obj, idx) => {

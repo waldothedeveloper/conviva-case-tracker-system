@@ -12,6 +12,7 @@ import TicketsPerCompanyTable from "./views/ticketsPerCompany/TicketsPerCompanyT
 import ShowTicketsPerCompanyPlacehoder from "./views/ticketsPerCompany/ShowTicketsPerCompanyPlaceholder";
 import AppBar from "./views/offline/AppBar";
 import OfflineMessage from "./views/offline/OfflineMessage";
+import Contact from "./views/Avatars/Contact";
 
 const GET_SINGLE_TICKET = gql`
   query GET_SINGLE_TICKET($id: String!) {
@@ -39,7 +40,8 @@ const useStyles = makeStyles(theme => ({
   },
   gridItems: {
     padding: "0.4%",
-    margin: "-0.2% !important"
+    margin: "-0.2% !important",
+    height: "100vh"
   },
   offline: {
     padding: "2% 5% 2% 5%",
@@ -102,6 +104,7 @@ const App = () => {
               input={input}
               loadSingleTicket={loadSingleTicket}
             />
+            <Contact />
           </Grid>
           <Grid
             className={classes.gridItems}

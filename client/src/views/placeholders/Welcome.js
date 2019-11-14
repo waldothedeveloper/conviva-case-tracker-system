@@ -7,10 +7,13 @@ import convivaLOGO from "../../assets/Conviva.png";
 
 const useStyles = makeStyles({
   cardEmpty: {
-    height: "90vh"
+    height: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center"
   },
   root: {
-    marginTop: "4rem",
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
@@ -41,7 +44,7 @@ export default function Welcome() {
         </Typography>
         <Typography align="center" variant="body1" component="p">
           ...a <span style={{ fontWeight: "bold" }}>Live Link </span>to your
-          case...
+          case
         </Typography>
       </CardContent>
     </Card>
