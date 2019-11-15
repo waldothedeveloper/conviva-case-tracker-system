@@ -2,18 +2,17 @@ const express = require("express");
 const { ApolloServer } = require("apollo-server-express");
 const typeDefs = require("./schema");
 const resolvers = require("./resolvers");
-const fs = require("fs");
-const https = require("https");
+// const fs = require("fs");
+// const https = require("https");
 const http = require("http");
 
 const configurations = {
   // Note: You may need sudo to run on port 443
-  production: { ssl: true, port: 443, hostname: "example.com" },
-  development: { ssl: false, port: 4000, hostname: "localhost" }
+  production: { port: 4000, hostname: "localhost" }
 };
 
-const environment = process.env.NODE_ENV || "production";
-const config = configurations[environment];
+// const environment = process.env.NODE_ENV || "production";
+const config = configurations.production;
 
 const apollo = new ApolloServer({
   typeDefs,
@@ -25,19 +24,9 @@ apollo.applyMiddleware({ app });
 
 let server;
 
-if (config.ssl) {
-  // Assumes certificates are in a .ssl folder off of the package root. Make sure
-  // these files are secured.
-  server = https.createServer(
-    {
-      key: fs.readFileSync(`./ssl/${environment}/server.key`),
-      cert: fs.readFileSync(`./ssl/${environment}/server.crt`)
-    },
-    app
-  );
-} else {
-  server = http.createServer(app);
-}
+// Assumes certificates are in a .ssl folder off of the package root. Make sure
+// these files are secured.
+server = http.createServer(app);
 
 server.listen({ port: config.port }, () =>
   console.log(
