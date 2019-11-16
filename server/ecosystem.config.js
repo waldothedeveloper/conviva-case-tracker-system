@@ -3,6 +3,7 @@ module.exports = {
     {
       name: "Conviva Case Tracker Server",
       script: "./src/index.js",
+      instances: "max",
       exec_mode: "cluster",
 
       // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
@@ -20,11 +21,11 @@ module.exports = {
   deploy: {
     production: {
       user: "wlavaut",
-      host: "192.168.151.118",
+      host: "localhost:4000",
       ref: "origin/master",
       repo:
         "https://github.com/waldothedeveloper/conviva-case-tracker-system.git",
-      path: "C:conviva-case-tracker-systemserver",
+      path: "C:/conviva-case-tracker-system/server",
       "post-deploy":
         "npm install && pm2 reload ecosystem.config.js --env production"
     }
