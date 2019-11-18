@@ -13,6 +13,8 @@ import ShowTicketsPerCompanyPlacehoder from "./views/ticketsPerCompany/ShowTicke
 import AppBar from "./views/offline/AppBar";
 import OfflineMessage from "./views/offline/OfflineMessage";
 import Contact from "./views/Avatars/Contact";
+import { isIE } from "./utils/detectBrowser";
+import IE from "./views/Browser-Detection/IE";
 
 const GET_SINGLE_TICKET = gql`
   query GET_SINGLE_TICKET($id: String!) {
@@ -74,7 +76,13 @@ const App = () => {
 
   return (
     <React.Fragment>
-      {isOnline ? (
+      {isIE ? (
+        <Grid container style={{ height: "100vh" }}>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
+            <IE />
+          </Grid>
+        </Grid>
+      ) : isOnline ? (
         <Grid container className={classes.root}>
           <Grid
             className={classes.gridItems}

@@ -1,14 +1,17 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import Avatar from "@material-ui/core/Avatar";
-import Grid from "@material-ui/core/Grid";
-import Link from "@material-ui/core/Link";
 import waldo from "../../assets/waldo.jpg";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 
 const useStyles = makeStyles(theme => ({
+  rootList: {
+    width: "100%",
+    backgroundColor: theme.palette.background.paper
+  },
   root: {
     width: "100%",
     margin: "0 0 5% 0"
@@ -49,41 +52,29 @@ export default function Contact() {
 
   return (
     <div className={classes.root}>
-      <Card>
-        <CardContent style={{ marginTop: "2.2rem" }}>
-          <Typography align="left" variant="body1" gutterBottom>
-            For any questions/feedback please contact:
-          </Typography>
-        </CardContent>
-        <CardContent>
-          <Grid container className={classes.cont}>
-            <Grid item className={classes.avs}>
-              <Grid item className={classes.insideAvs}>
-                <Avatar className={classes.bigAvatar}>C</Avatar>
-                <Typography>Carlos Rodriguez</Typography>
-              </Grid>
-              <Link
-                href="mailto:crodriguez@convivasolutions.com"
-                className={classes.link}
-              >
-                crodriguez@convivasolutions.com
-              </Link>
-            </Grid>
-            <Grid item className={classes.avs}>
-              <Grid item className={classes.insideAvs}>
-                <Avatar className={classes.bigAvatar} src={waldo} />
-                <Typography>Waldo Lavaut</Typography>
-              </Grid>
-              <Link
-                href="mailto:crodriguez@convivasolutions.com"
-                className={classes.link}
-              >
-                wlavaut@convivasolutions.com
-              </Link>
-            </Grid>
-          </Grid>
-        </CardContent>
-      </Card>
+      <List className={classes.rootList}>
+        <ListItem>
+          <ListItemText primary="For any questions/feedback please contact:" />
+        </ListItem>
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar className={classes.bigAvatar}>C</Avatar>
+          </ListItemAvatar>
+          <ListItemText
+            primary="Carlos Rodriguez"
+            secondary="crodriguez@convivasolutions.com"
+          />
+        </ListItem>
+        <ListItem>
+          <ListItemAvatar>
+            <Avatar className={classes.bigAvatar} src={waldo} />
+          </ListItemAvatar>
+          <ListItemText
+            primary="Waldo Lavaut"
+            secondary="wlavaut@convivasolutions.com"
+          />
+        </ListItem>
+      </List>
     </div>
   );
 }

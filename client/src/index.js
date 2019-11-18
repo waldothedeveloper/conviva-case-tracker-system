@@ -1,3 +1,4 @@
+import "react-app-polyfill/ie11";
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./App";
@@ -38,8 +39,8 @@ const client = new ApolloClient({
       if (networkError) console.log(`[Network error]: ${networkError}`);
     }),
     new HttpLink({
+      // 1. This one used for production but can also be used for developement if nothing changes on the server
       uri: "https://casetracker.mccigroup.com/server"
-      // credentials: 'same-origin'
     })
   ]),
   cache: cache,

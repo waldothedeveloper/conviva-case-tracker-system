@@ -80,7 +80,7 @@ export default function FindCenter({
   return (
     <React.Fragment>
       <Typography variant="body2" gutterBottom>
-        Type the center name
+        Type center name
       </Typography>
       <form onSubmit={handleSubmit} className={classes.formStyles}>
         <OutlinedInput

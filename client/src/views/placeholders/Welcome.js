@@ -42,6 +42,9 @@ export default function Welcome() {
         <Typography variant="h3" align="center" gutterBottom>
           Case Status Tracker
         </Typography>
+        <Typography variant="h6" align="center" gutterBottom>
+          (PILOT)
+        </Typography>
         <Typography align="center" variant="body1" component="p">
           ...a <span style={{ fontWeight: "bold" }}>Live Link </span>to your
           case

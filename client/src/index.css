@@ -17,8 +17,8 @@ body::-webkit-scrollbar-track {
 }
 
 body::-webkit-scrollbar-thumb {
-  background-color: #f8df8d;
-  outline: 1px solid #f8df8d;
+  background-color: #f3f1ed;
+  outline: 1px solid #f3f1ed;
 }
 
 /* Change Autocomplete styles in Chrome*/

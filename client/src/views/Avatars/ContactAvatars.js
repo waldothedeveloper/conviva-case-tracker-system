@@ -1,71 +1,64 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
-import Grid from "@material-ui/core/Grid";
-import Link from "@material-ui/core/Link";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemAvatar from "@material-ui/core/ListItemAvatar";
+
 import waldo from "../../assets/waldo.jpg";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
+  rootList: {
+    width: "100%",
+    backgroundColor: theme.palette.background.paper,
+    display: "flex"
+  },
   bigAvatar: {
     margin: 10,
     width: 60,
     height: 60
   },
-  link: {
-    marginBottom: "1rem",
-    color: "#FFF"
+  contact1: {
+    justifyContent: "flex-start"
   },
-  text: {
-    fontWeight: "bold"
+  contact2: {
+    justifyContent: "flex-end"
   },
-  subtext: {
-    color: "#9DC8C9"
-  },
-  contact: {
-    display: "flex",
-    alignItems: "center"
-  },
-  container1FirstDiv: {
-    width: "50%"
-  },
-  container1LastDiv: {
-    alignItems: "flex-end",
-    width: "50%",
-    display: "flex",
-    flexDirection: "column"
+  contactText: {
+    flex: "initial"
   }
-});
+}));
 
 export default function ContactAvatars() {
   const classes = useStyles();
 
   return (
-    <Grid container>
-      <div className={classes.container1FirstDiv}>
-        <Grid item className={classes.contact} style={{ marginLeft: "-12px" }}>
+    <List className={classes.rootList}>
+      <ListItem className={classes.contact1}>
+        <ListItemAvatar>
           <Avatar className={classes.bigAvatar}>C</Avatar>
-          <Typography>Carlos Rodriguez</Typography>
-        </Grid>
-        <Link
-          href="mailto:crodriguez@convivasolutions.com"
-          className={classes.link}
-        >
-          crodriguez@convivasolutions.com
-        </Link>
-      </div>
-      <div className={classes.container1LastDiv}>
-        <Grid item className={classes.contact}>
+        </ListItemAvatar>
+        <ListItemText
+          classes={{
+            root: classes.contactText
+          }}
+          primary="Carlos Rodriguez"
+          secondary="crodriguez@convivasolutions.com"
+        />
+      </ListItem>
+      <ListItem className={classes.contact2}>
+        <ListItemAvatar>
           <Avatar className={classes.bigAvatar} src={waldo} />
-          <Typography>Waldo Lavaut</Typography>
-        </Grid>
-        <Link
-          href="mailto:wlavaut@convivasolutions.com"
-          className={classes.link}
-        >
-          wlavaut@convivasolutions.com
-        </Link>
-      </div>
-    </Grid>
+        </ListItemAvatar>
+        <ListItemText
+          classes={{
+            root: classes.contactText
+          }}
+          primary="Waldo Lavaut"
+          secondary="wlavaut@convivasolutions.com"
+        />
+      </ListItem>
+    </List>
   );
 }
