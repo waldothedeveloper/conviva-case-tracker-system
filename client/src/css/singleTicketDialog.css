@@ -1,0 +1,15 @@
+/* width */
+#single-ticket-dialog::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+#single-ticket-dialog::-webkit-scrollbar-track {
+  box-shadow: none;
+}
+
+/* Handle */
+#single-ticket-dialog:-webkit-scrollbar-thumb {
+  background: #f3f1ed;
+  border-radius: 10px;
+}

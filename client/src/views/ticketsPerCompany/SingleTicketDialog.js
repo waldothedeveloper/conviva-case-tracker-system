@@ -15,6 +15,7 @@ import { queues } from "../../utils/queues";
 import { getTicketAge } from "../../utils/getTicketAge";
 import { options } from "../../utils/options";
 import ContactAvatars from "../Avatars/ContactAvatars";
+// import "../../css/singleTicketDialog.css";
 
 const useStyles = makeStyles({
   card: {
@@ -49,7 +50,8 @@ const useStyles = makeStyles({
     }
   },
   dialogAct: {
-    padding: 16
+    padding: 16,
+    backgroundColor: "#F3F1ED"
   }
 });
 
@@ -74,6 +76,7 @@ export default function SingleTicketDialog({
       <div>
         <Dialog
           maxWidth="lg"
+          fullWidth={true}
           open={open}
           TransitionComponent={Transition}
           keepMounted
@@ -81,6 +84,7 @@ export default function SingleTicketDialog({
           onClose={handleClose}
           aria-labelledby="alert-dialog-slide-title"
           aria-describedby="alert-dialog-slide-description"
+          id="single-ticket-dialog"
         >
           <DialogContent>
             <Card className={classes.card}>

@@ -10,7 +10,8 @@ const useStyles = makeStyles(theme => ({
     maxHeight: 450,
     overflow: "scroll",
     width: "100%",
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
+    position: "relative"
   },
   cover: {
     marginBottom: "2rem",
@@ -50,7 +51,7 @@ export default function CenterList({
   if (searchedCenter.length > 0) {
     return (
       <div className={classes.cover}>
-        <List className={classes.root}>
+        <List id="centers-list" className={classes.root}>
           {searchedCenter.map((company, id) => {
             return (
               <ListItem
