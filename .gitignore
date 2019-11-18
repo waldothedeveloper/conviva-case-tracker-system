@@ -1,12 +1,12 @@
 .icloud
 /client/node_modules
-/client/package-lock.json
+client/package-lock.json
 
 /server/node_modules
 /coverage
 /build
-/server/.env
-/server/package-lock.json
+server/.env
+server/package-lock.json
 
 .DS_Store
 variables.env
