@@ -1,8 +1,8 @@
 .icloud
-/client/node_modules
+client/node_modules
 client/package-lock.json
 
-/server/node_modules
+server/node_modules
 /coverage
 /build
 server/.env
