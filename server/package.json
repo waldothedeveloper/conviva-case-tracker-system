@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "_comments": "REMEMBER TO SWITCH THE START TO: node src/index.js BEFORE SWITCH TO PRODUCTION and delete the nodemon",
-    "start": "nodemon src/index.js",
+    "start": "node src/index.js",
     "start:ci": "node src/index.js"
   },
   "author": "",
