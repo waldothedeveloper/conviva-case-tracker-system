@@ -1,7 +1,6 @@
 .icloud
 client/node_modules
 client/package-lock.json
-client/SERVERACCESS.txt
 server/node_modules
 /coverage
 /build
@@ -20,3 +19,6 @@ package-lock.json
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+
+SERVERACCESS.txt
