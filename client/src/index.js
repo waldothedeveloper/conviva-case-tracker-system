@@ -40,8 +40,8 @@ const client = new ApolloClient({
     }),
     new HttpLink({
       // 1. This one used for production but can also be used for developement if nothing changes on the server
-      // uri: "https://casetracker.mccigroup.com/server"
-      uri: "http://localhost:4000/graphql"
+      uri: "https://casetracker.mccigroup.com/server"
+      // uri: "http://localhost:4000/graphql"
     })
   ]),
   cache: cache,
