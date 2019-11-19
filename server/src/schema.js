@@ -6,6 +6,13 @@ const typeDefs = gql`
     getTicketsByCompany(id: String!): [Ticket]!
     getListOfCompanies: [Company]!
     getSingleTicketNotes(id: Int!): [TicketNotes]!
+    getAllResources: [Resource]!
+  }
+
+  type Resource {
+    FirstName: String
+    LastName: String
+    id: Int
   }
 
   type TicketNotes {

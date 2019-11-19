@@ -56,7 +56,6 @@ module.exports = function cleanDataAndReturnArraySingleTicketNotes(obj) {
   cleanArrayOfTicketNotes.length = numberOfTickets;
 
   //! Get only what you need
-
   getOnlyTicketInfo.map((elements, idx) => {
     elements.elements.map(obj => {
       if (obj.name === "CreatorResourceID") {

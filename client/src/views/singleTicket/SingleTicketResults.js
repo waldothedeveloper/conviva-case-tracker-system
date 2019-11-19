@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import Spinner from "../../views/progress/Spinner";
 import { ticketStatus } from "../../utils/ticketStatus";
 import { ticketPriority } from "../../utils/ticketPriority";
-import { resources } from "../../utils/resources";
+import FindResource from "../../containers/FindSingleResource";
 import { queues } from "../../utils/queues";
 import { getTicketAge } from "../../utils/getTicketAge";
 import { options } from "../../utils/options";
@@ -47,11 +47,11 @@ const useStyles = makeStyles({
 export default function SingleTicketResults({ data, error, loading, called }) {
   const classes = useStyles();
 
+  // console.log("Single Ticket", data);
+
   // this is to find the full name of technicians etc
   const findResource = (resourceID, typeOfResource) => {
-    return data !== undefined
-      ? typeOfResource.find(e => e.id === resourceID)
-      : "";
+    return typeOfResource.find(e => e.id === resourceID) || "";
   };
 
   // ERROR
@@ -188,19 +188,11 @@ export default function SingleTicketResults({ data, error, loading, called }) {
             >
               By
             </Typography>
-            <Typography className={classes.text} variant="body1" gutterBottom>
-              {data.getAutoTaskSingleTicket.LastActivityResourceID === null
-                ? "No Activity Assigned"
-                : findResource(
-                    data.getAutoTaskSingleTicket.LastActivityResourceID,
-                    resources
-                  ).resource_name === undefined
-                ? "No Activity Found"
-                : findResource(
-                    data.getAutoTaskSingleTicket.LastActivityResourceID,
-                    resources
-                  ).resource_name}
-            </Typography>
+
+            <FindResource
+              resourceID={data.getAutoTaskSingleTicket.LastActivityResourceID}
+            />
+
             <Typography
               className={classes.subtext}
               color="textSecondary"
@@ -226,14 +218,10 @@ export default function SingleTicketResults({ data, error, loading, called }) {
             >
               Service Desk Contact
             </Typography>
-            <Typography className={classes.text} variant="body1" gutterBottom>
-              {data.getAutoTaskSingleTicket.AssignedResourceID === null
-                ? "Not Assigned yet"
-                : findResource(
-                    data.getAutoTaskSingleTicket.AssignedResourceID,
-                    resources
-                  ).resource_name}
-            </Typography>
+
+            <FindResource
+              resourceID={data.getAutoTaskSingleTicket.AssignedResourceID}
+            />
           </div>
           <div className={classes.container1LastDiv}>
             <Typography

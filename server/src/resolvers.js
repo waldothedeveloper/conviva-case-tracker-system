@@ -1,11 +1,13 @@
 const CleanDataAndReturnTicketObject = require("./utils/singleTicket");
 const cleanDataAndReturnArraySingleTicketNotes = require("./utils/singleTicketNotes");
 const CleanDataAndReturnCompanyData = require("./utils/companyInfo");
+const cleanDataAndReturnResources = require("./utils/resources");
 const cleanDataAndReturnArrayOfOpenTicketsPerCompany = require("./utils/ticketPerCompanyHelper");
 const SOAPTicketHelper = require("./datasources/getSingleTicket");
 const SOAPTicketNotesHelper = require("./datasources/getSingleTicketNotes");
 const SOAPTicketsByCompanyHelper = require("./datasources/getTicketsByCompany");
 const SOAPGetCompaniesHelper = require("./datasources/getCompanies");
+const SOAPAllResources = require("./datasources/getAllResources");
 const convert = require("xml-js");
 const fetch = require("node-fetch");
 
@@ -84,6 +86,23 @@ const resolvers = {
           "error in the server trying to get List of Companies",
           error
         );
+      }
+    },
+    // get single resource
+    getAllResources: async () => {
+      // console.log(args.id);
+      try {
+        const response = await fetch(url, SOAPAllResources());
+        const thisIsJustAnXMLString = await response.text();
+        const toJSONString = convert.xml2json(thisIsJustAnXMLString);
+        // console.log("toJSONString: ", JSON.stringify(toJSONString));
+
+        const JSONobj = JSON.parse(toJSONString);
+        // console.log("JSONobj: ", JSON.stringify(JSONobj));
+        // this will return the new object constructed over there
+        return cleanDataAndReturnResources(JSONobj);
+      } catch (error) {
+        console.log("error in the server trying to get all resources", error);
       }
     }
   }

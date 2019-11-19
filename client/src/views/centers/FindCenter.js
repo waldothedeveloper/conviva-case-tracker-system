@@ -84,7 +84,6 @@ export default function FindCenter({
       </Typography>
       <form onSubmit={handleSubmit} className={classes.formStyles}>
         <OutlinedInput
-          // placeholder="Seach a Conviva Center"
           onChange={handleChange}
           value={center}
           className={classes.searchRoot}

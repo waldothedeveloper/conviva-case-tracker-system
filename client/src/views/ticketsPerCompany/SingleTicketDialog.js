@@ -10,7 +10,7 @@ import Slide from "@material-ui/core/Slide";
 import Typography from "@material-ui/core/Typography";
 import { ticketStatus } from "../../utils/ticketStatus";
 import { ticketPriority } from "../../utils/ticketPriority";
-import { resources } from "../../utils/resources";
+import FindResource from "../../containers/FindSingleResource";
 import { queues } from "../../utils/queues";
 import { getTicketAge } from "../../utils/getTicketAge";
 import { options } from "../../utils/options";
@@ -195,18 +195,9 @@ export default function SingleTicketDialog({
                   >
                     By
                   </Typography>
-                  <Typography
-                    className={classes.text}
-                    variant="body1"
-                    gutterBottom
-                  >
-                    {selectedTicket[0].LastActivityResourceID === null
-                      ? "-"
-                      : findResource(
-                          selectedTicket[0].LastActivityResourceID,
-                          resources
-                        ).resource_name}
-                  </Typography>
+                  <FindResource
+                    resourceID={selectedTicket[0].LastActivityResourceID}
+                  />
                   <Typography
                     className={classes.subtext}
                     color="textSecondary"
@@ -236,18 +227,10 @@ export default function SingleTicketDialog({
                   >
                     Service Desk Contact
                   </Typography>
-                  <Typography
-                    className={classes.text}
-                    variant="body1"
-                    gutterBottom
-                  >
-                    {selectedTicket[0].AssignedResourceID === null
-                      ? "Not Assigned yet"
-                      : findResource(
-                          selectedTicket[0].AssignedResourceID,
-                          resources
-                        ).resource_name}
-                  </Typography>
+
+                  <FindResource
+                    resourceID={selectedTicket[0].AssignedResourceID}
+                  />
                 </div>
                 <div className={classes.container1LastDiv}>
                   <Typography
