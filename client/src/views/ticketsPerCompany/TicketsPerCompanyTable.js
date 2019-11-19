@@ -29,14 +29,11 @@ const useStyles = makeStyles({
     alignItems: "center",
     justifyContent: "center"
   },
-  table1: {
-    minWidth: 650,
-    position: "sticky",
-    top: 0,
-    backgroundColor: "#F3F1ED"
-  },
   table: {
     minWidth: 650
+  },
+  head: {
+    backgroundColor: "#F3F1ED"
   },
   mainRow: {
     fontSize: "1.2rem",
@@ -110,26 +107,16 @@ export default function TicketsPerCompanyTable({ selectedCompanyID }) {
   return (
     <React.Fragment>
       <Paper className={classes.root}>
-        <Table className={classes.table1} aria-label="simple table">
+        <Table className={classes.table} aria-label="simple table">
           <TableHead>
-            <TableRow>
+            <TableRow className={classes.head}>
               <TableCell className={classes.mainRow}>Case</TableCell>
-              <TableCell className={classes.mainRow} align="right">
-                Title
-              </TableCell>
-              <TableCell className={classes.mainRow} align="right">
-                Company/Center
-              </TableCell>
-              <TableCell className={classes.mainRow} align="right">
-                Status
-              </TableCell>
-              <TableCell className={classes.mainRow} align="right">
-                Priority
-              </TableCell>
+              <TableCell className={classes.mainRow}>Title</TableCell>
+              <TableCell className={classes.mainRow}>Company/Center</TableCell>
+              <TableCell className={classes.mainRow}>Status</TableCell>
+              <TableCell className={classes.mainRow}>Priority</TableCell>
             </TableRow>
           </TableHead>
-        </Table>
-        <Table className={classes.table}>
           <TableBody>
             {data !== undefined &&
               data.getTicketsByCompany.map((obj, idx) => {
@@ -142,23 +129,45 @@ export default function TicketsPerCompanyTable({ selectedCompanyID }) {
                     <TableCell component="th" scope="row">
                       {obj.TicketNumber}
                     </TableCell>
-                    <TableCell align="right">{obj.Title}</TableCell>
-                    <TableCell align="right">
+                    <TableCell>{obj.Title}</TableCell>
+                    <TableCell>
                       {selectedCompanyID.name !== undefined
                         ? selectedCompanyID.name
                         : ""}
                     </TableCell>
-                    <TableCell align="right">
-                      {ticketStatus(obj.Status)}
-                    </TableCell>
-                    <TableCell align="right">
-                      {ticketPriority(obj.Priority)}
-                    </TableCell>
+                    <TableCell>{ticketStatus(obj.Status)}</TableCell>
+                    <TableCell>{ticketPriority(obj.Priority)}</TableCell>
                   </TableRow>
                 );
               })}
           </TableBody>
         </Table>
+        {/* <Table className={classes.table}>
+          <TableBody>
+            {data !== undefined &&
+              data.getTicketsByCompany.map((obj, idx) => {
+                return (
+                  <TableRow
+                    hover
+                    key={data.getTicketsByCompany[idx].TicketNumber}
+                    onClick={() => handleClickOpen(obj.TicketNumber)}
+                  >
+                    <TableCell component="th" scope="row">
+                      {obj.TicketNumber}
+                    </TableCell>
+                    <TableCell>{obj.Title}</TableCell>
+                    <TableCell>
+                      {selectedCompanyID.name !== undefined
+                        ? selectedCompanyID.name
+                        : ""}
+                    </TableCell>
+                    <TableCell>{ticketStatus(obj.Status)}</TableCell>
+                    <TableCell>{ticketPriority(obj.Priority)}</TableCell>
+                  </TableRow>
+                );
+              })}
+          </TableBody>
+        </Table> */}
       </Paper>
       <SingleTicketDialog
         selectedTicket={selectedTicket}

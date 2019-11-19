@@ -50,8 +50,7 @@ const useStyles = makeStyles({
     }
   },
   dialogAct: {
-    padding: 16,
-    backgroundColor: "#F3F1ED"
+    padding: 16
   }
 });
 

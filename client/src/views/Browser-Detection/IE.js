@@ -5,7 +5,6 @@ import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles(theme => ({
   card: {
@@ -66,15 +65,9 @@ export default function IE() {
         <Typography align="center" variant="body2" component="p">
           or copy and paste this link on Google Chrome:
         </Typography>
-        <Link
-          color="secondary"
-          component="button"
-          variant="body1"
-          style={{ marginTop: "0.6rem" }}
-        >
-          {" "}
+        <Typography align="center" variant="body1" component="p">
           https://casetracker.mccigroup.com
-        </Link>
+        </Typography>
       </CardActions>
     </Card>
   );
