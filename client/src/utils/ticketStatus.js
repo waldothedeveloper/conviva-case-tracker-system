@@ -7,6 +7,9 @@ export const ticketStatus = status => {
     case 13:
       result = "Waiting Approval";
       break;
+    case 10:
+      result = "Dispatched";
+      break;
     case 15:
       result = "Change Order";
       break;
