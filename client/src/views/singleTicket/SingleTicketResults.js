@@ -47,7 +47,7 @@ const useStyles = makeStyles({
 export default function SingleTicketResults({ data, error, loading, called }) {
   const classes = useStyles();
 
-  // console.log("Single Ticket", data);
+  console.log("Single Ticket", data);
 
   const findResource = (resourceID, typeOfResource) => {
     return typeOfResource.find(e => e.id === resourceID) || "";

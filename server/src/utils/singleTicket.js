@@ -43,11 +43,12 @@ module.exports = function CleanDataAndReturnTicketObject(obj) {
         if (found(each)) {
           ticket[word] = each.elements[0].text;
         } else if (each.name === "UserDefinedFields") {
-          let businessFriendlyNote = "";
+          let businessFriendlyNote = null;
           each.elements.map(userDefinedField => {
             if (
               userDefinedField.elements[0].elements[0].text ===
-              "Service Desk (Governance) Commentary"
+                "Service Desk (Governance) Commentary" &&
+              userDefinedField.elements[1] !== undefined
             ) {
               businessFriendlyNote =
                 userDefinedField.elements[1].elements[0].text;
@@ -55,6 +56,7 @@ module.exports = function CleanDataAndReturnTicketObject(obj) {
           });
           ticket["UserDefinedFields"] = businessFriendlyNote;
         }
+
         DestructureData(each.elements, word);
       }
     });
