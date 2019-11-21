@@ -123,9 +123,37 @@ module.exports = function cleanDataAndReturnArrayOfOpenTicketsPerCompany(obj) {
           ? (cleanArrayOfTickets[idx] = { QueueID: obj.elements[0].text })
           : (cleanArrayOfTickets[idx].QueueID = obj.elements[0].text);
       }
+
+      if (obj.name === "UserDefinedFields") {
+        // console.log("FOUND NOTES:", JSON.stringify(obj));
+
+        // If there are business friendly ticket notes
+        if (obj.elements !== undefined && Array.isArray(obj.elements)) {
+          obj.elements.map(userDefinedField => {
+            if (
+              userDefinedField.elements[0].elements[0].text ===
+                "Service Desk (Governance) Commentary" &&
+              userDefinedField.elements[1] !== undefined
+            ) {
+              // console.log("userDefinedField", JSON.stringify(userDefinedField));
+              cleanArrayOfTickets[idx] === undefined
+                ? (cleanArrayOfTickets[idx] = {
+                    UserDefinedFields:
+                      userDefinedField.elements[1].elements[0].text
+                  })
+                : (cleanArrayOfTickets[idx].UserDefinedFields =
+                    userDefinedField.elements[1].elements[0].text);
+            }
+          });
+        } else {
+          cleanArrayOfTickets[idx] === undefined
+            ? (cleanArrayOfTickets[idx] = { UserDefinedFields: null })
+            : (cleanArrayOfTickets[idx].UserDefinedFields = null);
+        }
+      }
     });
   });
 
-  // console.log("cleanArrayOfTickets", cleanArrayOfTickets);
+  // console.log("cleanArrayOfTickets", cleanArrayOfTickets)
   return cleanArrayOfTickets;
 };

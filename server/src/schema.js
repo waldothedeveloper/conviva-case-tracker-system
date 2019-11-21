@@ -34,6 +34,7 @@ const typeDefs = gql`
     LastActivityResourceID: Int
     QueueID: Int
     id: Int
+    UserDefinedFields: String
   }
 
   type Company {

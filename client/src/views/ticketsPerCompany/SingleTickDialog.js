@@ -64,7 +64,7 @@ export default function SingleTicketDialog({
 }) {
   const classes = useStyles();
 
-  // console.log("selectedTicket", selectedTicket);
+  console.log("selectedTicket", selectedTicket);
 
   const findResource = (resourceID, typeOfResource) => {
     return typeOfResource.find(e => e.id === resourceID) || "";
@@ -181,8 +181,8 @@ export default function SingleTicketDialog({
                 </div>
               </CardContent>
               {/* , Notes */}
-              <CardContent>
-                {selectedTicket[0].UserDefinedFields !== null ? (
+              {/* <CardContent>
+                {data.getAutoTaskSingleTicket.UserDefinedFields !== null ? (
                   <Typography
                     className={classes.subtext}
                     color="textSecondary"
@@ -196,20 +196,20 @@ export default function SingleTicketDialog({
                   variant="body1"
                   gutterBottom
                 >
-                  {selectedTicket[0].UserDefinedFields !== null
-                    ? selectedTicket[0].UserDefinedFields.split("\n").map(
-                        (item, key) => {
-                          return (
-                            <React.Fragment key={key}>
-                              {item}
-                              <br />
-                            </React.Fragment>
-                          );
-                        }
-                      )
-                    : null}
+                  {data.getAutoTaskSingleTicket.UserDefinedFields !== null
+                    ? data.getAutoTaskSingleTicket.UserDefinedFields.split(
+                        "\n"
+                      ).map((item, key) => {
+                        return (
+                          <React.Fragment key={key}>
+                            {item}
+                            <br />
+                          </React.Fragment>
+                        );
+                      })
+                    : ""}
                 </Typography>
-              </CardContent>
+              </CardContent> */}
               {/* Service Desk Contact, Queue */}
               <CardContent className={classes.container1}>
                 <div className={classes.container1FirstDiv}>

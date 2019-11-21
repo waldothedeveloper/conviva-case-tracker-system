@@ -49,7 +49,6 @@ export default function SingleTicketResults({ data, error, loading, called }) {
 
   // console.log("Single Ticket", data);
 
-  // this is to find the full name of technicians etc
   const findResource = (resourceID, typeOfResource) => {
     return typeOfResource.find(e => e.id === resourceID) || "";
   };
@@ -82,7 +81,7 @@ export default function SingleTicketResults({ data, error, loading, called }) {
       <Card className={classes.cardEmpty}>
         <CardContent>
           <Typography align="center" variant="h2" gutterBottom>
-            CASE NOT FOUND
+            Case not found
           </Typography>
           <Typography variant="body1" align="center" gutterBottom>
             Please double check your case number.
@@ -99,7 +98,35 @@ export default function SingleTicketResults({ data, error, loading, called }) {
   ) {
     return (
       <Card className={classes.card}>
-        {/* case number */}
+        {/* Case number */}
+        <CardContent>
+          <Typography
+            className={classes.subtext}
+            color="textSecondary"
+            variant="body1"
+          >
+            Case
+          </Typography>
+          <Typography className={classes.text} variant="body1" gutterBottom>
+            {data.getAutoTaskSingleTicket.TicketNumber}
+          </Typography>
+        </CardContent>
+        {/* Title  */}
+        <CardContent>
+          <Typography
+            className={classes.subtext}
+            color="textSecondary"
+            variant="body1"
+          >
+            Title
+          </Typography>
+          <Typography variant="h5" className={classes.title} gutterBottom>
+            {data.getAutoTaskSingleTicket.Title !== null
+              ? data.getAutoTaskSingleTicket.Title
+              : "No Title found"}
+          </Typography>
+        </CardContent>
+        {/* status and priority, Last Activity On, Last Activity By */}
         <CardContent className={classes.container1}>
           <div className={classes.container1FirstDiv}>
             <Typography
@@ -107,10 +134,23 @@ export default function SingleTicketResults({ data, error, loading, called }) {
               color="textSecondary"
               variant="body1"
             >
-              Case
+              Status
             </Typography>
             <Typography className={classes.text} variant="body1" gutterBottom>
-              {data.getAutoTaskSingleTicket.TicketNumber}
+              {ticketStatus(data.getAutoTaskSingleTicket.Status)}
+            </Typography>
+            <Typography
+              style={{ marginTop: "1rem" }}
+              className={classes.subtext}
+              color="textSecondary"
+              variant="body1"
+            >
+              Last Activity On
+            </Typography>
+            <Typography className={classes.text} variant="body1" gutterBottom>
+              {new Date(
+                data.getAutoTaskSingleTicket.LastActivityDate
+              ).toLocaleDateString("en-US", options)}
             </Typography>
           </div>
           <div className={classes.container1LastDiv}>
@@ -124,24 +164,46 @@ export default function SingleTicketResults({ data, error, loading, called }) {
             <Typography className={classes.text} variant="body1" gutterBottom>
               {ticketPriority(data.getAutoTaskSingleTicket.Priority)}
             </Typography>
+            <Typography
+              style={{ marginTop: "1rem" }}
+              className={classes.subtext}
+              color="textSecondary"
+              variant="body1"
+            >
+              By
+            </Typography>
+            <FindResource
+              resourceID={data.getAutoTaskSingleTicket.LastActivityResourceID}
+            />
           </div>
         </CardContent>
-        {/* title  */}
+        {/* , Notes */}
         <CardContent>
-          <Typography
-            className={classes.subtext}
-            color="textSecondary"
-            variant="body2"
-          >
-            Title
-          </Typography>
-          <Typography variant="h5" className={classes.title} gutterBottom>
-            {data.getAutoTaskSingleTicket.Title !== null
-              ? data.getAutoTaskSingleTicket.Title
-              : "No Title found"}
+          {data.getAutoTaskSingleTicket.UserDefinedFields !== null ? (
+            <Typography
+              className={classes.subtext}
+              color="textSecondary"
+              variant="body1"
+            >
+              Notes
+            </Typography>
+          ) : null}
+          <Typography className={classes.text} variant="body1" gutterBottom>
+            {data.getAutoTaskSingleTicket.UserDefinedFields !== null
+              ? data.getAutoTaskSingleTicket.UserDefinedFields.split("\n").map(
+                  (item, key) => {
+                    return (
+                      <React.Fragment key={key}>
+                        {item}
+                        <br />
+                      </React.Fragment>
+                    );
+                  }
+                )
+              : ""}
           </Typography>
         </CardContent>
-        {/* status, resources, create-date, age, last activity time, last activity time */}
+        {/* Service Desk Contact, Queue */}
         <CardContent className={classes.container1}>
           <div className={classes.container1FirstDiv}>
             <Typography
@@ -149,25 +211,14 @@ export default function SingleTicketResults({ data, error, loading, called }) {
               color="textSecondary"
               variant="body1"
             >
-              Last Activity On
-            </Typography>
-            <Typography className={classes.text} variant="body1" gutterBottom>
-              {new Date(
-                data.getAutoTaskSingleTicket.LastActivityDate
-              ).toLocaleDateString("en-US", options)}
+              Service Desk Contact
             </Typography>
 
+            <FindResource
+              resourceID={data.getAutoTaskSingleTicket.AssignedResourceID}
+            />
             <Typography
-              className={classes.subtext}
-              color="textSecondary"
-              variant="body1"
-            >
-              Status
-            </Typography>
-            <Typography className={classes.text} variant="body1" gutterBottom>
-              {ticketStatus(data.getAutoTaskSingleTicket.Status)}
-            </Typography>
-            <Typography
+              style={{ marginTop: "1rem" }}
               className={classes.subtext}
               color="textSecondary"
               variant="body1"
@@ -186,14 +237,16 @@ export default function SingleTicketResults({ data, error, loading, called }) {
               color="textSecondary"
               variant="body1"
             >
-              By
+              Queue
             </Typography>
-
-            <FindResource
-              resourceID={data.getAutoTaskSingleTicket.LastActivityResourceID}
-            />
-
+            <Typography className={classes.text} variant="body1" gutterBottom>
+              {data.getAutoTaskSingleTicket.QueueID === null
+                ? "Queue not found"
+                : findResource(data.getAutoTaskSingleTicket.QueueID, queues)
+                    .resource_name}
+            </Typography>
             <Typography
+              style={{ marginTop: "1rem" }}
               className={classes.subtext}
               color="textSecondary"
               variant="body1"
@@ -207,44 +260,12 @@ export default function SingleTicketResults({ data, error, loading, called }) {
             </Typography>
           </div>
         </CardContent>
-
-        {/* technician */}
-        <CardContent className={classes.container1}>
-          <div className={classes.container1FirstDiv}>
-            <Typography
-              className={classes.subtext}
-              color="textSecondary"
-              variant="body1"
-            >
-              Service Desk Contact
-            </Typography>
-
-            <FindResource
-              resourceID={data.getAutoTaskSingleTicket.AssignedResourceID}
-            />
-          </div>
-          <div className={classes.container1LastDiv}>
-            <Typography
-              className={classes.subtext}
-              color="textSecondary"
-              variant="body1"
-            >
-              Queue
-            </Typography>
-            <Typography className={classes.text} variant="body1" gutterBottom>
-              {data.getAutoTaskSingleTicket.QueueID === null
-                ? "Queue not found"
-                : findResource(data.getAutoTaskSingleTicket.QueueID, queues)
-                    .resource_name}
-            </Typography>
-          </div>
-        </CardContent>
         {/* Description */}
         <CardContent>
           <Typography
             className={classes.subtext}
             color="textSecondary"
-            variant="body2"
+            variant="body1"
           >
             Description
           </Typography>
@@ -263,7 +284,8 @@ export default function SingleTicketResults({ data, error, loading, called }) {
               : "No description found"}
           </Typography>
         </CardContent>
-        {/* Contac CARLOS or WALDO */}
+
+        {/* Contact CARLOS or WALDO */}
         <CardContent>
           <Typography
             className={classes.subtext}

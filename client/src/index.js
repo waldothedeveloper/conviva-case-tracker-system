@@ -39,8 +39,9 @@ const client = new ApolloClient({
       if (networkError) console.log(`[Network error]: ${networkError}`);
     }),
     new HttpLink({
-      // 1. This one used for production but can also be used for developement if nothing changes on the server
+      // 1. This one used for production
       uri: "https://casetracker.mccigroup.com/server"
+      // 1. This one used for development
       // uri: "http://localhost:4000/graphql"
     })
   ]),

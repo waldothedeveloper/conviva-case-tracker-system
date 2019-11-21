@@ -12,6 +12,7 @@ module.exports = function CleanDataAndReturnTicketObject(obj) {
 
   // flattening the Array of arrays to whatever depth was able to find
   const flattened = toArray.flat(depth);
+  // console.log("flattened: ", JSON.stringify(flattened));
 
   let ticket = {};
 
@@ -41,6 +42,18 @@ module.exports = function CleanDataAndReturnTicketObject(obj) {
       ) {
         if (found(each)) {
           ticket[word] = each.elements[0].text;
+        } else if (each.name === "UserDefinedFields") {
+          let businessFriendlyNote = "";
+          each.elements.map(userDefinedField => {
+            if (
+              userDefinedField.elements[0].elements[0].text ===
+              "Service Desk (Governance) Commentary"
+            ) {
+              businessFriendlyNote =
+                userDefinedField.elements[1].elements[0].text;
+            }
+          });
+          ticket["UserDefinedFields"] = businessFriendlyNote;
         }
         DestructureData(each.elements, word);
       }

@@ -30,6 +30,7 @@ const GET_SINGLE_TICKET = gql`
       LastActivityResourceID
       QueueID
       id
+      UserDefinedFields
     }
   }
 `;

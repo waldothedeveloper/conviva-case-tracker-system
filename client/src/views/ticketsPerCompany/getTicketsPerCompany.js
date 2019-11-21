@@ -15,6 +15,7 @@ export const GET_TICKETS_BY_COMPANY = gql`
       LastActivityResourceID
       QueueID
       id
+      UserDefinedFields
     }
   }
 `;

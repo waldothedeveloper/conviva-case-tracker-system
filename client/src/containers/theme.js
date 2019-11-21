@@ -5,7 +5,7 @@ const ceraPROfont = {
   fontFamily: "Cera PRO",
   fontStyle: "normal",
   fontDisplay: "swap",
-  fontWeight: 700,
+  fontWeight: 400,
   src: `local('CeraPRO-Regular'),
     local('CeraPRO-Medium'),
     local('CeraPRO-Light'),
@@ -20,7 +20,7 @@ const ceraPROfont = {
 let theme = createMuiTheme({
   typography: {
     fontFamily: "Cera PRO",
-    fontSize: 17
+    fontSize: 16
   },
   overrides: {
     MuiCssBaseline: {
@@ -30,7 +30,7 @@ let theme = createMuiTheme({
     },
     MuiCardContent: {
       root: {
-        padding: "4px 16px"
+        padding: "16px 16px"
       }
     },
     MuiInputBase: {
