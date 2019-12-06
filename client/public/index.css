@@ -1,0 +1,20 @@
+@font-face {
+  font-family: "CeraPRO-Regular";
+  src: local("CeraPRO-Regular"),
+    url("./fonts/CeraPRO-Regular.ttf") format("truetype");
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+span,
+th,
+td,
+a {
+  font-family: CeraPRO-Regular !important;
+}

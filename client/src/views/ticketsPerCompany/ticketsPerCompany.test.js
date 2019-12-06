@@ -7,6 +7,10 @@ import {
   GetTicketsPerCompany
 } from "./getTicketsPerCompany";
 
+const selectedCompanyID = {
+  id: "190"
+};
+
 const mocks = [
   {
     request: {
@@ -19,12 +23,25 @@ const mocks = [
       data: {
         getTicketsPerCompany: [
           {
-            Title: "Mock Ticket HELP",
-            TicketNumber: "123",
+            Title: "Mock Ticket 1",
+            TicketNumber: null,
             Description: "I really need help with this shit",
             Status: "1",
             Priority: "1",
             AssignedResourceID: "123456",
+            CreateDate: "2019",
+            LastActivityDate: "2019",
+            LastActivityResourceID: "2019",
+            QueueID: "2",
+            id: "1232554645"
+          },
+          {
+            Title: "Mock Ticket 2",
+            TicketNumber: "456",
+            Description: "Now I need more help",
+            Status: "2",
+            Priority: "4",
+            AssignedResourceID: "45342342",
             CreateDate: "2019",
             LastActivityDate: "2019",
             LastActivityResourceID: "2019",
@@ -37,12 +54,18 @@ const mocks = [
   }
 ];
 
-it("renders an array of tickets per company", () => {
-  TestRenderer.create(
+it("renders without crashing", () => {
+  const ticketsPerCompany = TestRenderer.create(
     <MockedProvider mocks={mocks} addTypename={false}>
-      <TicketsPerCompanyTable />
+      <TicketsPerCompanyTable selectedCompanyID={selectedCompanyID} />
     </MockedProvider>
   );
+
+  const tree = ticketsPerCompany.toJSON();
+
+  expect(tree).toMatchSnapshot();
+
+  expect(tree[0].TicketNumber).toEqual("456");
 });
 
 // GetTicketsPerCompany(mocks[0].request.variables.id);

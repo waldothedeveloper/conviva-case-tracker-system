@@ -42,6 +42,8 @@ export default function CenterList({
 }) {
   const classes = useStyles();
 
+  // console.log("searchedCenter", searchedCenter);
+
   function handleClick(id) {
     setSearchTicketsPerCompany(true);
     setSearchSingleTicket(false);

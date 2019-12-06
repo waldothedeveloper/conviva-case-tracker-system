@@ -142,32 +142,6 @@ export default function TicketsPerCompanyTable({ selectedCompanyID }) {
               })}
           </TableBody>
         </Table>
-        {/* <Table className={classes.table}>
-          <TableBody>
-            {data !== undefined &&
-              data.getTicketsByCompany.map((obj, idx) => {
-                return (
-                  <TableRow
-                    hover
-                    key={data.getTicketsByCompany[idx].TicketNumber}
-                    onClick={() => handleClickOpen(obj.TicketNumber)}
-                  >
-                    <TableCell component="th" scope="row">
-                      {obj.TicketNumber}
-                    </TableCell>
-                    <TableCell>{obj.Title}</TableCell>
-                    <TableCell>
-                      {selectedCompanyID.name !== undefined
-                        ? selectedCompanyID.name
-                        : ""}
-                    </TableCell>
-                    <TableCell>{ticketStatus(obj.Status)}</TableCell>
-                    <TableCell>{ticketPriority(obj.Priority)}</TableCell>
-                  </TableRow>
-                );
-              })}
-          </TableBody>
-        </Table> */}
       </Paper>
       <SingleTicketDialog
         selectedTicket={selectedTicket}

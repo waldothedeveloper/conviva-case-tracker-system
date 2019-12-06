@@ -1,10 +1,12 @@
 /* @font-face {
-  font-family: "Cera PRO, Arial";
-  src: local("Cera PRO"), url("./fonts/CeraPRO-Regular.otf") format("opentype");
+  font-family: "CeraPRO-Regular";
+  src: local("CeraPRO-Regular"),
+    url("./fonts/CeraPRO-Regular.ttf") format("truetype");
 } */
 
 body {
   background: #16293a !important;
+  /* font-family: Cera Pro !important; */
 }
 
 body::-webkit-scrollbar {

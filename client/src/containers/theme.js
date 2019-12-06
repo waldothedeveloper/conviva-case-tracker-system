@@ -1,33 +1,27 @@
 import { createMuiTheme, responsiveFontSizes } from "@material-ui/core/styles";
-import ceraPRO from "../fonts/CeraPRO-Medium.ttf";
+// import convCeraPRO from "../fonts/CeraPRO-Regular.ttf";
 
-const ceraPROfont = {
-  fontFamily: "Cera PRO",
-  fontStyle: "normal",
-  fontDisplay: "swap",
-  fontWeight: 400,
-  src: `local('CeraPRO-Regular'),
-    local('CeraPRO-Medium'),
-    local('CeraPRO-Light'),
-    local('CeraPRO-Thin'),
-    url(${ceraPRO} format('ttf'))
-  `,
-  unicodeRange:
-    "U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF"
-};
+// const ceraPRO = {
+//   fontFamily: "CeraPRO-Regular",
+//   fontStyle: "regular",
+//   fontWeight: 400,
+//   src: `
+//     local('CeraPRO-Regular'),
+//     url(${convCeraPRO}) format('ttf')
+//   `
+// };
 
 // A custom theme for this app
 let theme = createMuiTheme({
   typography: {
-    fontFamily: "Cera PRO",
     fontSize: 16
   },
   overrides: {
-    MuiCssBaseline: {
-      "@global": {
-        "@font-face": [ceraPROfont]
-      }
-    },
+    // MuiCssBaseline: {
+    //   "@global": {
+    //     "@font-face": [ceraPRO]
+    //   }
+    // },
     MuiCardContent: {
       root: {
         padding: "16px 16px"
