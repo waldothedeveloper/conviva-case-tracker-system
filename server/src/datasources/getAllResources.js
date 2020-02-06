@@ -4,8 +4,8 @@
 // var username = process.env.API_USERNAME;
 // var password = process.env.API_PASSWORD;
 
-var username = "apireports2@convivasolutions.com";
-var password = "Qtp@8555";
+var username = "xxx";
+var password = "xxx";
 
 const SOAPAllResources = () => {
   const options = {
